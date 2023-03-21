@@ -1,0 +1,21 @@
+﻿<Window x:Class="RestaurantRetailPOSBill.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF"
+        xmlns:uc="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
+        mc:Ignorable="d"
+        xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
+        Title="MainWindow" Height="450" Width="450" WindowStartupLocation="CenterScreen" WindowState="Normal">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}"></controls:NavigationBar>
+        
+            <!--<uc:POSLoginView></uc:POSLoginView>-->
+            <ContentControl Grid.Row="1" Name="Container"  Content="{Binding Navigator.CurrentViewModel}"></ContentControl>
+    </Grid>
+</Window>
