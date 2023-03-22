@@ -11,11 +11,9 @@ namespace POSBill.EntityFramework
     public class RestaurantRetailPOSBillDBContext :DbContext
     {
        
+
         public DbSet<User> Users { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySQL("Server=localhost;Database=RRDB;Uid=root;Pwd=1234");
-            base.OnConfiguring(optionsBuilder);
-        }
+        public RestaurantRetailPOSBillDBContext(DbContextOptions options) : base(options){ }
+
     } 
 }

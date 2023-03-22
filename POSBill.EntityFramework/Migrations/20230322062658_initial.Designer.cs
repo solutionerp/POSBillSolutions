@@ -10,7 +10,7 @@ using POSBill.EntityFramework;
 namespace POSBill.EntityFramework.Migrations
 {
     [DbContext(typeof(RestaurantRetailPOSBillDBContext))]
-    [Migration("20230322053712_initial")]
+    [Migration("20230322062658_initial")]
     partial class initial
     {
         /// <inheritdoc />
