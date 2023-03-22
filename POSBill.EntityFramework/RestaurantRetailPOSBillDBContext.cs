@@ -14,7 +14,7 @@ namespace POSBill.EntityFramework
         public DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server.\\DESKTOP-LETTAVT;Database=RRDB;");
+            optionsBuilder.UseMySQL("Server=localhost;Database=RRDB;Uid=root;Pwd=1234");
             base.OnConfiguring(optionsBuilder);
         }
     } 
