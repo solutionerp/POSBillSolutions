@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace POSBill.Domain.Models
 {
-    public class User : DomainObject
+    public class DomainObject
     {
-      
-
-        public string username { get; set; }
-        public string password { get; set; }    
+        public int Id { get; set; }
     }
 }
