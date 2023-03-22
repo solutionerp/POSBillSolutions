@@ -118,7 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dashboardimg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dashboardimg.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="img_splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img_splash.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Posbill.png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Posbillimg.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>C:\Users\SOLUTION\Pictures\Saved Pictures\dashboard</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>C:\Users\SOLUTION\Pictures\Saved Pictures\settings</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>C:\Users\SOLUTION\Pictures\Saved Pictures\settings</value>
   </data>
 </root>

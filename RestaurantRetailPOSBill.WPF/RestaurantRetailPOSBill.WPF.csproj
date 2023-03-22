@@ -8,8 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controls\dashBoard.png" />
+    <None Remove="Controls\logout.png" />
+    <None Remove="Controls\Posbill.png.png" />
+    <None Remove="Controls\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\POSBill.Domain\POSBill.Domain.csproj" />
     <ProjectReference Include="..\POSBill.EntityFramework\POSBill.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Controls\dashBoard.png" />
+    <Resource Include="Controls\logout.png" />
+    <Resource Include="Controls\Posbill.png.png" />
+    <Resource Include="Controls\settings.png" />
   </ItemGroup>
 
   <ItemGroup>
