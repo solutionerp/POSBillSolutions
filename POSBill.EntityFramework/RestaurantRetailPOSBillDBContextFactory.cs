@@ -14,6 +14,7 @@ namespace POSBill.EntityFramework
         {
             var options =new DbContextOptionsBuilder<RestaurantRetailPOSBillDBContext>();
             options.UseMySQL("Server=localhost;Database=RRPOSDB;Uid=root;Pwd=1234");
+
             return new RestaurantRetailPOSBillDBContext(options.Options);
         }
     }

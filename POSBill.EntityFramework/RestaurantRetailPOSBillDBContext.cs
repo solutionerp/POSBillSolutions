@@ -10,9 +10,9 @@ namespace POSBill.EntityFramework
 {
     public class RestaurantRetailPOSBillDBContext :DbContext
     {
-       
-
         public DbSet<User> Users { get; set; }
+        public DbSet<security_roles> security_roles { get; set; }
+        public DbSet<stock_master> stock_master { get; set; }
         public RestaurantRetailPOSBillDBContext(DbContextOptions options) : base(options){ }
 
     } 
