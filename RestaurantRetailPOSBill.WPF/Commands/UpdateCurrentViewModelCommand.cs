@@ -1,5 +1,6 @@
 ﻿using RestaurantRetailPOSBill.WPF.State.Navigator;
 using RestaurantRetailPOSBill.WPF.ViewModels;
+using RestaurantRetailPOSBill.WPF.ViewModels.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,18 @@ namespace RestaurantRetailPOSBill.WPF.Commands
     {
 
         INavigator _navigator;
+        private readonly IRootRestaurantRetailPOSBillViewModelFactory _viewModelFactory;
+
+        public UpdateCurrentViewModelCommand(INavigator navigator,
+            IRootRestaurantRetailPOSBillViewModelFactory viewModelFactory)
+        {
+            _navigator = navigator;
+            _viewModelFactory = viewModelFactory;
+        }
 
         public event EventHandler? CanExecuteChanged;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator)
-        {
-            _navigator = navigator;
-        }
+        
         public bool CanExecute(object? parameter)
         {
             return true;
@@ -30,20 +36,7 @@ namespace RestaurantRetailPOSBill.WPF.Commands
             if(parameter is ViewType)
             {
                ViewType viewType = (ViewType)parameter;
-                switch(viewType)
-                {
-                    case ViewType.DashBoard:
-                        _navigator.CurrentViewModel = new DashBoardViewModel();
-                        break;
-                    case ViewType.POSBill:
-                        _navigator.CurrentViewModel = new POSBIllViewModel();
-                        break;
-                    case ViewType.Settings:
-                        _navigator.CurrentViewModel = new SettingViewModel();
-                        break;
-                    default:
-                        break;
-                }
+                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
             }
         }
     }

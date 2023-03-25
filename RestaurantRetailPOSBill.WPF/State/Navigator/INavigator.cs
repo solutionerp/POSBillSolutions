@@ -10,6 +10,7 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
 {
     public enum ViewType
     {
+        Login,
         DashBoard,
         POSBill,
         Settings

@@ -9,6 +9,12 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
 {
     public class MainwindowViewModel : ViewModelBase
     {
-        public INavigator Navigator { get; set; } = new Navigator();  
+        public INavigator Navigator { get; set; } 
+
+        public MainwindowViewModel(INavigator navigator)
+        {
+            Navigator = navigator;
+            Navigator.UpdateCurrentViewModelCommand.Execute(ViewType.Login);
+        }
     }
 }

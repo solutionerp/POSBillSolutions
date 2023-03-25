@@ -1,6 +1,7 @@
 ﻿using RestaurantRetailPOSBill.WPF.Commands;
 using RestaurantRetailPOSBill.WPF.Models;
 using RestaurantRetailPOSBill.WPF.ViewModels;
+using RestaurantRetailPOSBill.WPF.ViewModels.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,9 +30,14 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
             }
         }
 
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
 
-      
+        public ICommand UpdateCurrentViewModelCommand { get;set; }
+        
+        public Navigator(IRootRestaurantRetailPOSBillViewModelFactory viewModelFactory)
+        {
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
+        }
+
         public new event PropertyChangedEventHandler PropertyChanged;
 
     }

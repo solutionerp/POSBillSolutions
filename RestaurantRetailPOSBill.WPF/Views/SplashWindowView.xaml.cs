@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace RestaurantRetailPOSBill.WPF.Views
@@ -17,7 +18,7 @@ namespace RestaurantRetailPOSBill.WPF.Views
     /// <summary>
     /// Interaction logic for SplashWindowView.xaml
     /// </summary>
-    public partial class SplashWindowView : Window
+    public partial class SplashWindowView : UserControl
     {
         public SplashWindowView()
         {

@@ -63,12 +63,12 @@ namespace RestaurantRetailPOSBill.WPF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dashboardimg {
-            get {
-                object obj = ResourceManager.GetObject("dashboardimg", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
+        //internal static System.Drawing.Bitmap dashboardimg {
+        //    get {
+        //        object obj = ResourceManager.GetObject("dashboardimg", resourceCulture);
+        //        return ((System.Drawing.Bitmap)(obj));
+        //    }
+        //}
         
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
@@ -83,22 +83,22 @@ namespace RestaurantRetailPOSBill.WPF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Posbill_png {
-            get {
-                object obj = ResourceManager.GetObject("Posbill.png", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
+        //internal static System.Drawing.Bitmap Posbill_png {
+        //    get {
+        //        object obj = ResourceManager.GetObject("Posbill.png", resourceCulture);
+        //        return ((System.Drawing.Bitmap)(obj));
+        //    }
+        //}
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap settings {
-            get {
-                object obj = ResourceManager.GetObject("settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
+        //internal static System.Drawing.Bitmap settings {
+        //    get {
+        //        object obj = ResourceManager.GetObject("settings", resourceCulture);
+        //        return ((System.Drawing.Bitmap)(obj));
+        //    }
+        //}
         
         /// <summary>
         ///   Looks up a localized string similar to C:\Users\SOLUTION\Pictures\Saved Pictures\dashboard.

@@ -21,27 +21,10 @@ namespace RestaurantRetailPOSBill.WPF
     /// </summary>
     public partial class SplashWindow : Window
     {
-        DispatcherTimer timer;
-        
-        public SplashWindow()
+        public SplashWindow(object datacontext)
         {
             InitializeComponent();
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-
-
         }
 
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            timer.Stop();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.DataContext = new MainwindowViewModel();
-            mainWindow.Show();
-            this.Close();
-
-        }
     }
 }

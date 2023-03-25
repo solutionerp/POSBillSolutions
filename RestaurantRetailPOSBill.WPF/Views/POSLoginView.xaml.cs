@@ -24,5 +24,6 @@ namespace RestaurantRetailPOSBill.WPF.Views
         {
             InitializeComponent();
         }
+            
     }
 }

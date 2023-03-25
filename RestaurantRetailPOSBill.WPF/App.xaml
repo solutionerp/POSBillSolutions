@@ -3,21 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF"
              xmlns:viewModels="clr-namespace:RestaurantRetailPOSBill.WPF.ViewModels"
-             xmlns:views="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
-             StartupUri="SplashWindow.xaml">
+             xmlns:views="clr-namespace:RestaurantRetailPOSBill.WPF.Views">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Styles\Common.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+
+           
             <DataTemplate DataType="{x:Type viewModels:DashBoardViewModel}">
                 <views:DashBoardView></views:DashBoardView>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:POSBIllViewModel}">
                 <views:POSBillView></views:POSBillView>
-            </DataTemplate>
+            </DataTemplate> 
+            
             <DataTemplate DataType="{x:Type viewModels:SettingViewModel}">
                 <views:SettingsView></views:SettingsView>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:POSLoginViewModel}">
+                <views:POSLoginView></views:POSLoginView>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -25,9 +25,11 @@ namespace RestaurantRetailPOSBill.WPF
     {
        
 
-        public MainWindow()
+        public MainWindow(object dataContext)
         {
             InitializeComponent();
+            DataContext = dataContext;
+            this.Show();
         }
     }
 }
