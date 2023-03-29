@@ -1,4 +1,6 @@
-﻿using RestaurantRetailPOSBill.WPF.State.Authenticators;
+﻿using POSBill.Domain.Services;
+using RestaurantRetailPOSBill.WPF.Commands;
+using RestaurantRetailPOSBill.WPF.State.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,13 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
 {
     public class POSLoginViewModelFactory : IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel>
     {
-        //private readonly IAuthenticator _authenticator;
+        // private readonly IAuthenticator _authenticator;
+        private readonly IMajorIndexService _majorIndexService;
+
+        public POSLoginViewModelFactory(IMajorIndexService majorIndexService)
+        {
+            _majorIndexService = majorIndexService;
+        }
 
         //public POSLoginViewModelFactory(IAuthenticator authenticator)
         //{
@@ -17,8 +25,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
         //}
 
         public POSLoginViewModel CreateViewModel()
-          {
-            return new POSLoginViewModel();
+        {
+            return new POSLoginViewModel(_majorIndexService);
         }
     }
 }

@@ -12,6 +12,10 @@
     <None Remove="Controls\logout.png" />
     <None Remove="Controls\Posbill.png.png" />
     <None Remove="Controls\settings.png" />
+    <None Remove="img_splash.png" />
+    <None Remove="Views\login-background.jpg" />
+    <None Remove="Views\loginposimg.jpg" />
+    <None Remove="Views\Restaurant-POSimg.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\POSBill.Domain\POSBill.Domain.csproj" />
     <ProjectReference Include="..\POSBill.EntityFramework\POSBill.EntityFramework.csproj" />
+    <ProjectReference Include="..\RetailResuarantPOSAPI.Api\RetailResuarantPOSAPI.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +33,10 @@
     <Resource Include="Controls\logout.png" />
     <Resource Include="Controls\Posbill.png.png" />
     <Resource Include="Controls\settings.png" />
+    <Resource Include="img_splash.png" />
+    <Resource Include="Views\login-background.jpg" />
+    <Resource Include="Views\loginposimg.jpg" />
+    <Resource Include="Views\Restaurant-POSimg.jpg" />
   </ItemGroup>
 
   <ItemGroup>

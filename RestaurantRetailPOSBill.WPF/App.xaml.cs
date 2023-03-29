@@ -16,8 +16,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.Hosting;
+using RestaurantRetailPOSBill.WPF.ViewModels;
 using POSBill.Domain.Models;
 using POSBill.EntityFramework.Services;
+using RetailResuarantPOSAPI.Api.Services;
+using System.Windows.Input;
+using RestaurantRetailPOSBill.WPF.Commands;
 
 namespace RestaurantRetailPOSBill.WPF
 {
@@ -72,6 +76,9 @@ namespace RestaurantRetailPOSBill.WPF
             services.AddSingleton<RestaurantRetailPOSBillDBContextFactory>();
             services.AddSingleton<IDataServices<User>, GenericDataService<User>>();
             services.AddSingleton<IAccountServices<User>, GenericAccountService<User>>();
+            services.AddSingleton<IMajorIndexService, MajorIndexService>();
+            services.AddSingleton<ICommand, RelayCommand>();
+            //services.AddSingleton<IAccountServices<User>, MajorIndexService>();
 
             services.AddSingleton<IRootRestaurantRetailPOSBillViewModelFactory, RootRestaurantRetailPOSBillViewModelFactory>();
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<DashBoardViewModel>, DashBoardViewModelFactory>();
@@ -79,6 +86,7 @@ namespace RestaurantRetailPOSBill.WPF
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<SettingViewModel>, SettingsViewModelFactory>();
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel>, POSLoginViewModelFactory>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
+
             services.AddSingleton<SplashWindow>(s => new SplashWindow(s.GetRequiredService<SplashViewModel>()));
              
             services.AddSingleton<IPasswordHasher, PasswordHasher>();

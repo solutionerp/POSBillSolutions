@@ -6,7 +6,7 @@
     <Color x:Key="Primarycolor3">green</Color>
     <Color x:Key="Primarycolor4">Red</Color>
     <Color x:Key="Primarycolor5">lightBlue</Color>
-    <Color x:Key="Primarycolor6">Violet</Color>
+    <Color x:Key="Primarycolor6">DarkViolet</Color>
     <Color x:Key="Primarycolor7">Orange</Color>
     <Color x:Key="Primarycolor8">DarkGreen</Color>
     <Color x:Key="Primarycolor9">Black</Color>
@@ -25,6 +25,7 @@
     <SolidColorBrush x:Key="BrushPrimary6" Color="{StaticResource Primarycolor7}"></SolidColorBrush>
     <SolidColorBrush x:Key="BrushPrimary7" Color="{StaticResource Primarycolor8}"></SolidColorBrush>
     <SolidColorBrush x:Key="BrushPrimary8" Color="{StaticResource Primarycolor9}"></SolidColorBrush>
+    <SolidColorBrush x:Key="BrushPrimary9" Color="{StaticResource Primarycolor6}"></SolidColorBrush>
 
 
 </ResourceDictionary>

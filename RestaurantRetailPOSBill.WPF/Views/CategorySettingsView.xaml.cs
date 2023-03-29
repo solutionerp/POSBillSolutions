@@ -1,8 +1,4 @@
-﻿using POSBill.Domain.Services;
-using RestaurantRetailPOSBill.WPF.Commands;
-using RestaurantRetailPOSBill.WPF.ViewModels;
-using RetailResuarantPOSAPI.Api.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +16,13 @@ using System.Windows.Shapes;
 namespace RestaurantRetailPOSBill.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for POSLoginView.xaml
+    /// Interaction logic for CategorySettingsView.xaml
     /// </summary>
-    public partial class POSLoginView : UserControl
+    public partial class CategorySettingsView : UserControl
     {
-
-        public POSLoginView()
+        public CategorySettingsView()
         {
             InitializeComponent();
         }
-
     }
 }
