@@ -16,8 +16,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.Hosting;
-using RestaurantRetailPOSBill.WPF.ViewModels;
 using POSBill.Domain.Models;
+using POSBill.EntityFramework.Services;
 
 namespace RestaurantRetailPOSBill.WPF
 {
@@ -70,8 +70,8 @@ namespace RestaurantRetailPOSBill.WPF
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<RestaurantRetailPOSBillDBContextFactory>();
-         //   services.AddSingleton<IDataServices<User>>();
-          //  services.AddSingleton<IAccountServices>();
+            services.AddSingleton<IDataServices<User>, GenericDataService<User>>();
+            services.AddSingleton<IAccountServices<User>, GenericAccountService<User>>();
 
             services.AddSingleton<IRootRestaurantRetailPOSBillViewModelFactory, RootRestaurantRetailPOSBillViewModelFactory>();
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<DashBoardViewModel>, DashBoardViewModelFactory>();

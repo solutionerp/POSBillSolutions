@@ -17,7 +17,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
         //}
 
         public POSLoginViewModel CreateViewModel()
-        {
+          {
             return new POSLoginViewModel();
         }
     }

@@ -12,6 +12,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
    public class POSLoginViewModel : ViewModelBase
     {
         public string _userName;
+        public string _password;
 
         public string Username
         {
@@ -22,10 +23,22 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             set
             { 
                 _userName = value;
-               // OnPropertyChanged(nameof(Username));
+                OnPropertyChanged(nameof(Username));
             }
         }
-        //  public ICommand LoginCommand { get; }
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+                OnPropertyChanged(nameof(Password));
+            }
+        }
+        public ICommand LoginCommand { get; }
 
         //public POSLoginViewModel(IAuthenticator authenticator)
         //{

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using RestaurantRetailPOSBill.WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,28 @@ namespace RestaurantRetailPOSBill.WPF.Views
         public POSLoginView()
         {
             InitializeComponent();
+            this.DataContext = new POSLoginViewModel();
         }
-            
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            string strUsername = txtUserName.Text;
+            string strpasswrd = pbPassword.Password;
+            // Your code here
+        }
+
+        //private async void AuthenticateButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var api = new MyApi();
+        //    try
+        //    {
+        //        var result = await api.Authenticate(txtUserName.Text, pbPassword.Password);
+        //        // Handle successful authentication
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Handle authentication failure
+        //    }
+        //}
+
     }
 }
