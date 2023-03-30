@@ -9,7 +9,6 @@
         xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
         Title="MainWindow" Height="450" Width="450" WindowStartupLocation="CenterScreen" WindowState="Normal">
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>

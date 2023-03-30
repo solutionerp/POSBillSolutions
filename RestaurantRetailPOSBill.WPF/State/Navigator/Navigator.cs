@@ -30,7 +30,6 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
             }
         }
 
-
         public ICommand UpdateCurrentViewModelCommand { get;set; }
         
         public Navigator(IRootRestaurantRetailPOSBillViewModelFactory viewModelFactory)
