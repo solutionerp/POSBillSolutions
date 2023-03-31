@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF"
         mc:Ignorable="d"
-        Background="DarkViolet"
         WindowStartupLocation="CenterScreen"
-        Title="Restaurant Retail POSBill" Height="400" Width="600">
-        <Image Source="/img_splash.png" ></Image>
+        Title="Restaurant Retail POSBill" Height="400" Width="600" Icon="/img_splash.png">
+        <!--<Image Source="/img_splash.png" ></Image>-->
+    <Window.Background>
+        <ImageBrush ImageSource="/img_splash.png"></ImageBrush>
+    </Window.Background>
 </Window>

@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
              mc:Ignorable="d" 
              xmlns:DashBoardSideNav="clr-namespace:RestaurantRetailPOSBill.WPF.DashBoardSideNav"
-             
              Background="White"
              d:DesignHeight="600" d:DesignWidth="600">
     <Grid>

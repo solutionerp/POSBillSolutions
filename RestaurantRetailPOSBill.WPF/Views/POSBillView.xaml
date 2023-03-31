@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Views/imagesRes.jpg"  
+                    Opacity="1"
+            Stretch="UniformToFill"></ImageBrush>
+    </UserControl.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"></ColumnDefinition>
