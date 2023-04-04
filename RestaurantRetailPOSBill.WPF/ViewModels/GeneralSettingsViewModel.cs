@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace RestaurantRetailPOSBill.WPF.ViewModels
 {
-    public class GeneralSettingsViewModel
+    public class GeneralSettingsViewModel : SettingViewModel
     {
+        public  GeneralSettingsViewModel()
+        {
+            
+        }
     }
 }

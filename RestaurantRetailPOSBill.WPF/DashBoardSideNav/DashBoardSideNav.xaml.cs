@@ -1,5 +1,4 @@
-﻿using RestaurantRetailPOSBill.WPF.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RestaurantRetailPOSBill.WPF.Views
+namespace RestaurantRetailPOSBill.WPF.DashBoardSideNav
 {
     /// <summary>
-    /// Interaction logic for SettingsView.xaml
+    /// Interaction logic for DashBoardSideNav.xaml
     /// </summary>
-    public partial class SettingsView : UserControl
+    public partial class DashBoardSideNav : UserControl
     {
-        public SettingsView()
+        public DashBoardSideNav()
         {
             InitializeComponent();
-
         }
     }
 }

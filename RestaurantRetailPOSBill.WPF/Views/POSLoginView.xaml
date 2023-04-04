@@ -10,7 +10,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <UserControl.Background>
-        <ImageBrush ImageSource="/Views/login-background.jpg"  
+        <ImageBrush ImageSource="/Views/imagesbgrund.jpg"  
                     Opacity="1"
             Stretch="UniformToFill"></ImageBrush>
     </UserControl.Background>

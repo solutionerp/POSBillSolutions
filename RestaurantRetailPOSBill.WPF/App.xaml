@@ -25,6 +25,23 @@
             <DataTemplate DataType="{x:Type viewModels:POSLoginViewModel}">
                 <views:POSLoginView></views:POSLoginView>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:GeneralSettingsViewModel}">
+                <views:GeneralSettingsView></views:GeneralSettingsView>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:ServerSettingsViewModel}">
+                <views:ServerSettingsView></views:ServerSettingsView>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:PrinterSettingsViewModel}">
+                <views:PrinterSettingsView></views:PrinterSettingsView>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:CategorySettingsViewModel}">
+                <views:CategorySettingsView></views:CategorySettingsView>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

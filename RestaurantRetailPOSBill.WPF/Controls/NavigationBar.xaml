@@ -6,27 +6,34 @@
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
              xmlns:nav="clr-namespace:RestaurantRetailPOSBill.WPF.State.Navigator"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="200">
+             d:DesignHeight="80" d:DesignWidth="200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Restaurant Retail POSBill " Background="{StaticResource BrushPrimary2}"></TextBlock>
+        <TextBlock Grid.Row="0" Foreground="White" Padding="10" Text="Restaurant Retail POSBill " Background="{StaticResource BrushPrimary2}"></TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="25*"></ColumnDefinition>
-                <ColumnDefinition Width="25*"></ColumnDefinition>
-                <ColumnDefinition Width="25*"></ColumnDefinition>
-                <ColumnDefinition Width="25*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="15*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Height="50" Width="auto" Content="DashBoard" Background="{StaticResource BrushPrimary2}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.DashBoard}"></Button>
             <Button Grid.Column="1" Height="50" Width="auto" Content="POS" Background="{StaticResource BrushPrimary1}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.POSBill}"></Button>
             <Button Grid.Column="2" Height="50" Width="auto" Content="Settings" Background="{StaticResource BrushPrimary1}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Settings}"></Button>
             <Button Grid.Column="3" Width="auto" Height="50" Content="Logout" Background="{StaticResource BrushPrimary1}"></Button>
+            <Button Grid.Column="5" >
+                <Button.Background>
+                    <ImageBrush ImageSource="/Controls/calculatorjpg.jpg" />
+                </Button.Background>
+            </Button>
+            <Grid Grid.Column="4" Background="Teal"></Grid>
         </Grid>
-
     </Grid>
 </UserControl>

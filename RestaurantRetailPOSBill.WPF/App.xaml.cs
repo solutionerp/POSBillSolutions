@@ -85,12 +85,14 @@ namespace RestaurantRetailPOSBill.WPF
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<POSBIllViewModel>, POSBIllViewModelFactory>();
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<SettingViewModel>, SettingsViewModelFactory>();
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel>, POSLoginViewModelFactory>();
+            services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<GeneralSettingsViewModel>, GeneralSettingsViewModelFactory>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
 
             services.AddSingleton<SplashWindow>(s => new SplashWindow(s.GetRequiredService<SplashViewModel>()));
              
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainwindowViewModel>()));
+            //services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<SettingViewModel>()));
             services.AddScoped<INavigator, Navigator>();
             services.AddScoped<IAuthenticator, Authenticator>();
             services.AddScoped<MainwindowViewModel>();

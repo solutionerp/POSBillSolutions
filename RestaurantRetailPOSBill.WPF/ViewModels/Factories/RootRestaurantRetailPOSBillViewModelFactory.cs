@@ -13,9 +13,10 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
         private readonly IRestaurantRetailPOSBillViewModelFactory<SettingViewModel> _settingsViewModel;
         private readonly IRestaurantRetailPOSBillViewModelFactory<POSBIllViewModel> _posBillViewModel;
         private readonly IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel> _posLoginViewModel;
+        //private readonly IRestaurantRetailPOSBillViewModelFactory<GeneralSettingsViewModel> _generalSettingsViewModel;
 
-        public RootRestaurantRetailPOSBillViewModelFactory(IRestaurantRetailPOSBillViewModelFactory<DashBoardViewModel> dashBoardViewModel, 
-            IRestaurantRetailPOSBillViewModelFactory<SettingViewModel> settingsViewModel, 
+        public RootRestaurantRetailPOSBillViewModelFactory(IRestaurantRetailPOSBillViewModelFactory<DashBoardViewModel> dashBoardViewModel,
+            IRestaurantRetailPOSBillViewModelFactory<SettingViewModel> settingsViewModel,
             IRestaurantRetailPOSBillViewModelFactory<POSBIllViewModel> posBillViewModel, 
             IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel> posLoginViewModel)
         {
@@ -23,6 +24,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
             _settingsViewModel = settingsViewModel;
             _posBillViewModel = posBillViewModel;
             _posLoginViewModel = posLoginViewModel;
+            //_generalSettingsViewModel = generalSettingsViewModel;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -38,9 +40,11 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
                     return _posBillViewModel.CreateViewModel();
                 case ViewType.Settings:
                     return _settingsViewModel.CreateViewModel();
+               
                 default:
                     throw new ArgumentException("The ViewType does not have ViewModel.", "viewType");
             }
+            
         }
     }
 }

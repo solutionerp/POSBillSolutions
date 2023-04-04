@@ -15,12 +15,14 @@ namespace RestaurantRetailPOSBill.WPF.Commands
 
         INavigator _navigator;
         private readonly IRootRestaurantRetailPOSBillViewModelFactory _viewModelFactory;
+        public bool IsSettingsVisible = false;
 
         public UpdateCurrentViewModelCommand(INavigator navigator,
             IRootRestaurantRetailPOSBillViewModelFactory viewModelFactory)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
+            
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -38,6 +40,10 @@ namespace RestaurantRetailPOSBill.WPF.Commands
                ViewType viewType = (ViewType)parameter;
                 _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
             }
+            
         }
+
+       
+
     }
 }

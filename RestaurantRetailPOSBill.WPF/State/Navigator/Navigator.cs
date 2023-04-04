@@ -16,6 +16,7 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
     {
         
         public ViewModelBase _currentViewmodel;
+        //public SettingViewModel _settingsViewModel;
 
         public ViewModelBase CurrentViewModel
         {
@@ -31,7 +32,26 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
         }
 
         public ICommand UpdateCurrentViewModelCommand { get;set; }
-        
+
+        public bool IsSettingsVisible;
+        public ICommand ShowSettingsCommand => new RelayCommand(() =>
+        {
+            IsSettingsVisible = true;
+        });
+        //public SettingViewModel settingsCurrentViewModel
+        //{
+        //    get
+        //    {
+        //        return _settingsViewModel;
+        //    }
+        //    set
+        //    {
+        //        _settingsViewModel = value;
+        //        OnPropertyChanged(nameof(CurrentViewModel));
+        //    }
+
+        //}
+
         public Navigator(IRootRestaurantRetailPOSBillViewModelFactory viewModelFactory)
         {
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);

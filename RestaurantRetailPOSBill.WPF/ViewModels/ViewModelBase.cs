@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantRetailPOSBill.WPF.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
 
         public ViewModelBase()
         {
-           // ExitCommand = new ExitCommand();
 
         }
 
@@ -26,5 +26,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+      
+       
     }
 }

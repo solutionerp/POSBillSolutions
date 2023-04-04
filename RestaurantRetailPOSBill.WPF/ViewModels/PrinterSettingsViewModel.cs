@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantRetailPOSBill.WPF.ViewModels
 {
-    public class ServerSettingsViewModel : SettingViewModel
+   public class PrinterSettingsViewModel : SettingViewModel
     {
     }
 }

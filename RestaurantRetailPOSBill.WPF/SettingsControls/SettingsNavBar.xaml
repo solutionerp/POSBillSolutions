@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="RestaurantRetailPOSBill.WPF.SettingsControls.SettingsNavBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.SettingsControls"
+             xmlns:nav="clr-namespace:RestaurantRetailPOSBill.WPF.State.SettingsNavigator"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="250">
+    <Grid Background="Teal">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Button Content="General" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Foreground="BlueViolet" Content="Server" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.server}"></Button>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button Foreground="BlueViolet" Content="Printer" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.printer}"></Button>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Button Foreground="BlueViolet" Content="Category" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.category}"></Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

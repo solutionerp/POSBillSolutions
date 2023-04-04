@@ -17,6 +17,7 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
     }
     public interface INavigator
     {
+        //SettingViewModel settingsCurrentViewModel { get; set; }
         ViewModelBase CurrentViewModel { get; set; }
         ICommand UpdateCurrentViewModelCommand { get; }
     }

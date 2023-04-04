@@ -7,24 +7,31 @@
         xmlns:uc="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
         mc:Ignorable="d"
         xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
+        xmlns:SettingsControls="clr-namespace:RestaurantRetailPOSBill.WPF.SettingsControls"
         Title="MainWindow" Height="450" Width="450" WindowStartupLocation="CenterScreen" WindowState="Normal">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="90*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--<Border Grid.Row="0" Background="#ECF0F1" CornerRadius="10"></Border>-->
         <Grid Grid.Row="0">
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="Visibility" Value="Visible"></Setter>
                 </Style>
             </Grid.Style>
             <controls:NavigationBar DataContext="{Binding Navigator}"></controls:NavigationBar>
         </Grid>
         
-            <!--<uc:POSLoginView></uc:POSLoginView>-->
-            <ContentControl Grid.Row="1" Name="Container"  Content="{Binding Navigator.CurrentViewModel}"></ContentControl>
+            <ContentControl Grid.Row="2" Name="Container"  Content="{Binding Navigator.CurrentViewModel}"></ContentControl>
+        <!--<Grid Grid.Row="1" >
+            --><!--<SettingsControls:SettingsNavBar DataContext="{Binding SettingsNavigator}"></SettingsControls:SettingsNavBar>--><!--
+        </Grid>-->
+
     </Grid>
 </Window>

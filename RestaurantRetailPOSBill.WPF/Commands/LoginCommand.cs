@@ -50,7 +50,7 @@ namespace RestaurantRetailPOSBill.WPF.Commands
         public async void Execute(object? parameter)
         {
             // bool success = await _authenticator.Login(_loginViewModel.Username, string.Empty);
-            _majorIndexService.Authenticate(_userName, _password);
+            //_majorIndexService.Authenticate(_userName, _password);
         }
     }
 }

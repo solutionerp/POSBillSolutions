@@ -6,15 +6,23 @@
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
              mc:Ignorable="d" 
              xmlns:DashBoardSideNav="clr-namespace:RestaurantRetailPOSBill.WPF.DashBoardSideNav"
-             Background="White"
              d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Views/imagesbgrund.jpg"  
+                    Opacity="1"
+            Stretch="UniformToFill"></ImageBrush>
+    </UserControl.Background>
+    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40*"></ColumnDefinition>
+            <ColumnDefinition Width="15*"></ColumnDefinition>
             <ColumnDefinition Width="70*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <DashBoardSideNav:DashboardSideNavBar></DashBoardSideNav:DashboardSideNavBar>
+            <DashBoardSideNav:DashBoardSideNav></DashBoardSideNav:DashBoardSideNav>
             <!--<controls:DashboardSideNavBar></controls:DashboardSideNavBar>-->
         </Grid>
     </Grid>
