@@ -13,11 +13,12 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
         Login,
         DashBoard,
         POSBill,
-        Settings
+        Settings,
+        calculator
+
     }
     public interface INavigator
     {
-        //SettingViewModel settingsCurrentViewModel { get; set; }
         ViewModelBase CurrentViewModel { get; set; }
         ICommand UpdateCurrentViewModelCommand { get; }
     }

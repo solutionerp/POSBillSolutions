@@ -16,14 +16,17 @@
     <None Remove="DashBoardSideNav\loginposimg.jpg" />
     <None Remove="img_splash.png" />
     <None Remove="Views\backgroundrRes.jpg" />
+    <None Remove="Views\calculatorjpg.jpg" />
     <None Remove="Views\imagesbgrund.jpg" />
-    <None Remove="Views\imagesRes.jpg" />
+    <None Remove="Views\imgbgrund.jpg" />
     <None Remove="Views\imgRes.jpg" />
     <None Remove="Views\jpgRes.jpeg" />
     <None Remove="Views\login-background.jpg" />
     <None Remove="Views\loginposimg.jpg" />
+    <None Remove="Views\posimg.jpg" />
     <None Remove="Views\Restaurant-POSimg.jpg" />
     <None Remove="Views\settings icon.jpg" />
+    <None Remove="Views\sumimg.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,14 +48,17 @@
     <Resource Include="DashBoardSideNav\loginposimg.jpg" />
     <Resource Include="img_splash.png" />
     <Resource Include="Views\backgroundrRes.jpg" />
+    <Resource Include="Views\calculatorjpg.jpg" />
     <Resource Include="Views\imagesbgrund.jpg" />
-    <Resource Include="Views\imagesRes.jpg" />
+    <Resource Include="Views\imgbgrund.jpg" />
     <Resource Include="Views\imgRes.jpg" />
     <Resource Include="Views\jpgRes.jpeg" />
     <Resource Include="Views\login-background.jpg" />
     <Resource Include="Views\loginposimg.jpg" />
+    <Resource Include="Views\posimg.jpg" />
     <Resource Include="Views\Restaurant-POSimg.jpg" />
     <Resource Include="Views\settings icon.jpg" />
+    <Resource Include="Views\sumimg.png" />
   </ItemGroup>
 
   <ItemGroup>

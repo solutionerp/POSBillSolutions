@@ -19,8 +19,10 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="50*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1" Background="Violet">
+            
+            <Grid Grid.Column="1">
             </Grid>
+            
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"></RowDefinition>
@@ -38,7 +40,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Default Printer</Label>
+                    <Label Grid.Column="0" Margin="10" >Default Printer</Label>
                     <Grid Grid.Column="1">
                         <ComboBox x:Name="MyComboBox">
                             <ComboBoxItem>Item 1</ComboBoxItem>
@@ -52,13 +54,13 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0">Layout</Label>
+                    <Label Grid.Column="0" Margin="10">Layout</Label>
                     <Grid Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30*"></ColumnDefinition>
                             <ColumnDefinition Width="70*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <RadioButton Grid.Column="0"  Content="LandScape"/>
+                        <RadioButton Grid.Column="0" Content="LandScape"/>
                         <RadioButton Grid.Column="1"  Content="Portrait"/>
                     </Grid>
                 </Grid>
@@ -68,7 +70,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0">PDF Path</Label>
+                    <Label Grid.Column="0" Margin="10">PDF Path</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -79,7 +81,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0">Paper Size</Label>
+                    <Label Grid.Column="0" Margin="10">Paper Size</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -90,7 +92,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0">Custom Width</Label>
+                    <Label Grid.Column="0" Margin="10">Custom Width</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -101,7 +103,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0">Custom Height</Label>
+                    <Label Grid.Column="0" Margin="10">Custom Height</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -112,7 +114,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0">No Of Copies</Label>
+                    <Label Grid.Column="0" Margin="10">No Of Copies</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -123,7 +125,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0">Scale Factor</Label>
+                    <Label Grid.Column="0" Margin="10">Scale Factor</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -148,7 +150,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Margin</Label>
+                    <Label Grid.Column="0" Margin="10" >Margin</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -159,7 +161,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Margin Left</Label>
+                    <Label Grid.Column="0" Margin="10">Margin Left</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -170,7 +172,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Margin Top</Label>
+                    <Label Grid.Column="0" Margin="10">Margin Top</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -181,7 +183,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Margin Right</Label>
+                    <Label Grid.Column="0" Margin="10">Margin Right</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -192,7 +194,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Margin Bottom</Label>
+                    <Label Grid.Column="0" Margin="10">Margin Bottom</Label>
                     <Grid Grid.Column="1">
                         <TextBox Width="200" Height="40"></TextBox>
                     </Grid>
@@ -203,7 +205,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Enable Auto Print</Label>
+                    <Label Grid.Column="0" Margin="10">Enable Auto Print</Label>
                     <Grid Grid.Column="1">
                         <CheckBox  HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
                     </Grid>
@@ -214,7 +216,7 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" >Enable Silent Print</Label>
+                    <Label Grid.Column="0" Margin="10">Enable Silent Print</Label>
                     <Grid Grid.Column="1">
                         <CheckBox  HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
                     </Grid>

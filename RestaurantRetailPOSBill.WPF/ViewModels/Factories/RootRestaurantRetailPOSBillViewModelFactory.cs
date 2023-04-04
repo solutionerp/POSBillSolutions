@@ -13,18 +13,19 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
         private readonly IRestaurantRetailPOSBillViewModelFactory<SettingViewModel> _settingsViewModel;
         private readonly IRestaurantRetailPOSBillViewModelFactory<POSBIllViewModel> _posBillViewModel;
         private readonly IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel> _posLoginViewModel;
-        //private readonly IRestaurantRetailPOSBillViewModelFactory<GeneralSettingsViewModel> _generalSettingsViewModel;
+        private readonly IRestaurantRetailPOSBillViewModelFactory<CalculatorViewModel> _calculatorViewmodel;
 
         public RootRestaurantRetailPOSBillViewModelFactory(IRestaurantRetailPOSBillViewModelFactory<DashBoardViewModel> dashBoardViewModel,
             IRestaurantRetailPOSBillViewModelFactory<SettingViewModel> settingsViewModel,
             IRestaurantRetailPOSBillViewModelFactory<POSBIllViewModel> posBillViewModel, 
-            IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel> posLoginViewModel)
+            IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel> posLoginViewModel,
+            IRestaurantRetailPOSBillViewModelFactory<CalculatorViewModel> calculatorViewmodel)
         {
             _dashBoardViewModel = dashBoardViewModel;
             _settingsViewModel = settingsViewModel;
             _posBillViewModel = posBillViewModel;
             _posLoginViewModel = posLoginViewModel;
-            //_generalSettingsViewModel = generalSettingsViewModel;
+            _calculatorViewmodel = calculatorViewmodel;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -40,7 +41,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
                     return _posBillViewModel.CreateViewModel();
                 case ViewType.Settings:
                     return _settingsViewModel.CreateViewModel();
-               
+                case ViewType.calculator:
+                    return _calculatorViewmodel.CreateViewModel();
+
                 default:
                     throw new ArgumentException("The ViewType does not have ViewModel.", "viewType");
             }

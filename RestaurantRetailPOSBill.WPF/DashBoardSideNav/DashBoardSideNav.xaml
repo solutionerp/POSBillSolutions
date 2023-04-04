@@ -7,29 +7,23 @@
              mc:Ignorable="d" 
              Background="Teal"
              d:DesignHeight="600" d:DesignWidth="250">
-    
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="45*"></RowDefinition>
             <RowDefinition Height="20*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Button Content="TRANACTIONS"></Button>
             </Grid>
             <Grid Grid.Row="1">
                 <Button Content="REPORTS"></Button>
-            </Grid>
-            <Grid Grid.Row="2">
-                <Button Content="ENQUERY"></Button>
             </Grid>
             <Grid Grid.Row="3">
                 <Button Content="SETTUP"></Button>

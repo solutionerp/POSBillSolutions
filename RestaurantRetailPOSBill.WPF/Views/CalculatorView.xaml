@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="RestaurantRetailPOSBill.WPF.Views.CalculatorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
+             mc:Ignorable="d" 
+             xmlns:calculatorNavBar="clr-namespace:RestaurantRetailPOSBill.WPF.Controls.calculatorNavBar"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="80*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+                <ColumnDefinition Width="80*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+             </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <calculatorNavBar:CalculatorNavigationBar></calculatorNavBar:CalculatorNavigationBar>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

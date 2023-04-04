@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Background>
-        <ImageBrush ImageSource="/Views/imagesRes.jpg"  
+        <ImageBrush ImageSource="/Views/imgbgrund.jpg"  
                     Opacity="1"
             Stretch="UniformToFill"></ImageBrush>
     </UserControl.Background>
@@ -81,13 +81,14 @@
                 <Button Grid.Row="3" Grid.Column="1" Width="auto" Content="Add Shipping" Background="{StaticResource BrushPrimary5}"></Button>
                 <Button Grid.Row="3" Grid.Column="2" Width="auto" Content="Add Coupons" Background="{StaticResource BrushPrimary5}"></Button>
 
-                <Button  Grid.Row="4" Grid.Column="0"  Width="auto" Content="Cancel" Background="{StaticResource BrushPrimary4}"></Button>
-                <Button  Grid.Row="4" Grid.Column="1"  Width="auto" Content="Return" Background="{StaticResource BrushPrimary4}"></Button>
-                <Button  Grid.Row="4" Grid.Column="2"  Width="auto" Content="" Background="{StaticResource BrushPrimary6}"></Button>
+                <Button Grid.Column="0" Grid.Row="4" Width="auto" Content="New Sale" Background="{StaticResource BrushPrimary2}"></Button>
+                <Button Grid.Row="4" Grid.Column="1" Width="auto" Content="Save Sale" Background="{StaticResource BrushPrimary3}"></Button>
+                <Button Grid.Row="4" Grid.Column="2" Width="auto" Content="Pay" Background="{StaticResource BrushPrimary7}"></Button>
+                
+                <Button  Grid.Row="5" Grid.Column="0"  Width="auto" Content="Cancel" Background="{StaticResource BrushPrimary4}"></Button>
+                <Button  Grid.Row="5" Grid.Column="1"  Width="auto" Content="Return" Background="{StaticResource BrushPrimary4}"></Button>
+                <Button  Grid.Row="5" Grid.Column="2"  Width="auto" Content="" Background="{StaticResource BrushPrimary6}"></Button>
 
-                <Button Grid.Column="0" Grid.Row="5" Width="auto" Content="New Sale" Background="{StaticResource BrushPrimary2}"></Button>
-                <Button Grid.Row="5" Grid.Column="1" Width="auto" Content="Save Sale" Background="{StaticResource BrushPrimary3}"></Button>
-                <Button Grid.Row="5" Grid.Column="2" Width="auto" Content="Pay" Background="{StaticResource BrushPrimary7}"></Button>
 
             </Grid>
         </Grid>

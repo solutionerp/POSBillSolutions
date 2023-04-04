@@ -28,7 +28,7 @@
             <Button Grid.Column="1" Height="50" Width="auto" Content="POS" Background="{StaticResource BrushPrimary1}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.POSBill}"></Button>
             <Button Grid.Column="2" Height="50" Width="auto" Content="Settings" Background="{StaticResource BrushPrimary1}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Settings}"></Button>
             <Button Grid.Column="3" Width="auto" Height="50" Content="Logout" Background="{StaticResource BrushPrimary1}"></Button>
-            <Button Grid.Column="5" >
+            <Button Grid.Column="5" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.calculator}" >
                 <Button.Background>
                     <ImageBrush ImageSource="/Controls/calculatorjpg.jpg" />
                 </Button.Background>

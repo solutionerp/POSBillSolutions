@@ -86,6 +86,7 @@ namespace RestaurantRetailPOSBill.WPF
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<SettingViewModel>, SettingsViewModelFactory>();
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<POSLoginViewModel>, POSLoginViewModelFactory>();
             services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<GeneralSettingsViewModel>, GeneralSettingsViewModelFactory>();
+            services.AddSingleton<IRestaurantRetailPOSBillViewModelFactory<CalculatorViewModel>, CalculatorViewModelFactory>();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
 
             services.AddSingleton<SplashWindow>(s => new SplashWindow(s.GetRequiredService<SplashViewModel>()));
