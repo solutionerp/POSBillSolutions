@@ -33,7 +33,9 @@
                     <ImageBrush ImageSource="/Controls/calculatorjpg.jpg" />
                 </Button.Background>
             </Button>
-            <Grid Grid.Column="4" Background="Teal"></Grid>
+            <Grid Grid.Column="4">
+                <TextBlock FontSize="10" Foreground="White" Background="Teal" Text="05-04-2023"></TextBlock>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

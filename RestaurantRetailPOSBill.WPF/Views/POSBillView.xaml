@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Background>
-        <ImageBrush ImageSource="/Views/imgbgrund.jpg"  
+        <ImageBrush ImageSource="/Views/Posbgd.jpg"  
                     Opacity="1"
             Stretch="UniformToFill"></ImageBrush>
     </UserControl.Background>
@@ -25,30 +25,16 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <!--<ColumnDefinition Width="2*"></ColumnDefinition>-->
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="10*"></RowDefinition>
-                    <RowDefinition Height="10*"></RowDefinition>
-                    <RowDefinition Height="10*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button Grid.Column="0" Grid.Row="0" Width="auto" Content="Home" Background="{StaticResource BrushPrimary2}"></Button>
-                <Button Grid.Row="0" Grid.Column="1" Width="auto" Content="ADD" Background="{StaticResource BrushPrimary2}"></Button>
-                <Button Grid.Row="0" Grid.Column="2" Width="auto" Content=" " Background="{StaticResource BrushPrimary5}"></Button>
-                <Button Grid.Row="0" Grid.Column="3" Width="auto" Content="MADCNA" Background="{StaticResource BrushPrimary5}"></Button>
-
-                <Button Grid.Column="0" Grid.Row="1" Width="auto" Content="" Background="{StaticResource BrushPrimary5}"></Button>
-                <Button Grid.Row="1" Grid.Column="1" Width="auto" Content="" Background="{StaticResource BrushPrimary5}"></Button>
-                <Button Grid.Row="1" Grid.Column="2" Width="auto" Content=" " Background="{StaticResource BrushPrimary5}"></Button>
-                <Button Grid.Row="1" Grid.Column="3" Width="auto" Content="" Background="{StaticResource BrushPrimary5}"></Button>
-
-                <Button Grid.Column="0" Grid.Row="2" Width="auto" Content="" Background="{StaticResource BrushPrimary5}"></Button>
-                <Button Grid.Row="2" Grid.Column="1" Width="auto" Content="" Background="{StaticResource BrushPrimary5}"></Button>
-                <Button Grid.Row="2" Grid.Column="2" Width="auto" Content=" " Background="{StaticResource BrushPrimary5}"></Button>
-                <Button Grid.Row="2" Grid.Column="3" Width="auto" Content="" Background="{StaticResource BrushPrimary5}"></Button>
+                <Grid Grid.Column="0">
+                    <TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredText}" Foreground="Green"></TextBlock>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredPriceText}" Foreground="Green"></TextBlock>
+                </Grid>
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -65,16 +51,16 @@
                     <RowDefinition Height="16*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button  Grid.Row="0" Grid.Column="0"  Width="auto" Content="Edit Product" Background="{StaticResource BrushPrimary1}"></Button>
-                <Button  Grid.Row="0" Grid.Column="1"  Width="auto" Content="Print Coupons" Background="{StaticResource BrushPrimary1}"></Button>
-                <Button  Grid.Row="0" Grid.Column="2"  Width="auto" Content="Cash IN" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button  Grid.Row="0" Grid.Column="0" Foreground="White"  Width="auto" Content="Edit Product" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button  Grid.Row="0" Grid.Column="1" Foreground="White" Width="auto" Content="Print Coupons" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button  Grid.Row="0" Grid.Column="2" Foreground="white"  Width="auto" Content="Cash IN" Background="{StaticResource BrushPrimary1}"></Button>
 
-                <Button Grid.Column="0" Grid.Row="1" Width="auto" Content="Cash Out" Background="{StaticResource BrushPrimary1}"></Button>
-                <Button Grid.Row="1" Grid.Column="1" Width="auto" Content="Item LookUp" Background="{StaticResource BrushPrimary1}"></Button>
-                <Button Grid.Row="1" Grid.Column="2" Width="auto" Content="End Day" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button Grid.Column="0" Grid.Row="1" Foreground="white" Width="auto" Content="Cash Out" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button Grid.Row="1" Grid.Column="1" Foreground="white" Width="auto" Content="Item LookUp" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button Grid.Row="1" Grid.Column="2" Foreground="white" Width="auto" Content="End Day" Background="{StaticResource BrushPrimary1}"></Button>
 
-                <Button  Grid.Row="2" Grid.Column="0" Width="auto" Content="Clock IN/OUT" Background="{StaticResource BrushPrimary1}"></Button>
-                <Button Grid.Row="2" Grid.Column="1" Width="auto" Content="" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button  Grid.Row="2" Grid.Column="0" Foreground="white" Width="auto" Content="Clock IN/OUT" Background="{StaticResource BrushPrimary1}"></Button>
+                <Button Grid.Row="2" Grid.Column="1" Foreground="white" Width="auto" Content="" Background="{StaticResource BrushPrimary1}"></Button>
                 <Button Grid.Row="2" Grid.Column="2" Width="auto" Content="Open Drawer" Background="{StaticResource BrushPrimary5}"></Button>
 
                 <Button  Grid.Row="3" Grid.Column="0" Width="auto" Content="Line Discount" Background="{StaticResource BrushPrimary5}"></Button>
@@ -82,12 +68,12 @@
                 <Button Grid.Row="3" Grid.Column="2" Width="auto" Content="Add Coupons" Background="{StaticResource BrushPrimary5}"></Button>
 
                 <Button Grid.Column="0" Grid.Row="4" Width="auto" Content="New Sale" Background="{StaticResource BrushPrimary2}"></Button>
-                <Button Grid.Row="4" Grid.Column="1" Width="auto" Content="Save Sale" Background="{StaticResource BrushPrimary3}"></Button>
-                <Button Grid.Row="4" Grid.Column="2" Width="auto" Content="Pay" Background="{StaticResource BrushPrimary7}"></Button>
+                <Button Grid.Row="4" Grid.Column="1" Width="auto" Foreground="White" Content="Save Sale" Background="{StaticResource BrushPrimary3}"></Button>
+                <Button Grid.Row="4" Grid.Column="2" Width="auto" Foreground="White" Content="Pay" Background="{StaticResource BrushPrimary7}"></Button>
                 
-                <Button  Grid.Row="5" Grid.Column="0"  Width="auto" Content="Cancel" Background="{StaticResource BrushPrimary4}"></Button>
-                <Button  Grid.Row="5" Grid.Column="1"  Width="auto" Content="Return" Background="{StaticResource BrushPrimary4}"></Button>
-                <Button  Grid.Row="5" Grid.Column="2"  Width="auto" Content="" Background="{StaticResource BrushPrimary6}"></Button>
+                <Button  Grid.Row="5" Grid.Column="0"  Width="auto" Foreground="White" Content="Cancel" Background="{StaticResource BrushPrimary4}"></Button>
+                <Button  Grid.Row="5" Grid.Column="1"  Width="auto" Foreground="White" Content="Return" Background="{StaticResource BrushPrimary4}"></Button>
+                <Button  Grid.Row="5" Grid.Column="2"  Width="auto" Foreground="White" Content="" Background="{StaticResource BrushPrimary6}"></Button>
 
 
             </Grid>
@@ -95,13 +81,21 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"></RowDefinition>
-
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="20"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
-                <RowDefinition Height="40*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="80*"></RowDefinition>
+                
             </Grid.RowDefinitions>
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding QRCodeText}" />
+                <Button Content="Scan QR Code" Grid.Column="1" Command="{Binding ScanQRCodeCommand}">
+                </Button>
+                <!--<TextBox Text="{Binding SearchTerm}" />-->
+            </Grid>
+            <Grid Grid.Row="2">
                 <DataGrid x:Name="POSBillGrid" Grid.Column="0" Margin="10" Height="auto"  />
             </Grid>
             

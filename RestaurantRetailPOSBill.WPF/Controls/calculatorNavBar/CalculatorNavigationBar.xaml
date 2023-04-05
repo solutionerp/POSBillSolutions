@@ -32,7 +32,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Button Background="Orange" Width="auto" Height="auto" Content="+" FontSize="80">
-                    <!--<ImageBrush ImageSource="/Views/sumimg.png"></ImageBrush>-->
+                     
                 </Button>
             </Grid>
             <Grid Grid.Row="1">
