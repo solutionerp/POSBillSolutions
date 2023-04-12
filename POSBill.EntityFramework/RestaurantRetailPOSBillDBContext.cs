@@ -13,6 +13,16 @@ namespace POSBill.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<security_roles> security_roles { get; set; }
         public DbSet<stock_master> stock_master { get; set; }
+        public DbSet<bank_accounts> bank_accounts { get; set; }
+        public DbSet<audit_trail> audit_trail { get; set; }
+        public DbSet<areas> areas { get; set; }
+        public DbSet<attachments> attachments { get; set; }
+        public DbSet<bank_trans> banktrans { get;set; }
+        public DbSet<bom> bom { get; set; }
+        public DbSet<budget_trans> budgetrans { get; set; }
+        public DbSet<chart_class> chart_class { get;set; }
+        public DbSet<chart_master> chart_master { get; set; }
+
         public RestaurantRetailPOSBillDBContext(DbContextOptions options) : base(options){ }
 
     } 
