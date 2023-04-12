@@ -1,15 +1,24 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using Microsoft.AspNet.Identity;
+using Org.BouncyCastle.Asn1.Crmf;
+using POSBill.Domain.Models;
 using POSBill.Domain.Services;
+using POSBill.EntityFramework;
 using RestaurantRetailPOSBill.WPF.Commands;
+using RestaurantRetailPOSBill.WPF.Controls;
 using RestaurantRetailPOSBill.WPF.State.Authenticators;
+using RestaurantRetailPOSBill.WPF.State.Navigator;
+using RestaurantRetailPOSBill.WPF.Views;
 using RetailResuarantPOSAPI.Api.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace RestaurantRetailPOSBill.WPF.ViewModels
 {
@@ -18,16 +27,27 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public string _userName;
         public string _password;
         private readonly IMajorIndexService _majorIndexService;
+        public INavigator Navigator { get; set; }
+        private UserdbManager _userdbManager;
         public RelayCommand LoginCommand { get; set; }
+        public List<User> Users { get; set; }
+        bool IsValidUser = false;
+        public event EventHandler LoginSuccessful;
 
-        public POSLoginViewModel(IMajorIndexService majorIndexService)
+        //public POSLoginViewModel(IMajorIndexService majorIndexService)
+        //{
+        //    _majorIndexService = majorIndexService;
+        //    //LoginCommand = loginCommand;
+        //    LoginCommand = new RelayCommand(Login);
+
+        //}
+        public POSLoginViewModel()
         {
-            _majorIndexService = majorIndexService;
+            //  _majorIndexService = majorIndexService;
             //LoginCommand = loginCommand;
             LoginCommand = new RelayCommand(Login);
-        }
 
-       
+        }
         public string Username
         {
             get
@@ -52,21 +72,43 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-       
         private void Login()
         {
-            _majorIndexService.Authenticate(Username, Password);
-
+            try
+            {
+               // _userdbManager.SetUsers(Username, Password);
+                _userdbManager = new UserdbManager();
+                Users = _userdbManager.GetUsers();
+                foreach (User user in Users)
+                {
+                    if (user.user_id == Username && user.password == Password)
+                    {
+                        IsValidUser = true;
+                        //NavigationService navigationService = NavigationService.GetNavigationService(this);
+                        //navigationService.Navigate(new Uri("DashBoardView.xaml", UriKind.Relative));
+                        MessageBox.Show("Sucessfully Login");
+                        break;
+                    }
+                }
+                if (IsValidUser!=true)
+                {
+                    MessageBox.Show("Invalid username and Password");
+                }
+                //_majorIndexService.Authenticate(Username, Password);
+                Username = "";
+                Password = "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
         }
-
-
+       
         //public ICommand LoginCommand { get; }
 
         //public POSLoginViewModel(IMajorIndexService _majorIndexService)
         // {
         //    LoginCommand = new LoginCommand(this, _majorIndexService);
         //}
-
-
     }
 }

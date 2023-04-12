@@ -20,11 +20,10 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="90*"></RowDefinition>
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0">
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Visibility" Value="Visible"></Setter>
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
                 </Style>
             </Grid.Style>
             <controls:NavigationBar DataContext="{Binding Navigator}"></controls:NavigationBar>

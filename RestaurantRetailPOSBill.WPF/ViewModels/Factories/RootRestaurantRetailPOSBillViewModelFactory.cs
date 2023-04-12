@@ -1,4 +1,5 @@
-﻿using RestaurantRetailPOSBill.WPF.State.Navigator;
+﻿using RestaurantRetailPOSBill.WPF.State.LoginNavigator;
+using RestaurantRetailPOSBill.WPF.State.Navigator;
 using System;
 using System.Collections.Generic;
 using System.Linq;

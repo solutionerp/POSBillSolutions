@@ -22,6 +22,7 @@ using POSBill.EntityFramework.Services;
 using RetailResuarantPOSAPI.Api.Services;
 using System.Windows.Input;
 using RestaurantRetailPOSBill.WPF.Commands;
+using RestaurantRetailPOSBill.WPF.State.LoginNavigator;
 
 namespace RestaurantRetailPOSBill.WPF
 {
@@ -95,6 +96,7 @@ namespace RestaurantRetailPOSBill.WPF
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainwindowViewModel>()));
             //services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<SettingViewModel>()));
             services.AddScoped<INavigator, Navigator>();
+            services.AddScoped<ILoginNavigator, LoginNavigator>();
             services.AddScoped<IAuthenticator, Authenticator>();
             services.AddScoped<MainwindowViewModel>();
 

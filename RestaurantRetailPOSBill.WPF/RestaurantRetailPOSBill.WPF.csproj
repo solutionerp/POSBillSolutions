@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Controls\calculatorjpg.jpg" />
+    <None Remove="Controls\calculatorNavBar\calculatorjpg.jpg" />
     <None Remove="Controls\dashBoard.png" />
     <None Remove="Controls\logout.png" />
     <None Remove="Controls\Posbill.png.png" />
@@ -40,6 +41,7 @@
 
   <ItemGroup>
     <Resource Include="Controls\calculatorjpg.jpg" />
+    <Resource Include="Controls\calculatorNavBar\calculatorjpg.jpg" />
     <Resource Include="Controls\dashBoard.png" />
     <Resource Include="Controls\logout.png" />
     <Resource Include="Controls\Posbill.png.png" />
@@ -72,10 +74,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="State\DashBoardNav\" />
   </ItemGroup>
 
 </Project>

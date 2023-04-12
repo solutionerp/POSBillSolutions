@@ -17,6 +17,11 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         private string _coloredText = "TomatoBisket  :";
         private string _coloredPriceText = "Price :10";
 
+        public decimal Number { get; set; }
+        public ICommand NumberButtonCommand { get; set; }
+        public ICommand DecimalButtonCommand { get; set; }
+        public ICommand ClearButtonCommand { get; set; }
+
         public string ColoredPriceText
         {
             get { return _coloredPriceText; }
@@ -32,18 +37,17 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             get { return _coloredText; }
             set
             {
-                
-                _coloredText = value;
+                   _coloredText = value;
                 OnPropertyChanged(nameof(ColoredText));
             }
         }
-        public string QRCodeText
+        public string SearchText
         {
             get { return _qrCodeText; }
             set
             {
                 _qrCodeText = value;
-                OnPropertyChanged(nameof(QRCodeText));
+                OnPropertyChanged(nameof(SearchText));
             }
         }
         public POSBIllViewModel() 

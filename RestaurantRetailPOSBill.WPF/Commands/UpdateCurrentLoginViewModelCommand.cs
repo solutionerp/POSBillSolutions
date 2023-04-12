@@ -1,5 +1,5 @@
-﻿using RestaurantRetailPOSBill.WPF.State.Navigator;
-using RestaurantRetailPOSBill.WPF.ViewModels;
+﻿using RestaurantRetailPOSBill.WPF.State.LoginNavigator;
+using RestaurantRetailPOSBill.WPF.State.Navigator;
 using RestaurantRetailPOSBill.WPF.ViewModels.Factories;
 using System;
 using System.Collections.Generic;
@@ -10,23 +10,20 @@ using System.Windows.Input;
 
 namespace RestaurantRetailPOSBill.WPF.Commands
 {
-    public class UpdateCurrentViewModelCommand : ICommand
+    public class UpdateCurrentLoginViewModelCommand : ICommand
     {
-
-        INavigator _navigator;
+        public ILoginNavigator _iLoginNavigator;
         private readonly IRootRestaurantRetailPOSBillViewModelFactory _viewModelFactory;
-        public bool IsSettingsVisible = false;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator,
+        public UpdateCurrentLoginViewModelCommand(ILoginNavigator iLoginNavigator,
             IRootRestaurantRetailPOSBillViewModelFactory viewModelFactory)
         {
-            _navigator = navigator;
+            _iLoginNavigator = iLoginNavigator;
             _viewModelFactory = viewModelFactory;
         }
 
         public event EventHandler? CanExecuteChanged;
 
-        
         public bool CanExecute(object? parameter)
         {
             return true;
@@ -34,15 +31,11 @@ namespace RestaurantRetailPOSBill.WPF.Commands
 
         public void Execute(object? parameter)
         {
-            if (parameter is ViewType)
-            {
-                ViewType viewType = (ViewType)parameter;
-                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
-            }
-
+            //if (parameter is LoginViewType)
+            //{
+            //    LoginViewType viewType = (LoginViewType)parameter;
+            //    _iLoginNavigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
+            //}
         }
-
-       
-
     }
 }
