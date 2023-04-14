@@ -13,5 +13,7 @@ namespace POSBill.Domain.Services
         Task<T> Create(T entity);
         Task<T> Update(int id, T Enitity);
         Task<bool>Delete(int id);
+        Task<IEnumerable<T>> GetByQuery(string strQuery);
+        Task<T> ExecuteQuery(string strQuery);
     }
 }

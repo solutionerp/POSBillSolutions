@@ -17,8 +17,8 @@ using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace POSBill.EntityFramework
-{
-    public class UserdbManager
+{ 
+    public class UserdbManager : DbManager<User>
     {
         public UserdbManager() 
         {
@@ -50,19 +50,17 @@ namespace POSBill.EntityFramework
                 throw new Exception("An Exception Occured", ex);
             }
         }
-        public void SetUsers(string strUserName,string strPassword)
+      
+        public User GetUserByIdAndPassword(string strUserId,string strPassword)
         {
-            try
+            string strQuery = string.Format("SELECT * FROM reference_db.0_users where user_id='{0}' and password='{1}'", strUserId, strPassword);
+            var users = GetByQuery(strQuery).Result.ToList();
+            if(users.Count > 0) 
             {
-                DataBaseUtils dataBaseUtils = new DataBaseUtils();
-                string strQueryFormat = "INSERT INTO reference_db.0_users (user_id, password) VALUES ('{0}', '{1}')";
-                string strQuery = string.Format(strQueryFormat, strUserName, strPassword);
-                dataBaseUtils.ExecuteQuery(strQuery);
+                return users[0];
             }
-            catch (Exception ex)
-            {
-                throw new Exception("An Exception Occured", ex);
-            }
+            return null;
         }
+
     }
 }

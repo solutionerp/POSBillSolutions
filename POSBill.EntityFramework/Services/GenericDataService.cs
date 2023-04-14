@@ -42,6 +42,11 @@ namespace POSBill.EntityFramework.Services
             }
         }
 
+        public Task<T> ExecuteQuery(string strQuery)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<T> Get(int id)
         {
             using (RestaurantRetailPOSBillDBContext context = _contextFactory.CreateDbContext())
@@ -58,6 +63,11 @@ namespace POSBill.EntityFramework.Services
               IEnumerable<T>  entities = await context.Set<T>().ToListAsync();
                 return entities;
             }
+        }
+
+        public Task<IEnumerable<T>> GetByQuery(string strQuery)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<T> Update(int id, T enitity)
