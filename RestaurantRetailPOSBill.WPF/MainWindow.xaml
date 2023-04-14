@@ -15,7 +15,6 @@
     </Window.Resources>
 
     <Grid>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="90*"></RowDefinition>
@@ -23,16 +22,14 @@
         <Grid Grid.Row="0">
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="Visibility" Value="Visible" />
                 </Style>
             </Grid.Style>
-            <controls:NavigationBar DataContext="{Binding Navigator}"></controls:NavigationBar>
+            <controls:NavigationBar DataContext="{Binding Navigator}" Visibility="{Binding CurrentViewModel.NavVisibility}"></controls:NavigationBar>
         </Grid>
-        
             <ContentControl Grid.Row="2" Name="Container"  Content="{Binding Navigator.CurrentViewModel}"></ContentControl>
         <!--<Grid Grid.Row="1" >
             --><!--<SettingsControls:SettingsNavBar DataContext="{Binding SettingsNavigator}"></SettingsControls:SettingsNavBar>--><!--
         </Grid>-->
-
     </Grid>
 </Window>

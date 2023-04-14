@@ -13,7 +13,7 @@
             <RowDefinition Height="80*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
-            <Button  Content="Download Data From Server" Width="500" Height="60" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25" Background="{StaticResource BrushPrimary9}" Command="{Binding UpdateCurrentViewModelCommand}" Foreground="White"></Button>
+            <Button  Content="Download Data From Server" Width="500" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Background="{StaticResource BrushPrimary9}" Command="{Binding UpdateCurrentViewModelCommand}" Foreground="White"></Button>
         </Grid>
     </Grid>
 </UserControl>

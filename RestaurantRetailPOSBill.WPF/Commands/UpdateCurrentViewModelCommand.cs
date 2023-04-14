@@ -38,11 +38,8 @@ namespace RestaurantRetailPOSBill.WPF.Commands
             {
                 ViewType viewType = (ViewType)parameter;
                 _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
+                _navigator.CurrentViewModel.Navigator = _navigator;
             }
-
         }
-
-       
-
     }
 }

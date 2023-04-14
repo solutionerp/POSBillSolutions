@@ -27,7 +27,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public string _userName;
         public string _password;
         private readonly IMajorIndexService _majorIndexService;
-        public INavigator Navigator { get; set; }
+        
         private UserdbManager _userdbManager;
         public RelayCommand LoginCommand { get; set; }
         public List<User> Users { get; set; }
@@ -46,6 +46,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             //  _majorIndexService = majorIndexService;
             //LoginCommand = loginCommand;
             LoginCommand = new RelayCommand(Login);
+            NavVisibility = "collapsed";
 
         }
         public string Username
@@ -78,22 +79,21 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             {
                // _userdbManager.SetUsers(Username, Password);
                 _userdbManager = new UserdbManager();
-                Users = _userdbManager.GetUsers();
-                foreach (User user in Users)
+                User user = _userdbManager.GetUserByIdAndPassword(Username, Password);
+                if(user!= null)
                 {
                     if (user.user_id == Username && user.password == Password)
                     {
                         IsValidUser = true;
-                        //NavigationService navigationService = NavigationService.GetNavigationService(this);
-                        //navigationService.Navigate(new Uri("DashBoardView.xaml", UriKind.Relative));
+                        ((Navigator)Navigator).IsLoggedIn = true;
                         MessageBox.Show("Sucessfully Login");
-                        break;
                     }
                 }
-                if (IsValidUser!=true)
+                else
                 {
                     MessageBox.Show("Invalid username and Password");
                 }
+                
                 //_majorIndexService.Authenticate(Username, Password);
                 Username = "";
                 Password = "";

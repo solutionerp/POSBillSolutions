@@ -14,10 +14,8 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
 {
     public class Navigator : ObservableObject, INavigator
     {
-        
         public ViewModelBase _currentViewmodel;
         //public SettingViewModel _settingsViewModel;
-
         public ViewModelBase CurrentViewModel
         {
             get
@@ -30,28 +28,28 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
-
         public ICommand UpdateCurrentViewModelCommand { get;set; }
-
         public bool IsSettingsVisible;
+       
+        private bool _isLoggedIn;
+        public bool IsLoggedIn
+        {
+            get { return _isLoggedIn; }
+            set { _isLoggedIn = value;
+                if(_isLoggedIn)
+                {
+                    UpdateCurrentViewModelCommand.Execute(ViewType.DashBoard);
+                }
+                else
+                {
+                    UpdateCurrentViewModelCommand.Execute(ViewType.Login);
+                }
+                OnPropertyChanged(nameof(IsLoggedIn)); }
+        }
         public ICommand ShowSettingsCommand => new RelayCommand(() =>
         {
             IsSettingsVisible = true;
         });
-        //public SettingViewModel settingsCurrentViewModel
-        //{
-        //    get
-        //    {
-        //        return _settingsViewModel;
-        //    }
-        //    set
-        //    {
-        //        _settingsViewModel = value;
-        //        OnPropertyChanged(nameof(CurrentViewModel));
-        //    }
-
-        //}
-
         public Navigator(IRootRestaurantRetailPOSBillViewModelFactory viewModelFactory)
         {
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
