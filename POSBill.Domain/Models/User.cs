@@ -12,6 +12,7 @@ namespace POSBill.Domain.Models
         public string user_id { get; set; }
         public string password { get; set; }
 
+
         public override string GetSelectAllQuery()
         {
             return "SELECT * FROM reference_db.0_users";

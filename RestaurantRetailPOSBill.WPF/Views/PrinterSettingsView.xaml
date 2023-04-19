@@ -7,11 +7,72 @@
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="printersettingsButtonStyle" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="DarkMagenta"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect  ShadowDepth="6" Color="Gray" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Height" Value="27"/>
+        </Style>
+        <Style TargetType="Label" x:Key="labelStyle">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="RadioButton" x:Key="radioButtonStyle">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect  ShadowDepth="6" Color="Gray" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="70*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="40*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -19,10 +80,10 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="50*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
+
             <Grid Grid.Column="1">
             </Grid>
-            
+
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"></RowDefinition>
@@ -34,15 +95,15 @@
                     <RowDefinition Height="10*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10" >Default Printer</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10" >Default Printer</Label>
                     <Grid Grid.Column="1">
-                        <ComboBox x:Name="MyComboBox">
+                        <ComboBox x:Name="defaultprinterComboBox" Style="{StaticResource ComboBoxStyle}">
                             <ComboBoxItem>Item 1</ComboBoxItem>
                             <ComboBoxItem>Item 2</ComboBoxItem>
                             <ComboBoxItem>Item 3</ComboBoxItem>
@@ -51,17 +112,18 @@
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*"></ColumnDefinition>
-                        <ColumnDefinition Width="70*"></ColumnDefinition>
+                        <ColumnDefinition Width="119*"></ColumnDefinition>
+                        <ColumnDefinition Width="102*"></ColumnDefinition>
+                        <ColumnDefinition Width="175*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Layout</Label>
-                    <Grid Grid.Column="1">
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10,10,10,10">Layout</Label>
+                    <Grid Grid.Column="1" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30*"></ColumnDefinition>
                             <ColumnDefinition Width="70*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <RadioButton Grid.Column="0" Content="LandScape"/>
-                        <RadioButton Grid.Column="1"  Content="Portrait"/>
+                        <RadioButton Grid.Column="0" Style="{StaticResource radioButtonStyle}" Content="LandScape"/>
+                        <RadioButton Grid.Column="1" Style="{StaticResource radioButtonStyle}" Content="Portrait"/>
                     </Grid>
                 </Grid>
 
@@ -70,9 +132,10 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">PDF Path</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">PDF Path</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Please select PDF path to select" Command="{Binding UploadFileCommand}" />
+
                     </Grid>
                 </Grid>
 
@@ -81,9 +144,14 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Paper Size</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Paper Size</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <ComboBox x:Name="PapersizeComboBox" Style="{StaticResource ComboBoxStyle}">
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                            <ComboBoxItem>Item 3</ComboBoxItem>
+                        </ComboBox>
+                        <!--<TextBox Width="200" Height="40"></TextBox>-->
                     </Grid>
                 </Grid>
 
@@ -92,9 +160,9 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Custom Width</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Custom Width</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -103,9 +171,9 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Custom Height</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Custom Height</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -114,9 +182,9 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">No Of Copies</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">No Of Copies</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -125,14 +193,14 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Scale Factor</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Scale Factor</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
             </Grid>
-            
-            
+
+
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"></RowDefinition>
@@ -150,9 +218,14 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10" >Margin</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10" >Margin</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <ComboBox x:Name="MarginComboBox" Style="{StaticResource ComboBoxStyle}">
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                            <ComboBoxItem>Item 3</ComboBoxItem>
+                        </ComboBox>
+                        <!--<TextBox Width="200" Height="40"></TextBox>-->
                     </Grid>
                 </Grid>
 
@@ -161,9 +234,9 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Margin Left</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Margin Left</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -172,9 +245,9 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Margin Top</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Margin Top</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -183,9 +256,9 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Margin Right</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Margin Right</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -194,18 +267,17 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Margin Bottom</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Margin Bottom</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Width="200" Height="40"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
                     </Grid>
                 </Grid>
-
                 <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Enable Auto Print</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Enable Auto Print</Label>
                     <Grid Grid.Column="1">
                         <CheckBox  HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
                     </Grid>
@@ -216,12 +288,15 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Margin="10">Enable Silent Print</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Enable Silent Print</Label>
                     <Grid Grid.Column="1">
                         <CheckBox  HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
                     </Grid>
                 </Grid>
             </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button Style="{StaticResource printersettingsButtonStyle}"  Content="Update"  Height="60" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
         </Grid>
     </Grid>
 </UserControl>

@@ -50,7 +50,6 @@ namespace POSBill.EntityFramework
                 throw new Exception("An Exception Occured", ex);
             }
         }
-      
         public User GetUserByIdAndPassword(string strUserId,string strPassword)
         {
             string strQuery = string.Format("SELECT * FROM reference_db.0_users where user_id='{0}' and password='{1}'", strUserId, strPassword);

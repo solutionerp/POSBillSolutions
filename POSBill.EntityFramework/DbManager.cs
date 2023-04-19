@@ -13,29 +13,34 @@ namespace POSBill.EntityFramework
     {
         public Task<T> Create(T entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DomainObject obj = entity as DomainObject;
+                DataBaseUtils dataBaseUtils =new DataBaseUtils();
+                string strQuery = obj.GetInsertQuery();
+                return Task.FromResult(entity);
+            }
+            catch (Exception ex) 
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
         }
-
         public Task<bool> Delete(int id)
         {
             throw new NotImplementedException();
         }
-
         public Task<T> ExecuteQuery(string strQuery)
         {
             throw new NotImplementedException();
         }
-
         public Task<T> Get(int id)
         {
             throw new NotImplementedException();
         }
-
         public Task<IEnumerable<T>> GetAll()
         {
            try
             {
-                var users = new List<User>();
                 DomainObject obj = (DomainObject)Activator.CreateInstance(typeof(T));
                 DataBaseUtils dataBaseUtils = new DataBaseUtils();
                 string strQuery = obj.GetSelectAllQuery();
@@ -53,7 +58,6 @@ namespace POSBill.EntityFramework
         {
             try
             {
-                var users = new List<User>();
                 DomainObject obj = (DomainObject)Activator.CreateInstance(typeof(T));
                 DataBaseUtils dataBaseUtils = new DataBaseUtils();
                 DataSet dataset = dataBaseUtils.GetRecord(strQuery);
@@ -67,7 +71,18 @@ namespace POSBill.EntityFramework
 
         public Task<T> Update(int id, T Enitity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DomainObject obj = Enitity as DomainObject;
+                DataBaseUtils dataBaseUtils = new DataBaseUtils();
+                string strquery = obj.GetUpdateQuery(id.ToString());
+                dataBaseUtils.ExecuteQuery(strquery);
+                return Task.FromResult(Enitity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
         }
     }
 }

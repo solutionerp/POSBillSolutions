@@ -7,6 +7,20 @@
              mc:Ignorable="d" 
              Background="Teal"
              d:DesignHeight="600" d:DesignWidth="250">
+    <UserControl.Resources>
+        <Style x:Key="NavDashBoardButtonStyle" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect  ShadowDepth="6" Color="Gray" Opacity="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"></RowDefinition>
@@ -20,13 +34,13 @@
                 <RowDefinition Height="15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Button Content="TRANACTIONS"></Button>
+                <Button Style="{StaticResource NavDashBoardButtonStyle}" Content="TRANACTIONS"></Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Button Content="REPORTS"></Button>
+                <Button Style="{StaticResource NavDashBoardButtonStyle}" Content="REPORTS"></Button>
             </Grid>
             <Grid Grid.Row="3">
-                <Button Content="SETTUP"></Button>
+                <Button Style="{StaticResource NavDashBoardButtonStyle}" Content="SETTUP"></Button>
             </Grid>
         </Grid>
     </Grid>

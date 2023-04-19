@@ -10,6 +10,7 @@
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        
     </UserControl.Resources>
     <UserControl.Background>
         <ImageBrush ImageSource="/Views/imagesbgrund.jpg"  

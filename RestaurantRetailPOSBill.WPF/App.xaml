@@ -41,11 +41,6 @@
             <DataTemplate DataType="{x:Type viewModels:PrinterSettingsViewModel}">
                 <views:PrinterSettingsView></views:PrinterSettingsView>
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModels:CategorySettingsViewModel}">
-                <views:CategorySettingsView></views:CategorySettingsView>
-            </DataTemplate>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

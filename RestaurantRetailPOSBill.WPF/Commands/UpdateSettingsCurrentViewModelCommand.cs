@@ -42,9 +42,6 @@ namespace RestaurantRetailPOSBill.WPF.Commands
                     case SettingsViewType.printer:
                         _settingsnavigator.SettingsCurrentViewModel = new PrinterSettingsViewModel();
                         break;
-                    case SettingsViewType.category:
-                        _settingsnavigator.SettingsCurrentViewModel = new CategorySettingsViewModel();
-                        break;
                 }
 
 

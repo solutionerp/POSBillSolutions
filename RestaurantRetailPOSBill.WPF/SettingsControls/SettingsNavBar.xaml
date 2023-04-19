@@ -7,10 +7,31 @@
              xmlns:nav="clr-namespace:RestaurantRetailPOSBill.WPF.State.SettingsNavigator"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="250">
+    <UserControl.Resources>
+        <Style x:Key="NavPrinterButtonStyle" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+           
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect  ShadowDepth="6" Color="Gray" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="LightGray" />
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid Background="Teal">
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
             <RowDefinition Height="20*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
@@ -18,20 +39,17 @@
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Button Content="General" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>
+                <Button Style="{StaticResource NavPrinterButtonStyle}" Content="General" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Button Foreground="BlueViolet" Content="Server" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.server}"></Button>
+                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Server" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.server}"></Button>
             </Grid>
             <Grid Grid.Row="2">
-                <Button Foreground="BlueViolet" Content="Printer" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.printer}"></Button>
+                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Printer" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.printer}"></Button>
             </Grid>
-            <Grid Grid.Row="3">
-                <Button Foreground="BlueViolet" Content="Category" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.category}"></Button>
-            </Grid>
+            
         </Grid>
     </Grid>
 </UserControl>

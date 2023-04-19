@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantRetailPOSBill.WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace RestaurantRetailPOSBill.WPF.Views
         public GeneralSettingsView()
         {
             InitializeComponent();
+        }
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

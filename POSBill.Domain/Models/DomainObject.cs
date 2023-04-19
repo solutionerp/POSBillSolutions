@@ -14,6 +14,14 @@ namespace POSBill.Domain.Models
         {
             return string.Empty;
         }
+        public virtual string GetInsertQuery()
+        {
+            return string.Empty;
+        }
+        public virtual string GetUpdateQuery(string id)
+        {
+            return string.Empty;
+        }
         public virtual Task<IEnumerable<T>> ToArray<T>(DataSet dataSet) where T : class
         {
             List<DomainObject> items = new List<DomainObject>();
