@@ -33,7 +33,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
         {
             switch (viewType)
             {
-
                 case ViewType.Login:
                     return _posLoginViewModel.CreateViewModel();
                 case ViewType.DashBoard:
@@ -44,7 +43,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
                     return _settingsViewModel.CreateViewModel();
                 case ViewType.calculator:
                     return _calculatorViewmodel.CreateViewModel();
-
                 default:
                     throw new ArgumentException("The ViewType does not have ViewModel.", "viewType");
             }

@@ -10,22 +10,10 @@ namespace POSBill.Domain.Models
     public abstract class DomainObject
     {
         public int Id { get; set; }
-        public virtual string GetSelectAllQuery()
-        {
-            return string.Empty;
-        }
-        public virtual string GetInsertQuery()
-        {
-            return string.Empty;
-        }
-        public virtual string GetUpdateQuery(string id)
-        {
-            return string.Empty;
-        }
-        public virtual Task<IEnumerable<T>> ToArray<T>(DataSet dataSet) where T : class
-        {
-            List<DomainObject> items = new List<DomainObject>();
-            return Task.FromResult<IEnumerable<T>>(items as IEnumerable<T>);
-        }
+        public abstract string GetSelectAllQuery();
+        public abstract string GetInsertQuery();
+        public abstract string GetUpdateQuery(string id);
+        public abstract Task<IEnumerable<T>> ToArray<T>(DataSet dataSet) where T : class;
+       
     }
 }

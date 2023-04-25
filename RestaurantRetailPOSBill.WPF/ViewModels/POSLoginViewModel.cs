@@ -27,7 +27,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public string _userName;
         public string _password;
         private readonly IMajorIndexService _majorIndexService;
-        
         private UserdbManager _userdbManager;
         public RelayCommand LoginCommand { get; set; }
         public List<User> Users { get; set; }

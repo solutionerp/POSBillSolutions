@@ -36,7 +36,7 @@
         </Style>
     </UserControl.Resources>
     <UserControl.Background>
-        <ImageBrush ImageSource="/Views/imagesbgrund.jpg"  
+        <ImageBrush ImageSource="/Views/login-background.jpg"  
                     Opacity="1"
             Stretch="UniformToFill"></ImageBrush>
            

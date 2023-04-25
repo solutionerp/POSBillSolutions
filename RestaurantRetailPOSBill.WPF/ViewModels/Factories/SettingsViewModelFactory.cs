@@ -1,4 +1,5 @@
 ﻿using RestaurantRetailPOSBill.WPF.State.Navigator;
+using RestaurantRetailPOSBill.WPF.State.SettingsNavigator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels.Factories
 {
     public class SettingsViewModelFactory : IRestaurantRetailPOSBillViewModelFactory<SettingViewModel>
     {
-        
         public SettingViewModel CreateViewModel()
         {
             return new SettingViewModel();

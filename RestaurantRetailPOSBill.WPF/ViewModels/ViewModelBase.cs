@@ -1,5 +1,6 @@
 ﻿using RestaurantRetailPOSBill.WPF.Commands;
 using RestaurantRetailPOSBill.WPF.State.Navigator;
+using RestaurantRetailPOSBill.WPF.State.SettingsNavigator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

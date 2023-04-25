@@ -1,5 +1,6 @@
 ﻿using RestaurantRetailPOSBill.WPF.Commands;
 using RestaurantRetailPOSBill.WPF.Models;
+using RestaurantRetailPOSBill.WPF.State.Navigator;
 using RestaurantRetailPOSBill.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace RestaurantRetailPOSBill.WPF.State.SettingsNavigator
@@ -26,7 +28,6 @@ namespace RestaurantRetailPOSBill.WPF.State.SettingsNavigator
                 OnPropertyChanged(nameof(SettingsCurrentViewModel));
             }
         }
-
         public ICommand UpdateSettingsCurrentViewModelCommand => new UpdateSettingsCurrentViewModelCommand(this);
     }
 }

@@ -18,6 +18,7 @@ namespace POSBill.EntityFramework
                 DomainObject obj = entity as DomainObject;
                 DataBaseUtils dataBaseUtils =new DataBaseUtils();
                 string strQuery = obj.GetInsertQuery();
+                dataBaseUtils.ExecuteQuery(strQuery);
                 return Task.FromResult(entity);
             }
             catch (Exception ex) 

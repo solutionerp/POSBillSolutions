@@ -29,6 +29,22 @@ namespace POSBill.EntityFramework
                 throw new Exception("Exception Occured", ex);
             }
         }
+        public object ExecuteScalar(string strQuery)
+        {
+            try
+            {
+                using (var connection = new MySqlConnection("Server=localhost;Database=reference_db;Uid=root;Pwd=1234"))
+                {
+                    connection.Open();
+                    var command = new MySqlCommand(strQuery, connection);
+                    return command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception Occured", ex);
+            }
+        }
         public void ExecuteQuery(string strQuery) 
         {
             try

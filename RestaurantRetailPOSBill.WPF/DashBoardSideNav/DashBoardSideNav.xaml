@@ -5,27 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.DashBoardSideNav"
              mc:Ignorable="d" 
-             Background="Teal"
+             Background="BlueViolet"
              d:DesignHeight="600" d:DesignWidth="250">
     <UserControl.Resources>
         <Style x:Key="NavDashBoardButtonStyle" TargetType="Button">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Foreground" Value="BlueViolet"></Setter>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect  ShadowDepth="6" Color="Gray" Opacity="2"/>
+                    <DropShadowEffect  ShadowDepth="6" Color="Gray" Opacity="0.3"/>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40*"></RowDefinition>
             <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="45*"></RowDefinition>
-            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="40*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

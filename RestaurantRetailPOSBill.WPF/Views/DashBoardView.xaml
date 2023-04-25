@@ -11,17 +11,17 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <UserControl.Background>
+    <!--<UserControl.Background>
         <ImageBrush ImageSource="/Views/imagesbgrund.jpg"  
                     Opacity="1"
             Stretch="UniformToFill"></ImageBrush>
-    </UserControl.Background>
+    </UserControl.Background>-->
     
     <Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*"></ColumnDefinition>
-                <ColumnDefinition Width="70*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="80*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <DashBoardSideNav:DashBoardSideNav></DashBoardSideNav:DashBoardSideNav>

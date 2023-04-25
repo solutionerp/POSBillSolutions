@@ -23,15 +23,11 @@ namespace RestaurantRetailPOSBill.WPF.Commands
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
         }
-
         public event EventHandler? CanExecuteChanged;
-
-        
         public bool CanExecute(object? parameter)
         {
             return true;
         }
-
         public void Execute(object? parameter)
         {
             if (parameter is ViewType)

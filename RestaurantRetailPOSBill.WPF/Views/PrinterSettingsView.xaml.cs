@@ -24,5 +24,10 @@ namespace RestaurantRetailPOSBill.WPF.Views
         {
             InitializeComponent();
         }
+
+        private void CustomWidthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

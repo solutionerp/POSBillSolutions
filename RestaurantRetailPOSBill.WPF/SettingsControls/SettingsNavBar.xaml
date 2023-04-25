@@ -6,39 +6,40 @@
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.SettingsControls"
              xmlns:nav="clr-namespace:RestaurantRetailPOSBill.WPF.State.SettingsNavigator"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="250">
+             d:DesignHeight="600" d:DesignWidth="100">
     <UserControl.Resources>
         <Style x:Key="NavPrinterButtonStyle" TargetType="Button">
             <Setter Property="FontWeight" Value="Bold"/>
-           
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="Background" Value="Beige"></Setter>
             <Setter Property="Padding" Value="10"/>
+            <Setter Property="Width" Value="auto"></Setter>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect  ShadowDepth="6" Color="Gray" Opacity="0.8"/>
+                    <DropShadowEffect  ShadowDepth="7" Color="Gray" Opacity="0.1"/>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="LightGray" />
+            <!--<Setter Property="Background" Value="LightGray" />
             <Style.Triggers>
                 <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="Black" />
                 </Trigger>
-            </Style.Triggers>
+            </Style.Triggers>-->
         </Style>
     </UserControl.Resources>
-    <Grid Background="Teal">
+    <Grid Background="DarkViolet">
         <Grid.RowDefinitions>
+            <RowDefinition Height="40*"></RowDefinition>
             <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="30*"></RowDefinition>
-            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="40*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Button Style="{StaticResource NavPrinterButtonStyle}" Content="General" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>

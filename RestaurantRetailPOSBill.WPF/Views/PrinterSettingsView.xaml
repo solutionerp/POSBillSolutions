@@ -141,14 +141,13 @@
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10"> Paper Size</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Paper Size</Label>
                     <Grid Grid.Column="1">
-                        <ComboBox x:Name="PapersizeComboBox" Style="{StaticResource ComboBoxStyle}" SelectedItem="{Binding SelectedPaperSize}">
+                        <ComboBox x:Name="PapersizeComboBox" Style="{StaticResource ComboBoxStyle}"  SelectedItem="{Binding SelectedPaperSize}">
                             <ComboBoxItem>A4</ComboBoxItem>
                             <ComboBoxItem>A3</ComboBoxItem>
                             <ComboBoxItem>A5</ComboBoxItem>
                         </ComboBox>
-                        <!--<TextBox Width="200" Height="40"></TextBox>-->
                     </Grid>
                 </Grid>
 
@@ -159,14 +158,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Custom Width</Label>
                     <Grid Grid.Column="1">
-                        <ComboBox x:Name="CustomWidthComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Numbers}">
+                        <!--<ComboBox x:Name="CustomWidthComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Numbers}" SelectionChanged="CustomWidthComboBox_SelectionChanged">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
-                        </ComboBox>
-                      <!--<TextBox Style="{StaticResource TextBoxStyle}"></TextBox>-->
+                        </ComboBox>-->
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding CustomWidthText}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -177,14 +176,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Custom Height</Label>
                     <Grid Grid.Column="1">
-                        <ComboBox x:Name="CustomheightComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding HeightNumbers}">
+                        <!--<ComboBox x:Name="CustomheightComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding HeightNumbers}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <!--<TextBox Style="{StaticResource TextBoxStyle}"></TextBox>-->
+                        </ComboBox>-->
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding CustomHeightText}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -195,23 +194,20 @@
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">No Of Copies</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding NoOfCopiesText}"></TextBox>
                     </Grid>
                 </Grid>
-
                 <Grid Grid.Row="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Scale Factor</Label>
+                    <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10,10,10,10">Scale Factor</Label>
                     <Grid Grid.Column="1">
-                        <TextBox Style="{StaticResource TextBoxStyle}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding ScaleFactorText}"></TextBox>
                     </Grid>
                 </Grid>
             </Grid>
-
-
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"></RowDefinition>
@@ -223,8 +219,7 @@
                     <RowDefinition Height="10*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
+                <!--<Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"></ColumnDefinition>
                         <ColumnDefinition Width="70*"></ColumnDefinition>
@@ -236,9 +231,11 @@
                             <ComboBoxItem>Item 2</ComboBoxItem>
                             <ComboBoxItem>Item 3</ComboBoxItem>
                         </ComboBox>
-                        <!--<TextBox Width="200" Height="40"></TextBox>-->
+                        -->
+                <!--<TextBox Width="200" Height="40"></TextBox>-->
+                <!--
                     </Grid>
-                </Grid>
+                </Grid>-->
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -247,14 +244,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Margin Left</Label>
                     <Grid Grid.Column="1">
-                        <ComboBox x:Name="MarginLeftComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding MarginNumbers}">
+                        <!--<ComboBox x:Name="MarginLeftComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding MarginNumbers}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <!--<TextBox Style="{StaticResource TextBoxStyle}"></TextBox>-->
+                        </ComboBox>-->
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding MarginLeftText}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -265,14 +262,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Margin Top</Label>
                     <Grid Grid.Column="1">
-                        <ComboBox x:Name="MarginTopComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding MarginNumbers}">
+                        <!--<ComboBox x:Name="MarginTopComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding MarginNumbers}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <!--<TextBox Style="{StaticResource TextBoxStyle}"></TextBox>-->
+                        </ComboBox>-->
+                        <TextBox Style="{StaticResource TextBoxStyle}"  Text="{Binding MarginTopText}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -290,7 +287,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <!--<TextBox Style="{StaticResource TextBoxStyle}" TextChanged="TextBox_TextChanged"></TextBox>-->
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding MarginRightText}"></TextBox>
                     </Grid>
                 </Grid>
 
@@ -301,14 +298,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource labelStyle}" Grid.Column="0" Margin="10">Margin Bottom</Label>
                     <Grid Grid.Column="1">
-                        <ComboBox x:Name="MarginBottomComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding MarginNumbers}">
+                        <!--<ComboBox x:Name="MarginBottomComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding MarginNumbers}" Grid.ColumnSpan="4" Margin="10,10,10,9">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <!--<TextBox Style="{StaticResource TextBoxStyle}"></TextBox>-->
+                        </ComboBox>-->
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding MarginBottomText}"></TextBox>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="5">
@@ -335,7 +332,11 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <Button Style="{StaticResource printersettingsButtonStyle}"  Content="Update"  Height="60" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="29*"/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource printersettingsButtonStyle}"  Content="Update"  Height="60" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding PrinterUpdate}" Grid.Column="1" Margin="30,0,0,0"></Button>
         </Grid>
     </Grid>
 </UserControl>

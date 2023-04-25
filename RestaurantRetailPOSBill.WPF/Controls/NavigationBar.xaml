@@ -12,6 +12,7 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="DarkViolet"></Setter>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Effect">
@@ -27,7 +28,7 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Foreground="White" Padding="10" Text="Restaurant Retail POSBill " Background="{StaticResource BrushPrimary2}"></TextBlock>
+        <!--<TextBlock Grid.Row="0" Foreground="White" Padding="10" Text="Restaurant Retail POSBill " Background="{StaticResource BrushPrimary2}"></TextBlock>-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*"></ColumnDefinition>
@@ -37,10 +38,10 @@
                 <ColumnDefinition Width="15*"></ColumnDefinition>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="0" Height="50" Width="auto" Content="DashBoard" Background="{StaticResource BrushPrimary2}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.DashBoard}"></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="1" Height="50" Width="auto" Content="POS" Background="{StaticResource BrushPrimary1}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.POSBill}"></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="2" Height="50" Width="auto" Content="Settings" Background="{StaticResource BrushPrimary1}" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Settings}"></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="3" Width="auto" Height="50" Content="Logout" Background="{StaticResource BrushPrimary1}"></Button>
+            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="0" Height="50" Width="auto" Content="DashBoard"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.DashBoard}"></Button>
+            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="1" Height="50" Width="auto" Content="POS"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.POSBill}"></Button>
+            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="2" Height="50" Width="auto" Content="Settings"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Settings}"></Button>
+            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="3" Width="auto" Height="50" Content="Logout" ></Button>
             <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="5" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.calculator}" >
                 <Button.Background >
                     <ImageBrush ImageSource="/Controls/calculatorjpg.jpg" />

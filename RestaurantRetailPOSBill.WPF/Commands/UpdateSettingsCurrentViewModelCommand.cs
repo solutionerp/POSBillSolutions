@@ -13,19 +13,15 @@ namespace RestaurantRetailPOSBill.WPF.Commands
     public class UpdateSettingsCurrentViewModelCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
-
         ISettingsNavigator _settingsnavigator;
-
         public UpdateSettingsCurrentViewModelCommand(ISettingsNavigator settingsnavigator)
         {
             _settingsnavigator = settingsnavigator;
         }
-
         public bool CanExecute(object? parameter)
         {
             return true;
         }
-
         public void Execute(object parameter)
         {
             if (parameter is SettingsViewType)
@@ -43,8 +39,6 @@ namespace RestaurantRetailPOSBill.WPF.Commands
                         _settingsnavigator.SettingsCurrentViewModel = new PrinterSettingsViewModel();
                         break;
                 }
-
-
             }
         }
     }
