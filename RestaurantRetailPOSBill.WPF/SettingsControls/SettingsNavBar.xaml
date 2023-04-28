@@ -35,20 +35,20 @@
             <RowDefinition Height="20*"></RowDefinition>
             <RowDefinition Height="40*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="15*"></RowDefinition>
                 <RowDefinition Height="15*"></RowDefinition>
                 <RowDefinition Height="15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Button Style="{StaticResource NavPrinterButtonStyle}" Content="General" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>
+                <Button Style="{StaticResource NavPrinterButtonStyle}" Content="General >" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Server" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.server}"></Button>
+                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Server >" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.server}"></Button>
             </Grid>
             <Grid Grid.Row="2">
-                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Printer" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.printer}"></Button>
+                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Printer >" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.printer}"></Button>
             </Grid>
             
         </Grid>

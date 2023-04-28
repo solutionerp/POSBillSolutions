@@ -20,15 +20,24 @@
                     <DropShadowEffect  ShadowDepth="5" Color="Gray" Opacity="0.8"/>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="FontWeight" Value="Medium" />
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <!--<TextBlock Grid.Row="0" Foreground="White" Padding="10" Text="Restaurant Retail POSBill " Background="{StaticResource BrushPrimary2}"></TextBlock>-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*"></ColumnDefinition>
@@ -41,15 +50,21 @@
             <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="0" Height="50" Width="auto" Content="DashBoard"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.DashBoard}"></Button>
             <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="1" Height="50" Width="auto" Content="POS"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.POSBill}"></Button>
             <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="2" Height="50" Width="auto" Content="Settings"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Settings}"></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="3" Width="auto" Height="50" Content="Logout" ></Button>
+            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="3  " Width="auto" Height="50" Content="Logout" ></Button>
             <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="5" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.calculator}" >
                 <Button.Background >
                     <ImageBrush ImageSource="/Controls/calculatorjpg.jpg" />
                 </Button.Background>
             </Button>
             <Grid Grid.Column="4">
-                <TextBlock FontSize="10" Foreground="White" Background="Teal" Text="05-04-2023"></TextBlock>
+                <TextBlock FontSize="10" Style="{StaticResource TextBlockStyle}" Text="05-04-2023"></TextBlock>
             </Grid>
         </Grid>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>-->
+        <!--<TextBlock Grid.Row="0" Foreground="White" Padding="10" Text="Restaurant Retail POSBill " Background="{StaticResource BrushPrimary2}"></TextBlock>-->
+       
     </Grid>
 </UserControl>

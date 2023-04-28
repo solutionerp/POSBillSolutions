@@ -1,6 +1,7 @@
 ﻿using RestaurantRetailPOSBill.WPF.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -14,31 +15,30 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public ICommand ScanQRCodeCommand { get; }
         private string _qrCodeText;
 
-        private string _coloredText = "TomatoBisket  :";
-        private string _coloredPriceText = "Price :10";
+        private string _deliverChargeText { get; set; }
+        private string _taxableAmntText { get; set; }
 
         public decimal Number { get; set; }
         public ICommand NumberButtonCommand { get; set; }
         public ICommand DecimalButtonCommand { get; set; }
         public ICommand ClearButtonCommand { get; set; }
 
-        public string ColoredPriceText
+        public string TaxableAmntText
         {
-            get { return _coloredPriceText; }
+            get { return _taxableAmntText; }
             set
             {
-
-                _coloredText = value;
-                OnPropertyChanged(nameof(ColoredPriceText));
+                _taxableAmntText = value;
+                OnPropertyChanged(nameof(TaxableAmntText));
             }
         }
-        public string ColoredText
+        public string DeliverChargeText
         {
-            get { return _coloredText; }
+            get { return _deliverChargeText; }
             set
             {
-                   _coloredText = value;
-                OnPropertyChanged(nameof(ColoredText));
+                _deliverChargeText = value;
+                OnPropertyChanged(nameof(DeliverChargeText));
             }
         }
         public string SearchText

@@ -28,6 +28,7 @@ namespace RestaurantRetailPOSBill.WPF.State.SettingsNavigator
                 OnPropertyChanged(nameof(SettingsCurrentViewModel));
             }
         }
+      
         public ICommand UpdateSettingsCurrentViewModelCommand => new UpdateSettingsCurrentViewModelCommand(this);
     }
 }

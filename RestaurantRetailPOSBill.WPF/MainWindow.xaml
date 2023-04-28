@@ -8,12 +8,10 @@
         mc:Ignorable="d"
         xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
         xmlns:SettingsControls="clr-namespace:RestaurantRetailPOSBill.WPF.SettingsControls"
-        Height="450" Width="450" WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    
+        MinWidth="800" MinHeight="600" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

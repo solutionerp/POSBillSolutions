@@ -18,7 +18,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
 
         public SettingViewModel()
         {
-
+            
         }
          
 

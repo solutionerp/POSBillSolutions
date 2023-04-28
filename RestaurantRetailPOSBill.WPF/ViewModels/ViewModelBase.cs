@@ -19,6 +19,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public ViewModelBase()
         {
             NavVisibility = "visible";
+           
         }
 
         public virtual void Dispose() { }

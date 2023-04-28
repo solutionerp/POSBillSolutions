@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.Views"
              mc:Ignorable="d" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:MinHeight="600" d:MinWidth="800">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="BorderBrush" Value="Black"/>
@@ -19,6 +22,27 @@
                     <DropShadowEffect  ShadowDepth="5" Color="Gray" Opacity="0.8"/>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBoxStyleSearch">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Text" Value="Search here..."/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Foreground" Value="DarkGreen"></Setter>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Height" Value="27"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="Black" />
         </Style>
         <Style x:Key="ButtonStyleKeypad" TargetType="Button">
             <Setter Property="FontWeight" Value="Bold"/>
@@ -42,8 +66,8 @@
     </UserControl.Background>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*"></ColumnDefinition>
-            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="60*"></ColumnDefinition>
+            <ColumnDefinition Width="40*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -57,10 +81,62 @@
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredText}" Foreground="Green"></TextBlock>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Style="{StaticResource TextBlockStyle}">Delivery Charge</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <TextBlock Style="{StaticResource TextBlockStyle}">Taxable Amnt</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBlock Style="{StaticResource TextBlockStyle}">Tax (Inct.)</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <TextBlock Style="{StaticResource TextBlockStyle}">Discount</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <TextBlock Style="{StaticResource TextBlockStyle}">Total Order</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <TextBlock Style="{StaticResource TextBlockStyle}">Tender</TextBlock>
+                    </Grid>
+                    <!--<TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredText}" Foreground="Green"></TextBlock>-->
                 </Grid>
                 <Grid Grid.Column="1">
-                    <TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredPriceText}" Foreground="Green"></TextBlock>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                        <RowDefinition Height="17*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="Black">
+                        <TextBox Style="{StaticResource TextBoxStyle}"  Text="{Binding DeliverChargeText}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="1" Background="Black">
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TaxableAmntText}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="2" Background="Black">
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TaxText}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="3" Background="Black">
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding DiscountText}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="4" Background="Black">
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TotalOrderText}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="5" Background="Black">
+                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TenderText}"></TextBox>
+                    </Grid>
+                    <!--<TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredPriceText}" Foreground="Green"></TextBlock>-->
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
@@ -134,14 +210,6 @@
                     <Button Style="{StaticResource ButtonStyle}" Grid.Row="3" Width="auto" Foreground="White" Content="" Background="{StaticResource BrushPrimary6}"></Button>
 
                 </Grid>
-                <!--<Grid.RowDefinitions>
-                    <RowDefinition Height="17*"></RowDefinition>
-                    <RowDefinition Height="17*"></RowDefinition>
-                    <RowDefinition Height="17*"></RowDefinition>
-                    <RowDefinition Height="17*"></RowDefinition>
-                    <RowDefinition Height="16*"></RowDefinition>
-                    <RowDefinition Height="16*"></RowDefinition>
-                </Grid.RowDefinitions>-->
             </Grid>
         </Grid>
         <Grid Grid.Column="0">
@@ -152,45 +220,24 @@
 
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <TextBox Text="{Binding SearchText}">
-                    <TextBox.Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter Property="Foreground" Value="Gray"/>
-                            <Setter Property="Text" Value="Type here to search..."/>
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                    <Setter Property="Foreground" Value="Black"/>
-                                    <!--<Setter Property="Text" Value=""/>-->
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-                <!--<TextBox Text="{Binding SearchTerm}" />-->
+                    <TextBox x:Name="SearchTextBox">
+                        <controls:WatermarkService.Watermark>
+                            <TextBlock>Type here to search text</TextBlock>
+                        </controls:WatermarkService.Watermark>
+                    </TextBox>
             </Grid>
             <Grid Grid.Row="1">
                 <DataGrid x:Name="POSBillGrid"  Height="auto"  />
-                <DataGrid ItemsSource="{Binding MyData}">
+                <DataGrid ItemsSource="{Binding POSBillGrid}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="25*" Header="ItemName" Binding="{Binding ItemName}" />
+                        <DataGridTextColumn Width="30*" Header="ItemName" Binding="{Binding ItemName}" />
                         <DataGridTextColumn Width="25*" Header="Quantity" Binding="{Binding Quantity}" />
                         <DataGridTextColumn Width="25*" Header="Prize" Binding="{Binding Prize}" />
                         <DataGridTextColumn Width="25*" Header="Discount" Binding="{Binding Discount}" />
                         <DataGridTextColumn Width="25*" Header="Total" Binding="{Binding Total}" />
-                        <!--<DataGridTextColumn Header="Age" Binding="{Binding Age}" />-->
-                        <!--<DataGridTemplateColumn Header="Actions">-->
-                        <!--<DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    -->
-                        <!-- Add your custom template here -->
-                        <!--
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-
         </Grid>
     </Grid>
 </UserControl>
