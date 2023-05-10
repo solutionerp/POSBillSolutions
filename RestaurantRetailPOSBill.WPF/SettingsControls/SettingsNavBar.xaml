@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.SettingsControls"
              xmlns:nav="clr-namespace:RestaurantRetailPOSBill.WPF.State.SettingsNavigator"
              mc:Ignorable="d" 
+             Background="LightBlue"
              d:DesignHeight="600" d:DesignWidth="100">
     <UserControl.Resources>
         <Style x:Key="NavPrinterButtonStyle" TargetType="Button">
@@ -21,15 +22,31 @@
                     <DropShadowEffect  ShadowDepth="7" Color="Gray" Opacity="0.1"/>
                 </Setter.Value>
             </Setter>
-            <!--<Setter Property="Background" Value="LightGray" />
-            <Style.Triggers>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="Black" />
-                </Trigger>
-            </Style.Triggers>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Menu}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="DarkBlue"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect  ShadowDepth="7" Color="Gray" Opacity="0.1"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid Background="DarkViolet">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"></RowDefinition>
             <RowDefinition Height="20*"></RowDefinition>
@@ -42,15 +59,16 @@
                 <RowDefinition Height="15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Button Style="{StaticResource NavPrinterButtonStyle}" Content="General >" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>
+                <Button  Style="{StaticResource NavPrinterButtonStyle}" Content="General" Foreground="BlueViolet"  Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.general}"></Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Server >" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.server}"></Button>
+                <Button  Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Server" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.server}"></Button>
             </Grid>
             <Grid Grid.Row="2">
-                <Button Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Printer >" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.printer}"></Button>
+                <Button  Style="{StaticResource NavPrinterButtonStyle}" Foreground="BlueViolet" Content="Printer" Command="{Binding UpdateSettingsCurrentViewModelCommand}" CommandParameter="{x:Static nav:SettingsViewType.printer}"></Button>
             </Grid>
-            
         </Grid>
+       
+       
     </Grid>
 </UserControl>

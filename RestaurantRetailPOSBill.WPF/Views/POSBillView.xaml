@@ -25,7 +25,7 @@
         </Style>
         <Style TargetType="TextBox" x:Key="TextBoxStyleSearch">
             <Setter Property="Foreground" Value="Gray"/>
-            <Setter Property="Text" Value="Search here..."/>
+            <Setter Property="Height" Value="50"/>
         </Style>
         <Style TargetType="TextBox" x:Key="TextBoxStyle">
             <Setter Property="FontSize" Value="16" />
@@ -39,8 +39,8 @@
             <Setter Property="Height" Value="27"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="TextBlockStyle">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="LawnGreen" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Background" Value="Black" />
         </Style>
@@ -89,23 +89,23 @@
                         <RowDefinition Height="17*"></RowDefinition>
                         <RowDefinition Height="17*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <TextBlock Style="{StaticResource TextBlockStyle}">Delivery Charge</TextBlock>
+                    <Grid Grid.Row="0" Background="Black">
+                        <TextBlock Margin="10" Style="{StaticResource TextBlockStyle}">Sub Total</TextBlock>
                     </Grid>
-                    <Grid Grid.Row="1">
-                        <TextBlock Style="{StaticResource TextBlockStyle}">Taxable Amnt</TextBlock>
+                    <Grid Grid.Row="1" Background="Black">
+                        <TextBlock Margin="10" Style="{StaticResource TextBlockStyle}">Delivery Charge</TextBlock>
                     </Grid>
-                    <Grid Grid.Row="2">
-                        <TextBlock Style="{StaticResource TextBlockStyle}">Tax (Inct.)</TextBlock>
+                    <Grid Grid.Row="2" Background="Black">
+                        <TextBlock  Margin="10" Style="{StaticResource TextBlockStyle}">Tax (Inct.)</TextBlock>
                     </Grid>
-                    <Grid Grid.Row="3">
-                        <TextBlock Style="{StaticResource TextBlockStyle}">Discount</TextBlock>
+                    <Grid Grid.Row="3" Background="Black">
+                        <TextBlock Margin="10" Style="{StaticResource TextBlockStyle}">Discount</TextBlock>
                     </Grid>
-                    <Grid Grid.Row="4">
-                        <TextBlock Style="{StaticResource TextBlockStyle}">Total Order</TextBlock>
+                    <Grid Grid.Row="4" Background="Black">
+                        <TextBlock Margin="10" Style="{StaticResource TextBlockStyle}">Total Order</TextBlock>
                     </Grid>
-                    <Grid Grid.Row="5">
-                        <TextBlock Style="{StaticResource TextBlockStyle}">Tender</TextBlock>
+                    <Grid Grid.Row="5" Background="Black">
+                        <TextBlock Margin="10" Style="{StaticResource TextBlockStyle}">Tender</TextBlock>
                     </Grid>
                     <!--<TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredText}" Foreground="Green"></TextBlock>-->
                 </Grid>
@@ -119,24 +119,23 @@
                         <RowDefinition Height="17*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Background="Black">
-                        <TextBox Style="{StaticResource TextBoxStyle}"  Text="{Binding DeliverChargeText}"></TextBox>
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SubTotalText}"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="1" Background="Black">
-                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TaxableAmntText}"></TextBox>
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DeliverChargeText}"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="2" Background="Black">
-                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TaxText}"></TextBox>
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TaxText}"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="3" Background="Black">
-                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding DiscountText}"></TextBox>
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DiscountText}"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="4" Background="Black">
-                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TotalOrderText}"></TextBox>
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TotalOrderText}"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="5" Background="Black">
-                        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding TenderText}"></TextBox>
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TenderText}"></TextBlock>
                     </Grid>
-                    <!--<TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredPriceText}" Foreground="Green"></TextBlock>-->
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
@@ -208,7 +207,6 @@
                     <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Width="auto" Foreground="White" Content="Cancel" Background="{StaticResource BrushPrimary4}"></Button>
                     <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Width="auto" Foreground="White" Content="Return" Background="{StaticResource BrushPrimary4}"></Button>
                     <Button Style="{StaticResource ButtonStyle}" Grid.Row="3" Width="auto" Foreground="White" Content="" Background="{StaticResource BrushPrimary6}"></Button>
-
                 </Grid>
             </Grid>
         </Grid>
@@ -217,25 +215,21 @@
                 <RowDefinition Height="10*"></RowDefinition>
                 <!--<RowDefinition Height="10*"></RowDefinition>-->
                 <RowDefinition Height="90*"></RowDefinition>
-
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                    <TextBox x:Name="SearchTextBox">
+                <StackPanel>
+                    <TextBox x:Name="AutoCompleteTextBox" Style="{StaticResource TextBoxStyleSearch}" TextChanged="AutoCompleteTextBox_TextChanged" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown" Text="{Binding AutoCompleteTextBoxText}" >
                         <controls:WatermarkService.Watermark>
                             <TextBlock>Type here to search text</TextBlock>
                         </controls:WatermarkService.Watermark>
                     </TextBox>
+                    <Popup x:Name="SuggestionsPopup" PlacementTarget="{Binding ElementName=AutoCompleteTextBox}" StaysOpen="False" IsOpen="true" Width="600">
+                        <ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>
+                    </Popup>
+                </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
-                <DataGrid x:Name="POSBillGrid"  Height="auto"  />
-                <DataGrid ItemsSource="{Binding POSBillGrid}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="30*" Header="ItemName" Binding="{Binding ItemName}" />
-                        <DataGridTextColumn Width="25*" Header="Quantity" Binding="{Binding Quantity}" />
-                        <DataGridTextColumn Width="25*" Header="Prize" Binding="{Binding Prize}" />
-                        <DataGridTextColumn Width="25*" Header="Discount" Binding="{Binding Discount}" />
-                        <DataGridTextColumn Width="25*" Header="Total" Binding="{Binding Total}" />
-                    </DataGrid.Columns>
+                <DataGrid  x:Name="myDataGrid" AutoGenerateColumns="True" Loaded="PosDataGrid_Loaded">
                 </DataGrid>
             </Grid>
         </Grid>

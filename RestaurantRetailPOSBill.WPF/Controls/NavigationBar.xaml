@@ -31,33 +31,52 @@
             </Setter>
         </Style>
         <Style TargetType="TextBlock" x:Key="TextBlockStyle">
-            <Setter Property="FontSize" Value="17" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="DarkViolet" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
         </Style>
+        <Style TargetType="{x:Type Menu}">
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="DarkMagenta"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="DarkBlue"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        
     </UserControl.Resources>
     <Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"></ColumnDefinition>
-                <ColumnDefinition Width="20*"></ColumnDefinition>
-                <ColumnDefinition Width="20*"></ColumnDefinition>
-                <ColumnDefinition Width="20*"></ColumnDefinition>
-                <ColumnDefinition Width="15*"></ColumnDefinition>
-                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="80*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="0" Height="50" Width="auto" Content="DashBoard"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.DashBoard}"></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="1" Height="50" Width="auto" Content="POS"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.POSBill}"></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="2" Height="50" Width="auto" Content="Settings"  Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Settings}"></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="3  " Width="auto" Height="50" Content="Logout" ></Button>
-            <Button Style="{StaticResource ButtonStyleNav}" Grid.Column="5" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.calculator}" >
-                <Button.Background >
-                    <ImageBrush ImageSource="/Controls/calculatorjpg.jpg" />
-                </Button.Background>
-            </Button>
-            <Grid Grid.Column="4">
-                <TextBlock FontSize="10" Style="{StaticResource TextBlockStyle}" Text="05-04-2023"></TextBlock>
+            <Grid Grid.Column="0">
+                <Menu Name="MainMenu">
+                    <MenuItem Header="DashBoard" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.DashBoard}">
+                    </MenuItem>
+                    <MenuItem Header="POS" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.POSBill}">
+                    </MenuItem>
+                    <MenuItem Header="Settings" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Settings}">
+                    </MenuItem>
+                    <MenuItem Header="Logout">
+                    </MenuItem>
+                </Menu>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Menu>
+                    <MenuItem Header="Calculator" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.calculator}">
+                    </MenuItem>
+                </Menu>
+            </Grid>
+            <Grid Grid.Column="2" Background="LightBlue">
+                <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding CurrentDateTime, Mode=OneWay}" />
+                <!--<TextBox x:Name="txtDateTime" Text="{Binding CurrentDateTime}" IsReadOnly="True"></TextBox>-->
             </Grid>
         </Grid>
         <!--<Grid.RowDefinitions>

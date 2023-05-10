@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace POSBill.Domain.Models
 {
-    public class StockMaster : DomainObject
+    public class SalesOrder : DomainObject
     {
-        public string ItemName { get; set; }
-        public int Quantity { get; set; }
-        public decimal Prize { get; set; }
-        public decimal Discount { get; set; }
-        public decimal Total { get; set; }
         public override string GetInsertQuery()
         {
             throw new NotImplementedException();

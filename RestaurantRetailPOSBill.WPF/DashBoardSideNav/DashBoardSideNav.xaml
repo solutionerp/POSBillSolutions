@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantRetailPOSBill.WPF.DashBoardSideNav"
              mc:Ignorable="d" 
-             Background="BlueViolet"
+             Background="LightBlue"
              d:DesignHeight="600" d:DesignWidth="250">
     <UserControl.Resources>
         <Style x:Key="NavDashBoardButtonStyle" TargetType="Button">
@@ -36,10 +36,10 @@
                 <RowDefinition Height="15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Button Style="{StaticResource NavDashBoardButtonStyle}" Content="TRANACTIONS"></Button>
+                <Button  Style="{StaticResource NavDashBoardButtonStyle}" Content="TRANACTIONS"></Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Button Style="{StaticResource NavDashBoardButtonStyle}" Content="REPORTS"></Button>
+                <Button  Style="{StaticResource NavDashBoardButtonStyle}" Content="REPORTS"></Button>
             </Grid>
             <Grid Grid.Row="3">
                 <Button Style="{StaticResource NavDashBoardButtonStyle}" Content="SETTUP"></Button>

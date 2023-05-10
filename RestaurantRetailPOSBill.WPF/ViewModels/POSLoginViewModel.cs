@@ -32,13 +32,13 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public List<User> Users { get; set; }
         bool IsValidUser = false;
         public event EventHandler LoginSuccessful;
-
+        private string strPassword;
+        private string strUsername;
         //public POSLoginViewModel(IMajorIndexService majorIndexService)
         //{
         //    _majorIndexService = majorIndexService;
         //    //LoginCommand = loginCommand;
         //    LoginCommand = new RelayCommand(Login);
-
         //}
         public POSLoginViewModel()
         {
@@ -57,6 +57,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             set
             { 
                 _userName = value;
+                strUsername = _userName;
                 OnPropertyChanged(nameof(Username));
             }
         }
@@ -69,6 +70,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             set
             {
                 _password = value;
+                strPassword = _password;   
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -76,8 +78,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         {
             try
             {
-               // _userdbManager.SetUsers(Username, Password);
-                _userdbManager = new UserdbManager();
+
+                // _userdbManager.SetUsers(Username, Password);
+                 _userdbManager = new UserdbManager();
                 User user = _userdbManager.GetUserByIdAndPassword(Username, Password);
                 if(user!= null)
                 {
@@ -86,6 +89,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                         IsValidUser = true;
                         ((Navigator)Navigator).IsLoggedIn = true;
                         MessageBox.Show("Sucessfully Login");
+                        strUsernameVM = strUsername;
+                        strPasswordVM = strPassword;
                     }
                 }
                 else

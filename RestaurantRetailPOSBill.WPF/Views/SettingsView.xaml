@@ -18,8 +18,8 @@
     </UserControl.Background>-->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"></ColumnDefinition>
-            <ColumnDefinition Width="80*"></ColumnDefinition>
+            <ColumnDefinition Width="15*"></ColumnDefinition>
+            <ColumnDefinition Width="90*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <SettingsControls:SettingsNavBar DataContext="{Binding SettingsNavigator}"></SettingsControls:SettingsNavBar>

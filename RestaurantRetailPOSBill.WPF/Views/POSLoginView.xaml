@@ -108,7 +108,7 @@
                     <TextBox Grid.Row="6" x:Name="txtPassword" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left"  Width="200" VerticalAlignment="Center"  Text="{Binding Password}"></TextBox>
                 <!--<PasswordBox x:Name="pbPassword" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Grid.Column="1" Width="100"></PasswordBox>-->
                 <Grid Grid.Row="8">
-                    <Button HorizontalAlignment="Left"  x:Name="loginButton" Style="{StaticResource ButtonStylelogin}"  Content="Login" Height="40" Width="200" Command="{Binding LoginCommand}"></Button>
+                    <Button  HorizontalAlignment="Left"  x:Name="loginButton" Style="{StaticResource ButtonStylelogin}"  Content="Login" Height="40" Width="200" Command="{Binding LoginCommand}"></Button>
                 </Grid>
             </Grid>
         </Grid>

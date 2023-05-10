@@ -46,6 +46,11 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
                 }
                 OnPropertyChanged(nameof(IsLoggedIn)); }
         }
+        public string CurrentDateTime
+        {
+            get { return DateTime.Now.ToString(); }
+        }
+
         public ICommand ShowSettingsCommand => new RelayCommand(() =>
         {
             IsSettingsVisible = true;
@@ -54,7 +59,7 @@ namespace RestaurantRetailPOSBill.WPF.State.Navigator
         {
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
         }
-
+        
         public new event PropertyChangedEventHandler PropertyChanged;
 
     }

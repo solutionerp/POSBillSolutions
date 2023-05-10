@@ -11,6 +11,7 @@ namespace POSBill.Domain.Models
     {
         public string user_id { get; set; }
         public string password { get; set; }
+        public string strPos { get;set; }
 
         public override string GetUpdateQuery(string id)
         {
@@ -34,7 +35,8 @@ namespace POSBill.Domain.Models
                     var user = new User
                     {
                         user_id = (string)row["user_id"],
-                        password = (string)row["password"]
+                        password = (string)row["password"],
+                        //strPos = (string)row["pos"]
                     };
                     users.Add(user);
                 }

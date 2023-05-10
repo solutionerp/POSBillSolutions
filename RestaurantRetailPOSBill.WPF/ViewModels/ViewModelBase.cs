@@ -14,6 +14,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
     public class ViewModelBase : INotifyPropertyChanged
     {
         public ICommand ExitCommand { get; }
+        public static string strUsernameVM;
+        public static string strPasswordVM;
         public INavigator Navigator { get; set; }
         public string NavVisibility { get; set; }
         public ViewModelBase()
