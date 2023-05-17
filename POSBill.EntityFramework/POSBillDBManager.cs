@@ -36,7 +36,12 @@ namespace POSBill.EntityFramework
         {
             try
             {
-                string strQuery = "";
+                string strQuery = "SELECT DISTINCT kit.*, item.units, comp.description as comp_name"
+                                    + " FROM 0_item_codes kit, 0_item_codes comp"
+                                    + " LEFT JOIN 0_stock_master item"
+                                    + " ON item.stock_id = comp.item_code"
+                                    + " WHERE kit.stock_id = comp.item_code"
+                                    + " AND kit.item_code =" + "'"+ itemcode + "'";
                 DataSet dataSet = DataBaseUtils.GetRecord(strQuery);
                 return dataSet;
             }
@@ -165,7 +170,7 @@ namespace POSBill.EntityFramework
         {
             try
             {
-                string strQuery = "select s.* from 0_sales_pos s where s.price_list =" + "'"+ strPos + "'" + "and s.price_list =" + "'"+0+"'";
+                string strQuery = "select s.* from 0_sales_pos s where s.id =" + "'"+ strPos + "'";
                 DataSet dataSet = DataBaseUtils.GetRecord(strQuery);
                 return dataSet;
             }
@@ -181,7 +186,7 @@ namespace POSBill.EntityFramework
         {
             try
             {
-                string strQuery = "select s.def_cust,d.* from 0_sales_pos s join 0_debtors_master d where s.price_list ="+ "'"+ strPos + "'";
+                string strQuery = "select s.def_cust,d.* from 0_sales_pos s join 0_debtors_master d on (s.def_cust = d.debtor_no) where s.id = " + "'"+ strPos + "'";
                 DataSet dataSet = DataBaseUtils.GetRecord(strQuery);
                 return dataSet;
             }
@@ -191,5 +196,19 @@ namespace POSBill.EntityFramework
             }
         } 
         #endregion
+
+      public DataSet  GetItemNameByItemCode(string strItemCode)
+        {
+            try
+            {
+                string strQuery = "SELECT * FROM 0_item_codes where item_code = " + "'" + strItemCode + "'";
+                DataSet dataset = DataBaseUtils.GetRecord(strQuery);
+                return dataset;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
     }
 }

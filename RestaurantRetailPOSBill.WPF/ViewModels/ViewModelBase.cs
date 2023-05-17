@@ -1,4 +1,5 @@
-﻿using RestaurantRetailPOSBill.WPF.Commands;
+﻿using POSBill.Domain.Models;
+using RestaurantRetailPOSBill.WPF.Commands;
 using RestaurantRetailPOSBill.WPF.State.Navigator;
 using RestaurantRetailPOSBill.WPF.State.SettingsNavigator;
 using System;
@@ -14,10 +15,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
     public class ViewModelBase : INotifyPropertyChanged
     {
         public ICommand ExitCommand { get; }
-        public static string strUsernameVM;
-        public static string strPasswordVM;
         public INavigator Navigator { get; set; }
         public string NavVisibility { get; set; }
+        public static User userVm;
         public ViewModelBase()
         {
             NavVisibility = "visible";

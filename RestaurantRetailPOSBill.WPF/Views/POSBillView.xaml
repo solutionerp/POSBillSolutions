@@ -9,6 +9,8 @@
              xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              d:MinHeight="600" d:MinWidth="800">
+    
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -25,7 +27,10 @@
         </Style>
         <Style TargetType="TextBox" x:Key="TextBoxStyleSearch">
             <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="Height" Value="50"/>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="10" />
         </Style>
         <Style TargetType="TextBox" x:Key="TextBoxStyle">
             <Setter Property="FontSize" Value="16" />
@@ -38,7 +43,21 @@
             <Setter Property="Padding" Value="5" />
             <Setter Property="Height" Value="27"/>
         </Style>
+        <Style TargetType="TextBlock" x:Key="TextBlockStylesearch">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Focusable" Value="True"></Setter>
+        </Style>
         <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="LawnGreen" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="Black" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle2">
             <Setter Property="FontSize" Value="18" />
             <Setter Property="Foreground" Value="LawnGreen" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -120,21 +139,27 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Background="Black">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SubTotalText}"></TextBlock>
+                        <!--<TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding SubTotalText, Mode=TwoWay}" IsReadOnly="True"></TextBox>-->
                     </Grid>
                     <Grid Grid.Row="1" Background="Black">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DeliverChargeText}"></TextBlock>
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding DeliverChargeText, Mode=TwoWay}"></TextBox>
+                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DeliverChargeText}"></TextBlock>-->
                     </Grid>
                     <Grid Grid.Row="2" Background="Black">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TaxText}"></TextBlock>
+                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TaxText}"></TextBlock>-->
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TaxText, Mode=TwoWay}"></TextBox>
                     </Grid>
                     <Grid Grid.Row="3" Background="Black">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DiscountText}"></TextBlock>
+                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DiscountText, Mode=TwoWay}"></TextBlock>-->
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding DiscountText, Mode=TwoWay}"></TextBox>
                     </Grid>
                     <Grid Grid.Row="4" Background="Black">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TotalOrderText}"></TextBlock>
+                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TotalOrderText}"></TextBlock>-->
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TotalOrderText}"></TextBox>
                     </Grid>
                     <Grid Grid.Row="5" Background="Black">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TenderText}"></TextBlock>
+                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TenderText}"></TextBlock>-->
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TenderText, Mode=TwoWay}"></TextBox>
                     </Grid>
                 </Grid>
             </Grid>
@@ -160,15 +185,15 @@
                             <ColumnDefinition Width="20*"></ColumnDefinition>
                             <ColumnDefinition Width="20*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource ButtonStyle}"  Grid.Row="0" Grid.Column="0" Foreground="white"  Width="auto" Content="Cash IN" Background="{StaticResource BrushPrimary1}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="1" Foreground="white" Width="auto" Content="End Day" Background="{StaticResource BrushPrimary1}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="2" Width="auto" Content="Open Drawer" Background="{StaticResource BrushPrimary5}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="0" Width="auto" Content="Discount" Background="{StaticResource BrushPrimary5}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Shipping" Background="{StaticResource BrushPrimary5}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="2" Width="auto" Content="Add Coupons" Background="{StaticResource BrushPrimary5}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="2" Width="auto" Content="New Sale" Background="{StaticResource BrushPrimary2}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="1" Width="auto" Foreground="White" Content="Save Sale" Background="{StaticResource BrushPrimary3}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2" Width="auto" Foreground="White" Content="Pay" Background="{StaticResource BrushPrimary7}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}"  Grid.Row="0" Grid.Column="0" Foreground="white"  Width="auto" Content="Cash IN" Background="{StaticResource BrushPrimary1}" Command="{Binding CashInCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="1" Foreground="white" Width="auto" Content="End Day" Background="{StaticResource BrushPrimary1}" Command="{Binding EndDayCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="2" Width="auto" Content="Open Drawer" Background="{StaticResource BrushPrimary5}" Command="{Binding OpenDrawerCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="0" Width="auto" Content="Discount" Background="{StaticResource BrushPrimary5}"   Command="{Binding DiscountCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Shipping" Background="{StaticResource BrushPrimary5}" Command="{Binding AddShippingCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="2" Width="auto" Content="Add Coupons" Background="{StaticResource BrushPrimary5}" Command="{Binding AddCouponsCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="2" Width="auto" Content="New Sale" Background="{StaticResource BrushPrimary2}" Command="{Binding NewSaleCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="1" Width="auto" Foreground="White" Content="Save Sale" Background="{StaticResource BrushPrimary3}" Command="{Binding SaveSaleCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2" Width="auto" Foreground="White" Content="Pay" Background="{StaticResource BrushPrimary7}" Command="{Binding Paycommand}"></Button>
                     </Grid>
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -182,18 +207,18 @@
                             <ColumnDefinition Width="20*"></ColumnDefinition>
                             <ColumnDefinition Width="20*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="1" Command="{Binding Path=NumberButtonCommand}" CommandParameter="1" />
-                        <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="2" />
-                        <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="3" Command="{Binding Path=NumberButtonCommand}" CommandParameter="3" />
-                        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource ButtonStyleKeypad}" Content="4" Command="{Binding Path=NumberButtonCommand}" CommandParameter="4" />
-                        <Button Content="5" Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="1" Command="{Binding Path=NumberButtonCommand}" CommandParameter="5" />
-                        <Button Content="6" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="1" Command="{Binding Path=NumberButtonCommand}" CommandParameter="6" />
-                        <Button Content="7" Grid.Column="0" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="7" />
-                        <Button Content="8" Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="8" />
-                        <Button Content="9" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="9" />
-                        <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource ButtonStyleKeypad}" Content="0" Command="{Binding Path=NumberButtonCommand}" CommandParameter="0" />
-                        <Button Content="." Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="3" Command="{Binding Path=DecimalButtonCommand}" />
-                        <Button Content="00" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="3" Command="{Binding Path=DecimalButtonCommand}"/>
+                        <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="1"  Command="{Binding NumberButtonCommand}" CommandParameter="1"/>
+                        <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="2" Command="{Binding NumberButtonCommandTwo}" CommandParameter="2" />
+                        <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="3" Command="{Binding NumberButtonCommandThree}" CommandParameter="3" />
+                        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource ButtonStyleKeypad}" Content="4" Command="{Binding NumberButtonCommandFour}" CommandParameter="4" />
+                        <Button Content="5" Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="1" Command="{Binding NumberButtonCommandFive}" CommandParameter="5" />
+                        <Button Content="6" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="1" Command="{Binding NumberButtonCommandSix}" CommandParameter="6" />
+                        <Button Content="7" Grid.Column="0" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding NumberButtonCommandSeven}" CommandParameter="7" />
+                        <Button Content="8" Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding NumberButtonCommandEight}" CommandParameter="8" />
+                        <Button Content="9" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding NumberButtonCommandNine}" CommandParameter="9" />
+                        <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource ButtonStyleKeypad}" Content="0" Command="{Binding NumberButtonCommandZero}" CommandParameter="0" />
+                        <Button Content="." Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="3" Command="{Binding DecimalButtonCommand}" />
+                        <Button Content="00" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="3" Command="{Binding DecimalButtonCommandDoubleZero}"/>
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1">
@@ -203,9 +228,9 @@
                         <RowDefinition Height="18*"></RowDefinition>
                         <RowDefinition Height="18*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Width="auto" Foreground="White" Content="Clear" Background="{StaticResource BrushPrimary4}" Command="{Binding Path=ClearButtonCommand}"></Button>
-                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Width="auto" Foreground="White" Content="Cancel" Background="{StaticResource BrushPrimary4}"></Button>
-                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Width="auto" Foreground="White" Content="Return" Background="{StaticResource BrushPrimary4}"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Width="auto" Foreground="White" Content="Clear" Background="{StaticResource BrushPrimary4}" Command="{Binding ClearButtonCommand}"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Width="auto" Foreground="White" Content="Cancel" Background="{StaticResource BrushPrimary4}" Command="{Binding CancelCommand}"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Width="auto" Foreground="White" Content="Return" Background="{StaticResource BrushPrimary4}" Command="{Binding ReturnCommand}"></Button>
                     <Button Style="{StaticResource ButtonStyle}" Grid.Row="3" Width="auto" Foreground="White" Content="" Background="{StaticResource BrushPrimary6}"></Button>
                 </Grid>
             </Grid>
@@ -218,9 +243,9 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel>
-                    <TextBox x:Name="AutoCompleteTextBox" Style="{StaticResource TextBoxStyleSearch}" TextChanged="AutoCompleteTextBox_TextChanged" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown" Text="{Binding AutoCompleteTextBoxText}" >
+                    <TextBox x:Name="AutoCompleteTextBox" Style="{StaticResource TextBoxStyleSearch}" TextChanged="AutoCompleteTextBox_TextChanged" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown" Text="{Binding AutoCompleteTextBoxText, Mode=TwoWay}" >
                         <controls:WatermarkService.Watermark>
-                            <TextBlock>Type here to search text</TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockStylesearch}">Type here to search text</TextBlock>
                         </controls:WatermarkService.Watermark>
                     </TextBox>
                     <Popup x:Name="SuggestionsPopup" PlacementTarget="{Binding ElementName=AutoCompleteTextBox}" StaysOpen="False" IsOpen="true" Width="600">
@@ -229,7 +254,26 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
-                <DataGrid  x:Name="myDataGrid" AutoGenerateColumns="True" Loaded="PosDataGrid_Loaded">
+                <DataGrid ItemsSource="{Binding GridData}" AutoGenerateColumns="False" BeginningEdit="DataGrid_BeginningEdit" PreviewKeyDown="POSBillDataGrid_PreviewKeyDown" RowHeight="40">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ItemName" Binding="{Binding ItemName}" IsReadOnly="True" Width="45*"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"  Width="10*"/>
+                        <!--<DataGridTextColumn Header="Price" Binding="{Binding Price}" />-->
+                        <DataGridTemplateColumn Header="Price" Width="15*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Price}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="10*"/>
+                        <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="15*"/>
+                    </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Grid>

@@ -52,13 +52,20 @@ namespace POSBill.EntityFramework
         }
         public User GetUserByIdAndPassword(string strUserId,string strPassword)
         {
-            string strQuery = string.Format("SELECT * FROM reference_db.0_users where user_id='{0}' and password='{1}'", strUserId, strPassword);
-            var users = GetByQuery(strQuery).Result.ToList();
-            if(users.Count > 0) 
+            try
             {
-                return users[0];
+                string strQuery = string.Format("SELECT * FROM reference_db.0_users where user_id='{0}' and password='{1}'", strUserId, strPassword);
+                var users = GetByQuery(strQuery).Result.ToList();
+                if (users.Count > 0)
+                {
+                    return users[0];
+                }
+                return null;
             }
-            return null;
+           catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
         }
 
     }

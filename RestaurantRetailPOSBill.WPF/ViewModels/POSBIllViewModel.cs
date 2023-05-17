@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace RestaurantRetailPOSBill.WPF.ViewModels
@@ -19,18 +20,29 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
     public class POSBIllViewModel : ViewModelBase
     {
         #region MemberVarible
-        public event PropertyChangedEventHandler PropertyChanged;
+        
         public ICommand ScanQRCodeCommand { get; }
         private string _qrCodeText;
         private POSBillDbManager _pOSBillDbManager;
         private string _deliverChargeText = "0.00";
-        private string _SubTotalText = "0.00";
+        private string _SubTotalText;
         private string _taxTotal = "0.00";
-        private string _discountText = "0.00";
+        private string _discountText;
         private string _totalOrderText = "0.00";
         private string _tenderText = "0.00";
         public decimal Number { get; set; }
-        public ICommand NumberButtonCommand { get; set; }
+        public RelayCommand NumberButtonCommand { get;  set; }
+        public RelayCommand CashInCommand { get; set; }
+        public RelayCommand NumberButtonCommandTwo { get; set; }
+        public RelayCommand NumberButtonCommandThree { get; set; }
+        public RelayCommand NumberButtonCommandFour { get; set; }
+        public RelayCommand NumberButtonCommandFive { get; set; }
+        public RelayCommand NumberButtonCommandSix { get; set; }
+        public RelayCommand NumberButtonCommandSeven { get; set; }
+        public RelayCommand NumberButtonCommandEight { get; set; }
+        public RelayCommand NumberButtonCommandNine { get; set; }
+        public RelayCommand NumberButtonCommandZero { get; set; }
+        public RelayCommand DecimalButtonCommandDoubleZero { get; set; }
         public ICommand DecimalButtonCommand { get; set; }
         public ICommand ClearButtonCommand { get; set; }
         private string _query;
@@ -38,20 +50,40 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public ObservableCollection<string> _FilteredSuggestions;
         public string _strSelectedSuggestion;
         public string _selectedSuggestion;
-        private DataTable _mgridData;
-        //public DataTable PosBillGrid 
-        //{
-        //    get
-        //    {
-        //        return _mgridData;
-        //    }
-        //    set
-        //    {
-        //        _mgridData = value;
-        //    }
-        //}
-       
+        public string _autoCompeleteTextBox;
+        public string _currentColum;
+        public bool _rowSelected = false;
+        public int _rowIndex;
+        public double _mPrice;
+        public bool KeyBackSpace = false;
+        public string _textBoxGridData;
+        public string _itemName;
+        public string _quantity;
+        public string _discount;
+        public string _Total;
+        public string m_subTotal;
         #endregion
+
+
+        public ObservableCollection<POSBillGrid> GridData { get; set; }
+        public string ItemName { get; set; }
+        public int Quantity { get;set; }
+        public int Price { get; set; }
+        public string Discount { get;set; }
+        public int Total { get; set; }
+
+        public string AutoCompleteTextBoxText
+        {
+            get
+            {
+                return _autoCompeleteTextBox;
+            }
+            set
+            {
+                _autoCompeleteTextBox = value;
+                OnPropertyChanged(nameof(AutoCompleteTextBoxText));
+            }
+        }
 
         #region TextBlockTextProperties
         public string TenderText
@@ -64,7 +96,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             set
             {
                 _tenderText = value;
-                OnPropertyChanged(TenderText);
+                OnPropertyChanged(nameof(TenderText));
             }
         }
         public string TotalOrderText
@@ -76,7 +108,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             set
             {
                 _totalOrderText = value;
-                OnPropertyChanged(TotalOrderText);
+                OnPropertyChanged(nameof(TotalOrderText));
             }
         }
         public string DiscountText
@@ -85,7 +117,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             set
             {
                 _discountText = value;
-                OnPropertyChanged(DiscountText);
+                OnPropertyChanged(nameof(DiscountText));
             }
         }
         public string TaxText
@@ -97,7 +129,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             set
             {
                 _taxTotal = value;
-                OnPropertyChanged(TaxText);
+                OnPropertyChanged(nameof(TaxText));
             }
         }
 
@@ -130,14 +162,498 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         }
         #endregion
 
+        private int _selectedItem;
+        public int SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+               // OnPropertyChanged();
+            }
+        }
+
+        public string GridTextBoxDataProperty
+        {
+            get
+            {
+                return _textBoxGridData;
+            }
+            set
+            {
+                _textBoxGridData = value;
+            }
+        }
+
+
         #region Construtor
         public POSBIllViewModel()
         {
-            _pOSBillDbManager = new POSBillDbManager();
-            // FilteredSuggestions = new ObservableCollection<string>();
-            FilteredSuggestions = new ObservableCollection<string>();
-            Suggestions = new ObservableCollection<string>();
-           // PosBillGrid = LoadGridData();
+            try
+            {
+                _pOSBillDbManager = new POSBillDbManager();
+                // FilteredSuggestions = new ObservableCollection<string>();
+                FilteredSuggestions = new ObservableCollection<string>();
+                Suggestions = new ObservableCollection<string>();
+                NumberButtonCommand = new RelayCommand(NumberButtonCommandOne);
+                NumberButtonCommandTwo = new RelayCommand(NumberButtonTwo);
+                NumberButtonCommandThree = new RelayCommand(NumberButtonThree);
+                NumberButtonCommandFour = new RelayCommand(NumberButtonFour);
+                NumberButtonCommandFive = new RelayCommand(NumberButtonFive);
+                NumberButtonCommandSix = new RelayCommand(NumberButtonSix);
+                NumberButtonCommandSeven = new RelayCommand(NumberButtonSeven);
+                NumberButtonCommandEight = new RelayCommand(NumberButtonEight);
+                NumberButtonCommandNine = new RelayCommand(NumberButtonNine);
+                NumberButtonCommandZero = new RelayCommand(NumberButtonZero);
+                DecimalButtonCommandDoubleZero = new RelayCommand(NumberButtonDoubleZero);
+                CashInCommand = new RelayCommand(ButtonCashIn);
+                SubTotalText = "0.0";
+                DiscountText = "0.00";
+                GridData = new ObservableCollection<POSBillGrid>();
+            }
+          
+            catch(Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+            // PosBillGrid = LoadGridData();
+        }
+        #endregion
+
+        #region ButtonCashIn
+        public void ButtonCashIn()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        } 
+        #endregion
+
+        #region BackSpaceEvent
+        public void BackSpaceEvent()
+        {
+            try
+            {
+                if (_currentColum == "ItemName")
+                {
+
+                }
+                else if (_currentColum == "Quantity")
+                {
+                    
+
+                }
+                else if (_currentColum == "Price")
+                {
+                    double price = GridData[_rowIndex].Price;
+                    string priceString = price.ToString();
+                    string updatedPriceString = priceString.Substring(0, priceString.Length - 1);
+                    if(updatedPriceString  != "")
+                    {
+                        double updatedPrice = double.Parse(updatedPriceString);
+                        // Assign the updated price to the GridData
+                        GridData[_rowIndex].Price = updatedPrice;
+                        price = updatedPrice;
+                        
+                    }
+                    else
+                    {
+                        GridData[_rowIndex].Price = 0;
+                        price = GridData[_rowIndex].Price;
+                    }
+                    int iquantity = GridData[_rowIndex].Quantity;
+                    int iRowTotal = Convert.ToInt16(iquantity * price);
+                    string strDisCount = GridData[_rowIndex].Discount;
+                    strDisCount = strDisCount.Replace("%", "");
+                    double dicountValue = Convert.ToDouble(strDisCount);
+                    double discountedPrice = iRowTotal * (1 - dicountValue / 100);
+                    int total = Convert.ToInt32(iquantity * discountedPrice);
+                    GridData[_rowIndex].Total = total;
+                    iRowTotal = GridData[_rowIndex].Total;
+
+                }
+                else if (_currentColum == "Discount")
+                {
+                    //double dDisCount = GridData[_rowIndex].Discount;
+                    string dDisCount = GridData[_rowIndex].Discount; ;
+                    if (dDisCount.Contains("%"))
+                    {
+                        dDisCount = dDisCount.Replace("%", "");
+                    }
+                    string updatedPriceString = dDisCount.Substring(0, dDisCount.Length - 1);
+                    if (updatedPriceString != "")
+                    {
+                        double updatedDiscound= double.Parse(updatedPriceString);
+                        // Assign the updated price to the GridData
+                        GridData[_rowIndex].Discount = updatedDiscound.ToString();
+                        dDisCount = updatedDiscound.ToString();
+
+                    }
+                    else
+                    {
+                        GridData[_rowIndex].Discount = "";
+                        dDisCount = GridData[_rowIndex].Discount;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        } 
+        #endregion
+
+        #region loadGridColums
+        //public void loadGridColums()
+        //{
+        //    GridData.Columns.Add("ItemName", typeof(string));
+        //    GridData.Columns.Add("Quantity", typeof(int));
+        //    GridData.Columns.Add("Price", typeof(int));
+        //    GridData.Columns.Add("Discount", typeof(int));
+        //    GridData.Columns.Add("Total", typeof(int));
+        //}
+        #endregion
+
+        #region POSBillCalculation
+        public void POSBillCalculation(int iqty)
+        {
+            try
+            {
+                POSBillGrid pOSBillGrid = new POSBillGrid();
+                double iPrice = 0;
+                double strSubTotal = GridData[_rowIndex].Total;
+                int iquantity = GridData[_rowIndex].Quantity;
+                int iRowTotal = GridData[_rowIndex].Total;
+
+                double isubtotal = Convert.ToDouble(SubTotalText);
+                isubtotal = isubtotal - iRowTotal;
+                SubTotalText = isubtotal.ToString();
+                if (_currentColum == "ItemName")
+                {
+
+                }
+                else if (_currentColum == "Quantity")
+                {
+                    
+                    iPrice = GridData[_rowIndex].Price;
+                    iquantity = iqty;
+                    GridData[_rowIndex].Quantity = iquantity;
+                    string strDisCount = GridData[_rowIndex].Discount;
+                    if(strDisCount != null)
+                    {
+                        strDisCount = strDisCount.Replace("%", "");
+                    }
+                    double dicountValue = Convert.ToDouble(strDisCount);
+                   //double dicountValue = Convert.ToDouble(GridData[_rowIndex].Discount);
+                    double discountedPrice = iRowTotal * (1 - dicountValue / 100);
+                    int total = Convert.ToInt32(iquantity * discountedPrice);
+                    GridData[_rowIndex].Total = total;
+                    iRowTotal = GridData[_rowIndex].Total;
+                    strSubTotal = iRowTotal;
+                }
+                else if (_currentColum == "Price")
+                {
+
+                    iPrice = GridData[_rowIndex].Price;
+                    int iNewPrice = iqty;
+                    string strPriceGrid = iPrice.ToString();
+                    string steNewPrice = iNewPrice.ToString();
+                    string strNewPriceGrid = strPriceGrid + steNewPrice;
+                    GridData[_rowIndex].Price =Convert.ToDouble(strNewPriceGrid);
+                    iPrice = GridData[_rowIndex].Price;
+                    iRowTotal = Convert.ToInt32(iquantity * iPrice);
+                    string strDisCount = GridData[_rowIndex].Discount;
+                    if (strDisCount != null)
+                    {
+                        strDisCount = strDisCount.Replace("%", "");
+                    }
+                 //   strDisCount = strDisCount.Replace("%", "");
+                    double dicountValue = Convert.ToDouble(strDisCount);
+                    double discountedPrice = iRowTotal * (1 - dicountValue / 100);
+                    int total = Convert.ToInt32(iquantity * discountedPrice);
+                    GridData[_rowIndex].Total = total;
+                    iRowTotal = GridData[_rowIndex].Total;
+                    double i_subTotal = Convert.ToDouble(m_subTotal);
+
+                    if (i_subTotal != 0)
+                    {
+                        iRowTotal = GridData[_rowIndex].Total;
+                        isubtotal = Convert.ToDouble(SubTotalText);
+                        i_subTotal = iRowTotal;
+                        strSubTotal = i_subTotal ;
+                    }
+
+
+                } 
+                else if (_currentColum == "Discount")
+                {
+                   
+                    string strDisCountNew = iqty.ToString();
+                    string strDisCount = GridData[_rowIndex].Discount;
+                    if(strDisCount.Contains("%"))
+                    {
+                        strDisCount = strDisCount.Replace("%", "");
+                    }
+                    if(strDisCount != "")
+                    {
+                        Double idiscountROw = Convert.ToDouble(strDisCount);
+                        if (idiscountROw == 0)
+                        {
+                            strDisCount = "";
+                        }
+                    }
+                    strDisCount = strDisCount+  strDisCountNew ;
+                    GridData[_rowIndex].Discount = strDisCount;
+                   // strDisCount = GridData[_rowIndex].Discount;
+                    double dicountValue =Convert.ToDouble(strDisCount);
+                    iquantity = GridData[_rowIndex].Quantity;
+                    double discountedPrice = iRowTotal * (1 - dicountValue / 100);
+                    int total = Convert.ToInt32(iquantity * discountedPrice);
+                    GridData[_rowIndex].Total = total;
+                    iRowTotal = GridData[_rowIndex].Total;
+                    double discount = (dicountValue / iRowTotal) * 100;
+                    string discountPercentage = strDisCount + "%"; 
+                    GridData[_rowIndex].Discount = discountPercentage;
+
+                    iPrice = GridData[_rowIndex].Price;
+                    double ddisCountAmount = iPrice - iRowTotal;
+                    double dDiscountTxt = Convert.ToDouble(DiscountText);
+                    double dDiscountNewText = ddisCountAmount + dDiscountTxt;
+                    DiscountText = dDiscountNewText.ToString();
+                    strSubTotal =  total;
+                }
+                int strRowTotalGrid = 0;
+                double im_subTotal = Convert.ToDouble(m_subTotal);
+               // string strDisCountRowtxt = GridData[_rowIndex].Discount;
+                double dDiscountText = Convert.ToDouble(DiscountText);
+                double ddDiscountNewText = dDiscountText;
+                //if (strDisCountRowtxt != null)
+                //{
+                //    strDisCountRowtxt = strDisCountRowtxt.Replace("%", "");
+                //    double dDicount = Convert.ToDouble(strDisCountRowtxt);
+                //}
+
+
+                if (im_subTotal == 0)
+                {
+                    SubTotalText = GridData[_rowIndex].Total.ToString();
+                    DiscountText = ddDiscountNewText.ToString();
+                }
+                else
+                {
+                    isubtotal = Convert.ToDouble(SubTotalText);
+                    if (GridData.Count == 1)
+                    {
+                        isubtotal = 0;
+                    }
+                    strSubTotal = strSubTotal + isubtotal;
+                    SubTotalText = strSubTotal.ToString();
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+           
+        } 
+        #endregion
+
+        #region NumberPadEvennts
+        public void NumberButtonCommandOne()
+        {
+            try
+            {
+                int iquantity = 1;
+                if(_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+                //SubTotalText = "200Ax";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+        public void NumberButtonTwo()
+        {
+            try
+            {
+                int iquantity = 2;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+
+        public void NumberButtonThree()
+        {
+            try
+            {
+                int iquantity = 3;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+
+        public void NumberButtonFour()
+        {
+            try
+            {
+                int iquantity = 4;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+        public void NumberButtonFive()
+        {
+            try
+            {
+                int iquantity = 5;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+        public void NumberButtonSix()
+        {
+            try
+            {
+                int iquantity = 6;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+        public void NumberButtonSeven()
+        {
+            try
+            {
+                int iquantity = 7;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+        public void NumberButtonEight()
+        {
+            try
+            {
+                int iquantity = 8;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+        public void NumberButtonNine()
+        {
+            try
+            {
+                int iquantity = 9;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        } 
+
+        public void NumberButtonZero()
+        {
+            try
+            {
+                int iquantity = 0;
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+
+        public void NumberButtonDoubleZero()
+        {
+            try
+            {
+                string strFirstZero = "0";
+                string strSecondZero = "0";
+                string strDoubleZero = strFirstZero + strSecondZero;
+                int iquantity =Convert.ToInt16(strDoubleZero);
+                //if (_currentColum == "ItemName")
+                //{
+
+                //}
+                //else if (_currentColum == "Quantity")
+                //{
+
+                //}
+                //else if (_currentColum == "Price")
+                //{
+                //    GridData[_rowIndex].Price = strDoubleZero
+                //}
+                //else if (_currentColum == "Discount")
+                //{
+
+                //}
+
+                if (_rowSelected == true)
+                {
+                    POSBillCalculation(iquantity);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
         }
         #endregion
 
@@ -167,44 +683,107 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         #endregion
 
         #region LoadGridDataegion
-        //public DataTable LoadGridData()
-        //{
-        //    try
-        //    {
-        //        DataSet dataSet = new DataSet();
-        //        // Create a new table
-        //        DataTable dataTable = new DataTable("MyTable");
-
-        //        // Add columns to the table
-        //        dataTable.Columns.Add("ItemName", typeof(string));
-        //        dataTable.Columns.Add("Quantity", typeof(string));
-        //        dataTable.Columns.Add("Price", typeof(int));
-        //        dataTable.Columns.Add("Discount", typeof(int));
-        //        dataTable.Columns.Add("Total", typeof(int));
-
-        //        // Add rows to the table
-
-        //        dataTable.Rows.Add("MedicalGloves", 0, 0, 0, 0);
-        //        dataTable.Rows.Add("Trailor Hire Charges", 0, 0, 0, 0);
-
-
-        //        // Add the table to the dataset
-        //        // dataSet.Tables.Add(dataTable);
-        //        return dataTable;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("An Exception Occured", ex);
-        //    }
-        //} 
-        #endregion
-
-        #region OnPropertyChanged
-        protected void OnPropertyChanged(string propertyName)
+        public void LoadGridData()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        } 
+            try
+            {
+              //  DataTable dataTable = new DataTable("MyTable");
+                POSBillDbManager pOSBillDbManager = new POSBillDbManager();
+                POSBillGrid pOSBillGrid = new POSBillGrid();
+                string strSelectedData = _selectedSuggestion;
+                string strtext = AutoCompleteTextBoxText;
+                string[] parts = new string[0];
+                decimal dPrice = 0;
+                int iQuantity = 1;
+                int iDiscount = 0;
+                int iTotal = 0;
+                string strCurrency = "";
+                decimal dFactor = 0;
+                int iSalesTypeId = 0;
+                DateTime date = DateTime.Now;
+                bool std = false;
+                string strItemName = "";
+                string iItemcode = "";
+                if (strSelectedData != null)
+                {
+                    if (strSelectedData.Contains("-"))
+                    {
+                        parts = strSelectedData.Split('-');
+                        strItemName = parts[1];
+                        iItemcode = parts[0];
+                    }
+                }
+                else
+                {
+                    if (strtext != "")
+                    {
+                        iItemcode = strtext;
+                        DataSet dataSetItemName = pOSBillDbManager.GetItemNameByItemCode(iItemcode);
+                        if (dataSetItemName.Tables[0].Rows.Count > 0)
+                        {
+                            strItemName = dataSetItemName.Tables[0].Rows[0]["description"].ToString();
+                        }
+                    }
+                }
+                string strPos = ViewModelBase.userVm.strPos;
+                //DataSet dataSet = viewModel.loadSearchData(iItemcode);
+                DataSet dataSet = new DataSet();
+                DataSet datSetCurr = pOSBillDbManager.GetCompanyCurrency();
+                if (datSetCurr != null)
+                {
+                    strCurrency = datSetCurr.Tables[0].Rows[0]["value"].ToString();
+                }
+                DataSet dataSetSalesTypeId = pOSBillDbManager.GetSalesTypeId(strPos);
+                if (dataSetSalesTypeId.Tables[0].Rows.Count > 0)
+                {
+                    int iPriceList = Convert.ToInt16(dataSetSalesTypeId.Tables[0].Rows[0]["price_list"]);
+                    if (iPriceList != 0)
+                    {
+                        iSalesTypeId = Convert.ToInt16(dataSetSalesTypeId.Tables[0].Rows[0]["price_list"]);
+                    }
+                    else
+                    {
+                        DataSet datasetSalesTypeIdDeptMaster = pOSBillDbManager.GetSalesTypeIdDeoptMaster(strPos);
+                        if (datasetSalesTypeIdDeptMaster.Tables[0].Rows.Count > 0)
+                        {
+                            iSalesTypeId = Convert.ToInt16(datasetSalesTypeIdDeptMaster.Tables[0].Rows[0]["sales_type"]);
+                        }
+                    }
+                }
+                dPrice = GetKitPrice(iItemcode, strCurrency, iSalesTypeId, dFactor, date, std);
+                pOSBillGrid.ItemName = strItemName;
+                pOSBillGrid.Quantity = iQuantity;
+                pOSBillGrid.Price = Convert.ToDouble(dPrice);
+                pOSBillGrid.Discount = iDiscount.ToString();
+                pOSBillGrid.Total = Convert.ToInt32(dPrice);
+                GridData.Add(pOSBillGrid);
+                //  _SubTotalText = GridData[_rowIndex].Total + _SubTotalText;
+                if (pOSBillGrid.Total !=0 )
+                {
+                    int strRowTotalGrid = pOSBillGrid.Total;
+                    string strSubTotaltxt = SubTotalText;
+                    double iSubTotaltxt = Convert.ToDouble(strSubTotaltxt);
+                    double iSubTotal = strRowTotalGrid + iSubTotaltxt;
+                    string strSubTotal = iSubTotal.ToString();
+                    SubTotalText = strSubTotal;
+                }
+                m_subTotal = SubTotalText;
+                double dDiscount =Convert.ToDouble(pOSBillGrid.Discount);
+                double dDiscountTxt = Convert.ToDouble(DiscountText);
+                double ddDiscountText = dDiscountTxt + dDiscount;
+                DiscountText = ddDiscountText.ToString();
+                int rowCount = GridData.Count;
+                TotalOrderText = rowCount.ToString();
+                AutoCompleteTextBoxText = "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+
         #endregion
+
 
         #region ObservableCollection
         public ObservableCollection<string> FilteredSuggestions
@@ -249,7 +828,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             }
         }
         #endregion
-        
+
+        #region saveSelectedSuggestion
         public string saveSelectedSuggestion(string strSelectedSiggestion)
         {
             try
@@ -257,11 +837,13 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 _strSelectedSuggestion = strSelectedSiggestion;
                 return _strSelectedSuggestion;
             }
-           catch(Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        }
+        } 
+        #endregion
+
         #region UpdateSuggestions
         private void UpdateSuggestions()
         {
@@ -350,7 +932,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 int round_to = 0;
                 decimal bprice = 0;
                 string home_curr = "";
-                if (date == null)
+                int isalesTypeId = 0;
+                string currAbrev = "";
+                decimal dprice = 0;
                 {
                     date = DateTime.Now;
                 }
@@ -400,15 +984,19 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     if (dataSetRoundToCompanyPref.Tables[0].Rows.Count > 0)
                     {
                         round_to = Convert.ToInt16(dataSetRoundToCompanyPref.Tables[0].Rows[0]["value"]);
-
-                        foreach (DataRow row in dataSetRoundToCompanyPref.Tables[0].Rows)
+                    }
+                }
+                    if (dataSetSql.Tables[0].Rows.Count > 0)
+                    { 
+                        foreach (DataRow row in dataSetSql.Tables[0].Rows)
                         {
 
-                            int isalesTypeId = Convert.ToInt32(row["sales_type_id"]);
-                            string currAbrev = Convert.ToString(row["curr_abrev"]);
-                            decimal dprice = Convert.ToDecimal(row["price"]);
-
-                            if (!prices.ContainsKey(salesTypeId))
+                             isalesTypeId = Convert.ToInt32(row["sales_type_id"]);
+                             currAbrev = Convert.ToString(row["curr_abrev"]);
+                             dprice = Convert.ToDecimal(row["price"]);
+                        }
+                    }
+                         if (!prices.ContainsKey(salesTypeId))
                             {
                                 prices.Add(isalesTypeId, new Dictionary<string, decimal>());
                             }
@@ -439,8 +1027,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                                 if (factor != 0)
                                     bprice *= Convert.ToDecimal(factor);
                             }
-                        }
-                    }
+                      
                     if (bprice == 0)
                     {
                         return 0;
@@ -455,7 +1042,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                         decimal roundedPrice = Math.Round(bprice, DecimalPlaces, MidpointRounding.AwayFromZero);
                         bprice = roundedPrice;
                     }
-                }
+                
                 return bprice;
             }
             catch (Exception ex)
@@ -494,5 +1081,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             return Math.Round(value * power, MidpointRounding.AwayFromZero) / power;
         }
 
+       // public event PropertyChangedEventHandler PropertyChanged;
+       
     }
 }

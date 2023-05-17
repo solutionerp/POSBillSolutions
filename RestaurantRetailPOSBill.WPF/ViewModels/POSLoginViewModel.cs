@@ -78,26 +78,22 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         {
             try
             {
-
                 // _userdbManager.SetUsers(Username, Password);
                  _userdbManager = new UserdbManager();
-                User user = _userdbManager.GetUserByIdAndPassword(Username, Password);
-                if(user!= null)
+                userVm = _userdbManager.GetUserByIdAndPassword(Username, Password);
+                if(userVm != null)
                 {
-                    if (user.user_id == Username && user.password == Password)
+                    if (userVm.user_id == Username && userVm.password == Password)
                     {
                         IsValidUser = true;
                         ((Navigator)Navigator).IsLoggedIn = true;
                         MessageBox.Show("Sucessfully Login");
-                        strUsernameVM = strUsername;
-                        strPasswordVM = strPassword;
                     }
                 }
                 else
                 {
                     MessageBox.Show("Invalid username and Password");
                 }
-                
                 //_majorIndexService.Authenticate(Username, Password);
                 Username = "";
                 Password = "";
@@ -109,7 +105,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         }
        
         //public ICommand LoginCommand { get; }
-
         //public POSLoginViewModel(IMajorIndexService _majorIndexService)
         // {
         //    LoginCommand = new LoginCommand(this, _majorIndexService);

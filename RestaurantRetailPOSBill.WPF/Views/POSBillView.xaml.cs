@@ -30,28 +30,28 @@ namespace RestaurantRetailPOSBill.WPF.Views
         public POSBillView()
         {
             InitializeComponent();
-            LoadgridPos();
+           // LoadgridPos();
 
         }
         #region LoadgridPos
-        public void LoadgridPos()
-        {
-            try
-            {
-                dataTable.Columns.Clear();
-                dataTable.Columns.Add("ItemName", typeof(string));
-                dataTable.Columns.Add("Quantity", typeof(int));
-                dataTable.Columns.Add("Price", typeof(int));
-                dataTable.Columns.Add("Discount", typeof(int));
-                dataTable.Columns.Add("Total", typeof(int));
-                //dataSet.Tables.Add(dataTable);
-                myDataGrid.ItemsSource = dataTable.DefaultView;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An Exception Occured", ex);
-            }
-        }
+        //public void LoadgridPos()
+        //{
+        //    try
+        //    {
+        //        dataTable.Columns.Clear();
+        //        dataTable.Columns.Add("ItemName", typeof(string));
+        //        dataTable.Columns.Add("Quantity", typeof(int));
+        //        dataTable.Columns.Add("Price", typeof(int));
+        //        dataTable.Columns.Add("Discount", typeof(int));
+        //        dataTable.Columns.Add("Total", typeof(int));
+        //        //dataSet.Tables.Add(dataTable);
+        //        myDataGrid.ItemsSource = dataTable.DefaultView;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("An Exception Occured", ex);
+        //    }
+      //  }
         #endregion
 
         #region AutoCompleteTextBox_PreviewKeyDown
@@ -105,62 +105,16 @@ namespace RestaurantRetailPOSBill.WPF.Views
                     }
                     else if (e.Key == Key.Enter)
                     {
-                            try
-                            {
-                            POSBillDbManager pOSBillDbManager = new POSBillDbManager();
-                            string strSelectedData =viewModel._selectedSuggestion;
-                            string[] parts = strSelectedData.Split('-');
-                            string strItemName = parts[1];
-                            decimal dPrice =0;
-                            int iQuantity = 0;
-                            int iDiscount = 0;
-                            int iTotal = 0;
-                            string iItemcode = parts[0];
-                            string strCurrency = "";
-                            decimal dFactor = 0;
-                            int iSalesTypeId = 0;
-                            DateTime date = DateTime.Now;
-                            bool std = false;
-                            User user = new User();
-                            string strUsername = ViewModelBase.strUsernameVM;
-                            string strPassweord = ViewModelBase.strPasswordVM;
-                            string strPos = user.strPos;
-                            //DataSet dataSet = viewModel.loadSearchData(iItemcode);
-                            DataSet dataSet = new DataSet();
-                             DataSet datSetCurr = pOSBillDbManager.GetCompanyCurrency();
-                            if(datSetCurr != null) 
-                            {
-                                strCurrency = datSetCurr.Tables[0].Rows[0]["value"].ToString();
-                            }
-                            DataSet dataSetSalesTypeId = pOSBillDbManager.GetSalesTypeId(strPos);
-                            if (dataSetSalesTypeId.Tables[0].Rows.Count > 0 ) 
-                            {
-                                iSalesTypeId = Convert.ToInt16(dataSetSalesTypeId.Tables[0].Rows[0]["price_list"]);
-                            }
-                            else
-                            {
-                                DataSet datasetSalesTypeIdDeptMaster = pOSBillDbManager.GetSalesTypeIdDeoptMaster(strPos);
-                                if (datasetSalesTypeIdDeptMaster.Tables[0].Rows.Count > 0)
-                                {
-                                    iSalesTypeId = Convert.ToInt16(datasetSalesTypeIdDeptMaster.Tables[0].Rows[0]["sales_type"]);
-                                }
-                            }
-                           dPrice = viewModel.GetKitPrice(iItemcode, strCurrency, iSalesTypeId, dFactor, date, std);
-                            dataTable.Rows.Add(strItemName, iQuantity, dPrice, iDiscount, iTotal);
-                            myDataGrid.ItemsSource = dataTable.DefaultView;
-                            }
-                            catch (Exception ex)
-                            {
-                                throw new Exception("An Exception Occured", ex);
-                            }
-                        
+                        e.Handled = false;
+                        viewModel.LoadGridData();
                         if (popup.IsOpen == true && viewModel.SelectedSuggestion != null)
                         {
+                            e.Handled = true;
                             viewModel.Query = viewModel.SelectedSuggestion;
                             popup.IsOpen = false;
                             Keyboard.Focus(sender as TextBox);
                         }
-                        e.Handled = true;
+                       
                     }
                 }
             }
@@ -200,28 +154,57 @@ namespace RestaurantRetailPOSBill.WPF.Views
                 //    ViewModel.FilteredSuggestions.Add(item);
                 //}
                 // Open the popup if there are any filtered suggestions
+                ViewModel.AutoCompleteTextBoxText = AutoCompleteTextBox.Text;
                 SuggestionsPopup.IsOpen = ViewModel.FilteredSuggestions.Any();
             }
         }
         #endregion
 
-        #region PosDataGridLoaded
-        private void PosDataGrid_Loaded(object sender, RoutedEventArgs e)
+       
+        private void DataGrid_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            try
+            var viewModel = DataContext as POSBIllViewModel;
+            if (e.Row.IsSelected)
             {
-                myDataGrid.Columns[0].Width = new DataGridLength(30, DataGridLengthUnitType.Star); // 30% of available space for first column
-                myDataGrid.Columns[1].Width = new DataGridLength(20, DataGridLengthUnitType.Star); // 20% of available space for second column
-                myDataGrid.Columns[2].Width = new DataGridLength(20, DataGridLengthUnitType.Star); // 20% of available space for third column
-                myDataGrid.Columns[3].Width = new DataGridLength(15, DataGridLengthUnitType.Star); // 15% of available space for fourth column
-                myDataGrid.Columns[4].Width = new DataGridLength(15, DataGridLengthUnitType.Star); // 15% of available space for fifth column
-                myDataGrid.RowHeight = 30;
+                viewModel._rowSelected = true;
+                viewModel._currentColum = e.Column.Header.ToString();
+                viewModel._rowIndex = e.Row.GetIndex();
             }
-            catch (Exception ex)
+        }
+
+        private void POSBillDataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            var viewModel = DataContext as POSBIllViewModel;
+            int count = 0;
+
+            if (e.Key == Key.Back)
             {
-                throw new Exception("An Exception Occured", ex);
+                viewModel.BackSpaceEvent();
             }
-        } 
-        #endregion
+        }
+
+        //private void myDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        //{
+
+        //}
+
+        //private void KeyboardClick(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        DataRowView selectedRow = myDataGrid.SelectedItem as DataRowView;
+        //        if (selectedRow != null)
+        //        {
+        //            int quantity = 2; // You can modify this value as needed
+        //            selectedRow["Quantity"] = quantity;
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        throw new Exception("An Exception Occured", ex);
+        //    }
+        //} 
+
+
     }
 }

@@ -27,21 +27,29 @@ namespace POSBill.Domain.Models
         }
         public override async Task<IEnumerable<T>> ToArray<T>(DataSet dataSet)
         {
-            List<User> users = new List<User>();
-            if (dataSet.Tables[0].Rows.Count > 0) 
+            try
             {
-                foreach(DataRow row in dataSet.Tables[0].Rows) 
+                List<User> users = new List<User>();
+                if (dataSet.Tables[0].Rows.Count > 0)
                 {
-                    var user = new User
+                    foreach (DataRow row in dataSet.Tables[0].Rows)
                     {
-                        user_id = (string)row["user_id"],
-                        password = (string)row["password"],
-                        //strPos = (string)row["pos"]
-                    };
-                    users.Add(user);
+                        string strPosValue = row["pos"].ToString();
+                        var user = new User
+                        {
+                            user_id = (string)row["user_id"],
+                            password = (string)row["password"],
+                            strPos = strPosValue
+                        };
+                        users.Add(user);
+                    }
                 }
+                return await Task.FromResult<IEnumerable<T>>(users as IEnumerable<T>);
             }
-            return await Task.FromResult<IEnumerable<T>>(users as IEnumerable<T>);
+            catch (Exception ex) 
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
         }
     }
 }
