@@ -8,8 +8,8 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              d:MinHeight="600" d:MinWidth="800">
-    
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -42,6 +42,15 @@
             <Setter Property="BorderBrush" Value="Gray" />
             <Setter Property="Padding" Value="5" />
             <Setter Property="Height" Value="27"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextBlockStyleCustomer">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Padding" Value="10"/>
+            <!--<Setter Property="Height" Value="50"></Setter>-->
+            <Setter Property="Focusable" Value="True"></Setter>
         </Style>
         <Style TargetType="TextBlock" x:Key="TextBlockStylesearch">
             <Setter Property="FontSize" Value="18" />
@@ -78,22 +87,61 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+    
     <UserControl.Background>
         <ImageBrush ImageSource="/Views/Posbgd.jpg"  
                     Opacity="1"
             Stretch="UniformToFill"></ImageBrush>
     </UserControl.Background>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60*"></ColumnDefinition>
             <ColumnDefinition Width="40*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <!--<RowDefinition Height="1*"></RowDefinition>-->
+                <RowDefinition Height="40*"></RowDefinition>
                 <RowDefinition Height="50*"></RowDefinition>
             </Grid.RowDefinitions>
+             
             <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Grid Grid.Column="0">
+                        <TextBox x:Name="AutoCompleteCustomerTextBox"
+         Style="{StaticResource TextBoxStyleSearch}"
+         TextChanged="AutoCompleteCustomerTextBox_TextChanged"
+         Text="{Binding AutoCompleteCustomerTextBoxText, Mode=TwoWay}">
+                            <controls:WatermarkService.Watermark>
+                                <TextBlock Style="{StaticResource TextBlockStylesearch}">Customer</TextBlock>
+                            </controls:WatermarkService.Watermark>
+                        </TextBox>
+                        <Popup x:Name="SuggestionsCustomerPopup" PlacementTarget="{Binding ElementName=AutoCompleteCustomerTextBox}" StaysOpen="False" IsOpen="true" Width="600">
+                            <!--<ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>-->
+                            <ListBox ItemsSource="{Binding FilteredSuggestions}"
+         SelectedItem="{Binding SelectedSuggestion,Mode=TwoWay}">
+                                <b:Interaction.Triggers>
+                                    <b:EventTrigger EventName="SelectionChanged">
+                                        <b:InvokeCommandAction Command="{Binding ListBoxCustomerItemSelectedCommand}" />
+                                    </b:EventTrigger>
+                                </b:Interaction.Triggers>
+                            </ListBox>
+                        </Popup>
+                    </Grid>
+                </StackPanel>
+                    <Grid Grid.Column="1">
+                    <TextBlock Style="{StaticResource TextBlockStyleCustomer}" Text="{Binding CustomerNameText}" Background="White" Foreground="Black"></TextBlock>
+                    </Grid>
+            </Grid>
+            
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                     <!--<ColumnDefinition Width="2*"></ColumnDefinition>-->
@@ -163,7 +211,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"></ColumnDefinition>
                     <!--<ColumnDefinition Width="35*"></ColumnDefinition>-->
@@ -185,14 +233,14 @@
                             <ColumnDefinition Width="20*"></ColumnDefinition>
                             <ColumnDefinition Width="20*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource ButtonStyle}"  Grid.Row="0" Grid.Column="0" Foreground="white"  Width="auto" Content="Cash IN" Background="{StaticResource BrushPrimary1}" Command="{Binding CashInCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}"  Grid.Row="0" Grid.Column="0" Foreground="white"  Width="auto" Content="Draft" Background="{StaticResource BrushPrimary1}" Command="{Binding DraftCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="1" Foreground="white" Width="auto" Content="End Day" Background="{StaticResource BrushPrimary1}" Command="{Binding EndDayCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Grid.Column="2" Width="auto" Content="Open Drawer" Background="{StaticResource BrushPrimary5}" Command="{Binding OpenDrawerCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="0" Width="auto" Content="Discount" Background="{StaticResource BrushPrimary5}"   Command="{Binding DiscountCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Shipping" Background="{StaticResource BrushPrimary5}" Command="{Binding AddShippingCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="2" Width="auto" Content="Add Coupons" Background="{StaticResource BrushPrimary5}" Command="{Binding AddCouponsCommand}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="2" Width="auto" Content="New Sale" Background="{StaticResource BrushPrimary2}" Command="{Binding NewSaleCommand}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="1" Width="auto" Foreground="White" Content="Save Sale" Background="{StaticResource BrushPrimary3}" Command="{Binding SaveSaleCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="2" Width="auto" Content="Cash" Background="{StaticResource BrushPrimary1}" Command="{Binding CashButtonCommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="1" Width="auto" Foreground="White" Content="Card" Background="{StaticResource BrushPrimary10}" Command="{Binding CardButtonCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2" Width="auto" Foreground="White" Content="Pay" Background="{StaticResource BrushPrimary7}" Command="{Binding Paycommand}"></Button>
                     </Grid>
                     <Grid Grid.Column="0">
@@ -228,10 +276,10 @@
                         <RowDefinition Height="18*"></RowDefinition>
                         <RowDefinition Height="18*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Width="auto" Foreground="White" Content="Clear" Background="{StaticResource BrushPrimary4}" Command="{Binding ClearButtonCommand}"></Button>
-                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Width="auto" Foreground="White" Content="Cancel" Background="{StaticResource BrushPrimary4}" Command="{Binding CancelCommand}"></Button>
-                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Width="auto" Foreground="White" Content="Return" Background="{StaticResource BrushPrimary4}" Command="{Binding ReturnCommand}"></Button>
-                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="3" Width="auto" Foreground="White" Content="" Background="{StaticResource BrushPrimary6}"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="0" Width="auto" Foreground="White" Content="Enter" Background="{StaticResource BrushPrimary6}" Command="{Binding EnterButtonCommand}"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Width="auto" Foreground="White" Content="Clear" Background="{StaticResource BrushPrimary4}" Command="{Binding ClearButtonCommand}"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Width="auto" Foreground="White" Content="Cancel" Background="{StaticResource BrushPrimary4}" Command="{Binding CancelCommand}"></Button>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Row="3" Width="auto" Foreground="White" Content="Return" Background="{StaticResource BrushPrimary4}" Command="{Binding ReturnCommand}"></Button>
                 </Grid>
             </Grid>
         </Grid>
@@ -243,13 +291,22 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel>
-                    <TextBox x:Name="AutoCompleteTextBox" Style="{StaticResource TextBoxStyleSearch}" TextChanged="AutoCompleteTextBox_TextChanged" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown" Text="{Binding AutoCompleteTextBoxText, Mode=TwoWay}" >
+                    <TextBox x:Name="AutoCompleteTextBox" Style="{StaticResource TextBoxStyleSearch}" TextChanged="AutoCompleteTextBox_TextChanged"  Text="{Binding AutoCompleteTextBoxText, Mode=TwoWay}">
                         <controls:WatermarkService.Watermark>
                             <TextBlock Style="{StaticResource TextBlockStylesearch}">Type here to search text</TextBlock>
                         </controls:WatermarkService.Watermark>
                     </TextBox>
+
                     <Popup x:Name="SuggestionsPopup" PlacementTarget="{Binding ElementName=AutoCompleteTextBox}" StaysOpen="False" IsOpen="true" Width="600">
-                        <ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>
+                        <!--<ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>-->
+                        <ListBox ItemsSource="{Binding FilteredSuggestions}"
+         SelectedItem="{Binding SelectedSuggestion,Mode=TwoWay}">
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="SelectionChanged">
+                                    <b:InvokeCommandAction Command="{Binding ListBoxItemSelectedCommand}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
+                        </ListBox>
                     </Popup>
                 </StackPanel>
             </Grid>
@@ -262,7 +319,7 @@
                         <DataGridTemplateColumn Header="Price" Width="15*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Price}" />
+                                    <TextBlock Text="{Binding Price}" HorizontalAlignment="Right" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellEditingTemplate>
@@ -271,11 +328,40 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="10*"/>
-                        <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="15*"/>
+
+                        <DataGridTemplateColumn Header="Discount" Width="15*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Discount}" HorizontalAlignment="Right" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Total" Width="15*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Total}" HorizontalAlignment="Right" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Total, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--<DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="10*">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="15*"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Grid>
     </Grid>
+    
 </UserControl>

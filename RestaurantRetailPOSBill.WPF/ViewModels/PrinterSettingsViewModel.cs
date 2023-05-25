@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using POSBill.Domain.Models;
 using POSBill.EntityFramework;
+using System.Windows;
 
 namespace RestaurantRetailPOSBill.WPF.ViewModels
 {
@@ -59,7 +60,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 OnPropertyChanged("MarginTopText");
             }
         }
-
         public string MarginRightText
         {
             get
@@ -318,6 +318,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             {
                 dbManagerMarginBottomSettings.Create(MarginBottomSettings);
             }
+            MessageBox.Show("Successfully Updated");
         }
     }
 }

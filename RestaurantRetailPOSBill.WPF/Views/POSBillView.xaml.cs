@@ -33,26 +33,6 @@ namespace RestaurantRetailPOSBill.WPF.Views
            // LoadgridPos();
 
         }
-        #region LoadgridPos
-        //public void LoadgridPos()
-        //{
-        //    try
-        //    {
-        //        dataTable.Columns.Clear();
-        //        dataTable.Columns.Add("ItemName", typeof(string));
-        //        dataTable.Columns.Add("Quantity", typeof(int));
-        //        dataTable.Columns.Add("Price", typeof(int));
-        //        dataTable.Columns.Add("Discount", typeof(int));
-        //        dataTable.Columns.Add("Total", typeof(int));
-        //        //dataSet.Tables.Add(dataTable);
-        //        myDataGrid.ItemsSource = dataTable.DefaultView;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("An Exception Occured", ex);
-        //    }
-      //  }
-        #endregion
 
         #region AutoCompleteTextBox_PreviewKeyDown
         private void AutoCompleteTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -105,8 +85,6 @@ namespace RestaurantRetailPOSBill.WPF.Views
                     }
                     else if (e.Key == Key.Enter)
                     {
-                        e.Handled = false;
-                        viewModel.LoadGridData();
                         if (popup.IsOpen == true && viewModel.SelectedSuggestion != null)
                         {
                             e.Handled = true;
@@ -114,7 +92,7 @@ namespace RestaurantRetailPOSBill.WPF.Views
                             popup.IsOpen = false;
                             Keyboard.Focus(sender as TextBox);
                         }
-                       
+                        e.Handled = true;
                     }
                 }
             }
@@ -125,6 +103,7 @@ namespace RestaurantRetailPOSBill.WPF.Views
         private async void AutoCompleteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var ViewModel = DataContext as POSBIllViewModel;
+            ViewModel.AutoCompleteTextBoxText = AutoCompleteTextBox.Text;
             if (string.IsNullOrEmpty(AutoCompleteTextBox.Text))
             {
                 SuggestionsPopup.IsOpen = false;
@@ -154,13 +133,13 @@ namespace RestaurantRetailPOSBill.WPF.Views
                 //    ViewModel.FilteredSuggestions.Add(item);
                 //}
                 // Open the popup if there are any filtered suggestions
-                ViewModel.AutoCompleteTextBoxText = AutoCompleteTextBox.Text;
+               
                 SuggestionsPopup.IsOpen = ViewModel.FilteredSuggestions.Any();
             }
         }
         #endregion
 
-       
+        #region DataGrid_BeginningEdit
         private void DataGrid_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             var viewModel = DataContext as POSBIllViewModel;
@@ -171,7 +150,9 @@ namespace RestaurantRetailPOSBill.WPF.Views
                 viewModel._rowIndex = e.Row.GetIndex();
             }
         }
+        #endregion
 
+        #region POSBillDataGrid_PreviewKeyDown
         private void POSBillDataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             var viewModel = DataContext as POSBIllViewModel;
@@ -182,6 +163,9 @@ namespace RestaurantRetailPOSBill.WPF.Views
                 viewModel.BackSpaceEvent();
             }
         }
+
+
+        #endregion
 
         //private void myDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         //{
@@ -205,6 +189,37 @@ namespace RestaurantRetailPOSBill.WPF.Views
         //    }
         //} 
 
+        #region AutoCompleteCustomerTextBox_TextChanged
+        private void AutoCompleteCustomerTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var ViewModel = DataContext as POSBIllViewModel;
+            if (string.IsNullOrEmpty(AutoCompleteCustomerTextBox.Text))
+            {
+                SuggestionsCustomerPopup.IsOpen = false;
+            }
+            else
+            {
+                string strCustomerInfo = AutoCompleteCustomerTextBox.Text;
+                DataSet dataSetCustomer = ViewModel.LoadCustomerInfomartion(strCustomerInfo);
+                if (null != dataSetCustomer.Tables[0].Rows)
+                {
+                    ViewModel.FilteredSuggestions.Clear();
+                }
+                if (dataSetCustomer.Tables[0].Rows.Count > 0)
+                {
+                    foreach(DataRow row in dataSetCustomer.Tables[0].Rows)
+                    {
+                        string strSuggestion = row["name"].ToString() + " " + row["debtor_ref"].ToString() + "-" + row["address"].ToString();
+                        if (!ViewModel.FilteredSuggestions.Contains(strSuggestion))
+                        {
+                            ViewModel.FilteredSuggestions.Add(strSuggestion);
+                        }
+                    }
+                }
+                SuggestionsCustomerPopup.IsOpen = ViewModel.FilteredSuggestions.Any();
+            }
+        } 
+        #endregion
 
     }
 }

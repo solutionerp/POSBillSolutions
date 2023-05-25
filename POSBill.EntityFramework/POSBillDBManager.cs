@@ -20,7 +20,7 @@ namespace POSBill.EntityFramework
                 string strItemcode = strSuggestionData;
                 string strQuery = "SELECT" +
                                   " i.item_code, i.description, s.stock_id,p.price " + "FROM "
-                                  + " 0_prices p join  0_stock_master s on p.stock_id = s.stock_id Join 0_item_codes i on s.stock_id = i.stock_id WHERE " + "( s.description LIKE " + "'%" + strSuggestionData + "%'" + " OR i.item_code LIKE " + "'%" + strSuggestionData + "%') ";
+                                  + " 0_prices p join  0_stock_master s on p.stock_id = s.stock_id Join 0_item_codes i on s.stock_id = i.stock_id WHERE " + "( s.description LIKE " + "'%" + strSuggestionData + "%'" + " OR i.item_code LIKE " + "'%" + strSuggestionData + "%') limit 10";
                 DataSet dataSet = DataBaseUtils.GetRecord(strQuery);
                 return dataSet;
             }
@@ -28,8 +28,25 @@ namespace POSBill.EntityFramework
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        } 
+        }
         #endregion
+
+        public DataSet GetCustomerDeatils(string strCustomer)
+        {
+            try
+            {
+                string strQuery = "SELECT" +
+                                  " name,debtor_no, address,debtor_ref " + "FROM "
+                                  + "0_debtors_master " + " where name like "
+                                  + "'%" + strCustomer + "%'" + " limit 5";
+                DataSet dataSet = DataBaseUtils.GetRecord(strQuery);
+                return dataSet;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
 
         #region GetItemKit
         public DataSet GetItemKit(string itemcode)
