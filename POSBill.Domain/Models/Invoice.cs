@@ -11,6 +11,7 @@ namespace POSBill.Domain.Models
         public int InvoiceNumber { get; set; }
         public DateTime Date { get; set; }
         public string CustomerName { get; set; }
+        public string PaymentMethod { get; set; }
         public string[] PosItems { get; set; }
     }
 }

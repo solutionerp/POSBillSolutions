@@ -2,6 +2,7 @@
 using POSBill.Domain.Models;
 using POSBill.EntityFramework;
 using RestaurantRetailPOSBill.WPF.Commands;
+using RestaurantRetailPOSBill.WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,9 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
@@ -54,7 +57,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public ICommand ListBoxCustomerItemSelectedCommand { get; set; }
         public RelayCommand DecimalButtonCommand { get; set; }
        public ICommand TextBoxTextChangedCommand { get;  set; }
-       
+        public RelayCommand AddNewCustomerCommand { get; set; }
+        //   public RelayCommand ButtonAddUserCommand { get; set; }
+
         //public ICommand ClearButtonCommand { get; set; }
         private string _query;
         public ObservableCollection<string> _suggestions;
@@ -75,7 +80,19 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public string m_subTotal;
         public string _customerName;
         public string _autoCompleteCustomer;
-        public string m_deptorno;
+        public string m_deptno;
+        public string _NewcustomerName;
+        public string _newcustomershortName;
+        public string _address;
+        public string _emailNeCustomer;
+        public string _NewCustGstNo;
+        public string _NewCustcurrenecy;
+        public string _newCustSalespersontxt;
+        public string _paymentTermsNewCust;
+        public string _creditStatus;
+        public string _newCustshippingCopmny;
+        public string _salesAresTxtNewCust;
+        public string _newcustTaxgrpid;
         #endregion
         public ObservableCollection<POSBillGrid> GridData { get; set; }
         public string ItemName { get; set; }
@@ -83,6 +100,177 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public int Price { get; set; }
         public string Discount { get;set; }
         public int Total { get; set; }
+
+        private bool isUserRegistrationPopupOpen;
+
+        #region AddNewCustomerProperty
+        public string TaxGroupText
+        { 
+            get
+            {
+                return _newcustTaxgrpid;
+            } 
+            set
+            {
+                _newcustTaxgrpid = value;
+                OnPropertyChanged(nameof(TaxGroupText));
+            }
+        }
+        public string SalesAreaText
+        {
+            get
+            {
+                return _salesAresTxtNewCust;
+            }
+            set
+            {
+                _salesAresTxtNewCust = value;
+                OnPropertyChanged(nameof(SalesAreaText));
+            }
+        }
+        public string ShippingCompanyText
+        {
+            get
+            {
+                return _newCustshippingCopmny;
+            }
+            set
+            {
+                _newCustshippingCopmny = value;
+                OnPropertyChanged(nameof(ShippingCompanyText));
+            }
+        }
+        public string CreditStatusText
+        {
+            get
+            {
+                return _creditStatus;
+            }
+            set
+            {
+                _creditStatus = value;
+                OnPropertyChanged(nameof(CreditStatusText));
+            }
+        }
+        public string PaymentTermsText
+        {
+            get
+            {
+                return _paymentTermsNewCust;
+            }
+            set
+            {
+                _paymentTermsNewCust = value;
+                OnPropertyChanged(nameof(PaymentTermsText));
+            }
+        }
+        public string SalesPersonText
+        {
+            get
+            {
+                return _newCustSalespersontxt;
+            }
+            set
+            {
+                _newCustSalespersontxt = value;
+                OnPropertyChanged(nameof(SalesPersonText));
+            }
+        }
+        public string CustomerCurrencyText
+        {
+            get
+            {
+                return _NewCustcurrenecy;
+            }
+            set
+            {
+                _NewCustcurrenecy = value;
+                OnPropertyChanged(nameof(CustomerCurrencyText));
+            }
+        }
+        public string NewCustGstNoText
+        {
+            get
+            {
+                return _NewCustGstNo;
+            }
+            set
+            {
+                _NewCustGstNo = value;
+                OnPropertyChanged(nameof(NewCustGstNoText));
+            }
+        }
+        public string EmailText
+        {
+            get
+            {
+                return _emailNeCustomer;
+            }
+            set
+            {
+                _emailNeCustomer = value;
+                OnPropertyChanged(nameof(EmailText));
+            }
+        }
+        public string AddressText
+        {
+            get
+            {
+                return _address;
+            }
+            set
+            {
+                _address = value;
+                OnPropertyChanged(nameof(AddressText));
+            }
+        }
+        public string CustomeShortNameText
+        {
+            get
+            {
+                return _newcustomershortName;
+            }
+            set
+            {
+                _newcustomershortName = value;
+                OnPropertyChanged(nameof(CustomeShortNameText));
+            }
+        }
+        public string NewCustomerNameText
+        {
+            get
+            {
+                return _NewcustomerName;
+            }
+            set
+            {
+                _NewcustomerName = value;
+                OnPropertyChanged(nameof(NewCustomerNameText));
+            }
+        } 
+        #endregion
+        public bool IsUserRegistrationPopupOpen
+        {
+            get { return isUserRegistrationPopupOpen; }
+            set
+            {
+                isUserRegistrationPopupOpen = value;
+                OnPropertyChanged(nameof(IsUserRegistrationPopupOpen));
+            }
+        }
+
+        private ICommand _buttonAddUserCommand;
+        public ICommand ButtonAddUserCommand
+        {
+            get
+            {
+                if (_buttonAddUserCommand == null)
+                {
+                    _buttonAddUserCommand = new RelayCommand(ShowAddUserPopup);
+                }
+                return _buttonAddUserCommand;
+            }
+        }
         public string AutoCompleteTextBoxText
         {
             get
@@ -254,6 +442,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 CardButtonCommand = new RelayCommand(ButtonCard);
                 DecimalButtonCommand = new RelayCommand(DecimalButton);
                 EnterButtonCommand = new RelayCommand(EnterButton);
+                AddNewCustomerCommand = new RelayCommand(ButtonAddNewCustomer);
+                //  ButtonAddUserCommand = new RelayCommand(ButtonAddUser);
                 SubTotalText = "0.00";
                 DiscountText = "0.00";
                 DeliverChargeText = "0.00";
@@ -270,11 +460,35 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             // PosBillGrid = LoadGridData();
         }
         #endregion
+        public void ButtonAddNewCustomer()
+        {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+        public void ShowAddUserPopup()
+        {
+            try
+            {
+                IsUserRegistrationPopupOpen = true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
+
+        #region LoadCustomerNameText
         public void LoadCustomerNameText()
         {
             try
             {
+                Cart cartnew = new Cart();
                 if (string.IsNullOrEmpty(AutoCompleteCustomerTextBoxText))
                 {
                     return;
@@ -285,13 +499,28 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     CustomerNameText = "";
                     CustomerNameText = _selectedSuggestion;
                     AutoCompleteCustomerTextBoxText = "";
+                    string strCustomer = CustomerNameText;
+                    if (strCustomer.Contains("-"))
+                    {
+                        string[] strparts = strCustomer.Split('-');
+                        strCustomer = strparts[0];
+                    }
+                    object objDeptNo = _pOSBillDbManager.GetDeptNoByName(strCustomer);
+                    if (objDeptNo != null)
+                    {
+                        m_deptno = objDeptNo.ToString();
+                    }
+                    CustomerDBManager customerDBManager = new CustomerDBManager();
+                    cutomerVm = customerDBManager.CustomerDetailsByDeptNo(m_deptno);
+                    cartnew.custmerCart = cutomerVm;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        }
+        } 
+        #endregion
 
         #region LoadCustomerName
         public void LoadCustomerName()
@@ -299,6 +528,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             try
             {
                 POSBillDbManager pOSBillDbManager = new POSBillDbManager();
+                Cart cartnew = new Cart();
+                CustomerDBManager customerDBManager = new CustomerDBManager();
                 string strPos = ViewModelBase.userVm.strPos;
                 string strCustomerName = "";
                 DataSet datasetSalesTypeIdDeptMaster = pOSBillDbManager.GetSalesTypeIdDeoptMaster(strPos);
@@ -306,6 +537,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 {
                     strCustomerName = datasetSalesTypeIdDeptMaster.Tables[0].Rows[0]["name"].ToString();
                     CustomerNameText = strCustomerName;
+                    m_deptno = datasetSalesTypeIdDeptMaster.Tables[0].Rows[0]["debtor_no"].ToString();
+                    cutomerVm = customerDBManager.CustomerDetailsByDeptNo(m_deptno);
+                    cartnew.custmerCart = cutomerVm;
                 }
             }
             catch (Exception ex)
@@ -489,6 +723,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             try
             {
                 POSBillGrid pOSBillGrid = new POSBillGrid();
+                Cart cartnew = new Cart();
                 int i = 0;
                 decimal iPrice = GridData[_rowIndex].Price;
                 double strSubTotal = GridData[_rowIndex].Total;
@@ -667,7 +902,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     strSubTotal = strSubTotal + isubtotal;
                     SubTotalText = strSubTotal.ToString();
                 }
-                LoadToArray();
+                cartnew.posBillArray =  LoadToArray();
             }
             catch (Exception ex)
             {
@@ -886,6 +1121,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         }
         #endregion
 
+        #region LoadCustomerInfomartion
         public DataSet LoadCustomerInfomartion(string strCustomer)
         {
             DataSet dataSetCustomer = _pOSBillDbManager.GetCustomerDeatils(strCustomer);
@@ -893,14 +1129,15 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             {
                 foreach (DataRow row in dataSetCustomer.Tables[0].Rows)
                 {
-                    string strSuggestion = row["name"].ToString() + " " + row["debtor_ref"].ToString() + "-" + row["address"].ToString();
+                    string strSuggestion = row["name"].ToString() + "-" + row["address"].ToString();
                     Suggestions = new ObservableCollection<string>();
                     _suggestions.Add(strSuggestion);
                     Suggestions.CollectionChanged += OnSuggestionsChanged;
                 }
             }
             return dataSetCustomer;
-        }
+        } 
+        #endregion
 
         #region loadSearchData
         public DataSet loadSearchData(string strSearchdata)

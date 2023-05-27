@@ -18,6 +18,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public INavigator Navigator { get; set; }
         public string NavVisibility { get; set; }
         public static User userVm;
+        public static Customer cutomerVm;
         public ViewModelBase()
         {
             NavVisibility = "visible";

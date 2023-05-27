@@ -209,7 +209,7 @@ namespace RestaurantRetailPOSBill.WPF.Views
                 {
                     foreach(DataRow row in dataSetCustomer.Tables[0].Rows)
                     {
-                        string strSuggestion = row["name"].ToString() + " " + row["debtor_ref"].ToString() + "-" + row["address"].ToString();
+                        string strSuggestion = row["name"].ToString() + "-" + row["address"].ToString();
                         if (!ViewModel.FilteredSuggestions.Contains(strSuggestion))
                         {
                             ViewModel.FilteredSuggestions.Add(strSuggestion);

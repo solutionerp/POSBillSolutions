@@ -31,6 +31,7 @@ namespace POSBill.EntityFramework
         }
         #endregion
 
+        #region GetCustomerDeatils
         public DataSet GetCustomerDeatils(string strCustomer)
         {
             try
@@ -46,7 +47,8 @@ namespace POSBill.EntityFramework
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        }
+        } 
+        #endregion
 
         #region GetItemKit
         public DataSet GetItemKit(string itemcode)
@@ -211,10 +213,11 @@ namespace POSBill.EntityFramework
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        } 
+        }
         #endregion
 
-      public DataSet  GetItemNameByItemCode(string strItemCode)
+        #region GetItemNameByItemCode
+        public DataSet GetItemNameByItemCode(string strItemCode)
         {
             try
             {
@@ -222,10 +225,27 @@ namespace POSBill.EntityFramework
                 DataSet dataset = DataBaseUtils.GetRecord(strQuery);
                 return dataset;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("An Exception Occured", ex);
             }
         }
+        #endregion
+
+        #region GetDeptNoByName
+        public object GetDeptNoByName(string strCustomerName)
+        {
+            try
+            {
+                string strQuery = "SELECT debtor_no FROM 0_debtors_master where name = " + "'" + strCustomerName + "'";
+                object objDeptNo = DataBaseUtils.ExecuteScalar(strQuery);
+                return objDeptNo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        } 
+        #endregion
     }
 }

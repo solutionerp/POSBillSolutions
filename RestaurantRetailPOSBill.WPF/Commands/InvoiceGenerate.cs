@@ -10,6 +10,7 @@ using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace RestaurantRetailPOSBill.WPF.Commands
 {
@@ -17,22 +18,29 @@ namespace RestaurantRetailPOSBill.WPF.Commands
     {
         public void GenerateInvoice(string strPaymentMethod)
         {
+            Cart cartnew = new Cart();
             Invoice invoice = new Invoice();
-            PosBillDetails posBillDetails = new PosBillDetails();
-            POSBIllViewModel pOSBIllViewModel = new POSBIllViewModel();
-          //  invoice.InvoiceNumber = GenerateInvoiceNumber();
-            invoice.Date = DateTime.Now;
-            invoice.CustomerName = GetCustomerName();
-            PosBillDetails[] ArrayGridItems = pOSBIllViewModel.LoadToArray();
 
-           // invoice.PosItems = 
-            SaveInvoice(invoice);
+
+            #region Array
+            //foreach (PosBillDetails item in ArrayGridItems)
+            //{
+            //    // Access properties of the item and process as needed
+            //     itemName = item.strPosItemName;
+            //     quantity = item.strPosQty;
+            //     price = item.strPrice;
+            //     discount = item.strDscount;
+            //     total = item.strTotal;
+            //} 
+            #endregion
+
+            SaveInvoice(cartnew);
             PrintInvoice(invoice);
         }
         private string GetCustomerName()
         {
             string strCustomer = "";
-            CustomerDetails customerDetails = new CustomerDetails();
+            Customer customerDetails = new Customer();
             strCustomer = customerDetails.customer_name;
             return strCustomer;
         }
@@ -40,9 +48,9 @@ namespace RestaurantRetailPOSBill.WPF.Commands
         {
             return 1234;
         }
-        private void SaveInvoice(Invoice invoice)
+        private void SaveInvoice(Cart cart)
         {
-            // Logic to save the invoice to a database or file
+            
         }
         #region PrintInvoice
         private void PrintInvoice(Invoice invoice)

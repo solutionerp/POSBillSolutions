@@ -74,14 +74,16 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
+       
+        #region Login
         private void Login()
         {
             try
             {
                 // _userdbManager.SetUsers(Username, Password);
-                 _userdbManager = new UserdbManager();
+                _userdbManager = new UserdbManager();
                 userVm = _userdbManager.GetUserByIdAndPassword(Username, Password);
-                if(userVm != null)
+                if (userVm != null)
                 {
                     if (userVm.user_id == Username && userVm.password == Password)
                     {
@@ -102,8 +104,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        }
-       
+        } 
+        #endregion
+
         //public ICommand LoginCommand { get; }
         //public POSLoginViewModel(IMajorIndexService _majorIndexService)
         // {

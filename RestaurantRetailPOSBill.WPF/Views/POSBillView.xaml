@@ -123,7 +123,7 @@
                                 <TextBlock Style="{StaticResource TextBlockStylesearch}">Customer</TextBlock>
                             </controls:WatermarkService.Watermark>
                         </TextBox>
-                        <Popup x:Name="SuggestionsCustomerPopup" PlacementTarget="{Binding ElementName=AutoCompleteCustomerTextBox}" StaysOpen="False" IsOpen="true" Width="600">
+                        <Popup x:Name="SuggestionsCustomerPopup" PlacementTarget="{Binding ElementName=AutoCompleteCustomerTextBox}" StaysOpen="False" IsOpen="true" Width="270">
                             <!--<ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>-->
                             <ListBox ItemsSource="{Binding FilteredSuggestions}"
          SelectedItem="{Binding SelectedSuggestion,Mode=TwoWay}">
@@ -137,7 +137,19 @@
                     </Grid>
                 </StackPanel>
                     <Grid Grid.Column="1">
-                    <TextBlock Style="{StaticResource TextBlockStyleCustomer}" Text="{Binding CustomerNameText}" Background="White" Foreground="Black"></TextBlock>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70*"></ColumnDefinition>
+                        <ColumnDefinition Width="40*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock Style="{StaticResource TextBlockStyleCustomer}" Text="{Binding CustomerNameText}" Background="White" Foreground="Black"></TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button Style="{StaticResource ButtonStyle}" Content="AddCustomer" Command="{Binding ButtonAddUserCommand}"></Button>
+                        <Popup IsOpen="{Binding IsUserRegistrationPopupOpen}" StaysOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="600">
+                            <local:AddUserView />
+                        </Popup>
+                    </Grid>
                     </Grid>
             </Grid>
             
