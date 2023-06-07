@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+
 
 namespace POSBill.EntityFramework
 {
@@ -20,7 +22,7 @@ namespace POSBill.EntityFramework
                 string strItemcode = strSuggestionData;
                 string strQuery = "SELECT" +
                                   " i.item_code, i.description, s.stock_id,p.price " + "FROM "
-                                  + " 0_prices p join  0_stock_master s on p.stock_id = s.stock_id Join 0_item_codes i on s.stock_id = i.stock_id WHERE " + "( s.description LIKE " + "'%" + strSuggestionData + "%'" + " OR i.item_code LIKE " + "'%" + strSuggestionData + "%') limit 10";
+                                  + " 0_prices p join  0_stock_master s on p.stock_id = s.stock_id Join 0_item_codes i on s.stock_id = i.stock_id WHERE " + "( s.description LIKE " + "'%" + strSuggestionData + "%'" + " OR i.item_code LIKE " + "'%" + strSuggestionData + "%') limit 15";
                 DataSet dataSet = DataBaseUtils.GetRecord(strQuery);
                 return dataSet;
             }
@@ -230,6 +232,91 @@ namespace POSBill.EntityFramework
                 throw new Exception("An Exception Occured", ex);
             }
         }
+        #endregion
+
+        #region SaveInvoiceItems
+        public void SaveInvoiceItems(string strDeptorTransNo, string strStockId, string strItemName, string strUnitPrice, string strQty, int isrcid)
+        {
+            try
+            {
+                using (var scope = new TransactionScope()) // Begin the transaction
+                {
+                    string strQuery = string.Format("insert into 0_debtor_trans_details (debtor_trans_no,stock_id,description,unit_price,qty_done,src_id)" +
+                                               "VALUES" +
+                                               " ( '" + strDeptorTransNo + "'," + "'" + strStockId + "', " + "'" + strItemName + "'," + strUnitPrice + "," + strQty + "," + isrcid + ")");
+                    DataBaseUtils.ExecuteQuery(strQuery);
+                    // Commit the transaction
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        } 
+        #endregion
+
+        #region SaveDeptormaster
+        public object SaveDeptormaster(string strCsutomerName, string strCustomerShortName, string strCuurency, string strpaymentTerms, string strdiscount, string strNotes)
+        {
+            try
+            {
+                string strQuerydeptormaster = string.Format("INSERT INTO 0_debtors_master (name, debtor_ref, curr_code, payment_terms, discount, notes)" +
+                                               "VALUES" +
+                                               " ( '" + strCsutomerName + "'," + "'" + strCustomerShortName + "', " + "'" + strCuurency + "'," + strpaymentTerms + "," + strdiscount + "," + "'" + strNotes + "'); select debtor_no  from 0_debtors_master order by debtor_no desc limit 1");
+                object objDeptNo = DataBaseUtils.ExecuteScalar(strQuerydeptormaster);
+                return objDeptNo;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        } 
+        #endregion
+
+        #region SaveDeptTransDetails
+        public object SaveDeptTransDetails(int itype, int ideptno, string strTransDate, string strDuedate, double iorder, double strOvamnt, double strDiscount, string strNotes,
+                                           string strStockId, string strItemName, string strUnitPrice, string strQty, int isrcid)
+        {
+            try
+            {
+                string strDeptorTransNo = "";
+
+                using (var scope = new TransactionScope()) // Begin the transaction
+                {
+                    string strQuery = string.Format("select trans_no  from 0_debtor_trans where type = 10 order by trans_no desc limit 1");
+                    object objTransNo1 = DataBaseUtils.ExecuteScalar(strQuery);
+                    int iTransNo = 1;
+                    if (objTransNo1 != null)
+                    {
+                        iTransNo = Convert.ToInt32(objTransNo1);
+                        iTransNo = iTransNo + 1;
+                    }
+                    string strQuery2 = string.Format("insert into 0_debtor_trans (trans_no,type,debtor_no,ov_amount,ov_discount)" +
+                                                  "VALUES" +
+                                                  " ( " + iTransNo + "," + itype + "," + ideptno + "," + strOvamnt + "," + strDiscount + "); select trans_no  from 0_debtor_trans where type = 10 order by trans_no desc limit 1");
+
+                    object objTransNo = DataBaseUtils.ExecuteScalar(strQuery2);
+                    if (objTransNo != null)
+                    {
+                        strDeptorTransNo = objTransNo.ToString();
+                    }
+
+                    string strQueryDetails = string.Format("insert into 0_debtor_trans_details (debtor_trans_no,stock_id,description,unit_price,qty_done,src_id)" +
+                                               "VALUES" +
+                                               " ( '" + strDeptorTransNo + "'," + "'" + strStockId + "', " + "'" + strItemName + "'," + strUnitPrice + "," + strQty + "," + isrcid + ")");
+                    DataBaseUtils.ExecuteQuery(strQueryDetails);
+                    // Commit the transaction
+                    scope.Complete();
+                    return objTransNo;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        } 
         #endregion
 
         #region GetDeptNoByName

@@ -49,5 +49,41 @@ namespace POSBill.EntityFramework
             }
         } 
         #endregion
+
+        public void SaveCustomer(Customer customer)
+        {
+            try
+            {
+                DataBaseUtils dataBaseUtils = new DataBaseUtils();
+                string strCustomershortaName = customer.cust_ref;
+                string strCustomerName = customer.customer_name;
+                string strCustomerAddress = customer.address;
+                string strPhnoneNo = customer.phone;
+                string strCustEmail = customer.email;
+                string strCustGstNo = customer.customer_GstNo;
+                string strCustmerCurrency = customer.customer_currency;
+                string strSalesPerson = customer.Sale_person;
+                string strPaymentTerms = customer.payment_terms;
+                string strCreditstatus = customer.credit_status;
+                string strShippingcmpny = customer.Shipping_copmany;
+                string strSalesArea = customer.Sales_Area;
+                string strTaxgroup = customer.taxgroup_id;
+                string strNotes = "";
+                string strQuerydeptormaster = string.Format("INSERT INTO 0_debtors_master (name, debtor_ref, curr_code, payment_terms, discount, notes)" +
+                                               "VALUES"+
+                                               " ( '" +strCustomerName + "'," +" ' " +strCustomershortaName +"', " +"' " +strCustmerCurrency +"'," +strPaymentTerms +", 0," +"'"+ strNotes + "')");
+
+                dataBaseUtils.ExecuteQuery(strQuerydeptormaster);
+                string strQueryCrmPerson  = string.Format ("INSERT INTO 0_crm_persons (ref, name, address, phone, email,notes) " +
+                                                             "VALUES" +
+                                                               " ( '" + strCustomershortaName + "'," + " ' " + strCustomerName + "', " + "' " + strCustomerAddress + "'," + strPhnoneNo + ",'"+ strCustEmail + "'," + "'" + strNotes + "')");
+
+                dataBaseUtils.ExecuteQuery (strQueryCrmPerson);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An Exception Occured", ex);
+            }
+        }
     }
 }

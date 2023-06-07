@@ -25,7 +25,6 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
     public class POSBIllViewModel : ViewModelBase
     {
         #region MemberVarible
-        
         public ICommand ScanQRCodeCommand { get; }
         private string _qrCodeText;
         private POSBillDbManager _pOSBillDbManager;
@@ -60,7 +59,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public RelayCommand AddNewCustomerCommand { get; set; }
         //   public RelayCommand ButtonAddUserCommand { get; set; }
 
-        //public ICommand ClearButtonCommand { get; set; }
+       // public ICommand ClearButtonCommand { get; set; }
+
         private string _query;
         public ObservableCollection<string> _suggestions;
         public ObservableCollection<string> _FilteredSuggestions;
@@ -84,6 +84,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public string _NewcustomerName;
         public string _newcustomershortName;
         public string _address;
+        public string _phoneNo;
         public string _emailNeCustomer;
         public string _NewCustGstNo;
         public string _NewCustcurrenecy;
@@ -93,7 +94,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public string _newCustshippingCopmny;
         public string _salesAresTxtNewCust;
         public string _newcustTaxgrpid;
+        public Cart cart;
         #endregion
+
         public ObservableCollection<POSBillGrid> GridData { get; set; }
         public string ItemName { get; set; }
         public int Quantity { get;set; }
@@ -102,6 +105,21 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         public int Total { get; set; }
 
         private bool isUserRegistrationPopupOpen;
+
+        private bool _isDataLoaded =false;
+
+        #region IsDataLoaded
+        public bool IsDataLoaded
+        {
+            get { return _isDataLoaded; }
+            set
+            {
+                _isDataLoaded = value;
+                OnPropertyChanged(nameof(IsDataLoaded));
+                ((RelayCommand)CashButtonCommand).RaiseCanExecuteChanged();
+            }
+        } 
+        #endregion
 
         #region AddNewCustomerProperty
         public string TaxGroupText
@@ -212,6 +230,19 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 OnPropertyChanged(nameof(EmailText));
             }
         }
+
+        public string PhoneNoText
+        {
+            get
+            {
+                return _phoneNo;
+            }
+            set
+            {
+                _phoneNo = value;
+                OnPropertyChanged(nameof(PhoneNoText));
+            }
+        }
         public string AddressText
         {
             get
@@ -247,8 +278,10 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 _NewcustomerName = value;
                 OnPropertyChanged(nameof(NewCustomerNameText));
             }
-        } 
+        }
         #endregion
+
+        #region IsUserRegistrationPopupOpen
         public bool IsUserRegistrationPopupOpen
         {
             get { return isUserRegistrationPopupOpen; }
@@ -257,9 +290,12 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 isUserRegistrationPopupOpen = value;
                 OnPropertyChanged(nameof(IsUserRegistrationPopupOpen));
             }
-        }
+        } 
+        #endregion
 
         private ICommand _buttonAddUserCommand;
+
+        #region ButtonAddUserCommand
         public ICommand ButtonAddUserCommand
         {
             get
@@ -270,7 +306,10 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 }
                 return _buttonAddUserCommand;
             }
-        }
+        } 
+        #endregion 
+
+        #region AutoCompleteTextBoxText
         public string AutoCompleteTextBoxText
         {
             get
@@ -282,8 +321,11 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 _autoCompeleteTextBox = value;
                 OnPropertyChanged(nameof(AutoCompleteTextBoxText));
             }
-        } 
+        }
 
+        #endregion
+
+        #region AutoCompleteCustomerTextBoxText
         public string AutoCompleteCustomerTextBoxText
         {
             get
@@ -295,7 +337,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 _autoCompleteCustomer = value;
                 OnPropertyChanged(nameof(AutoCompleteCustomerTextBoxText));
             }
-        }
+        } 
+        #endregion
 
         #region TextBlockTextProperties
         public string CustomerNameText
@@ -390,15 +433,18 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         #endregion
 
         private int _selectedItem;
+
+        #region SelectedItem
         public int SelectedItem
         {
             get { return _selectedItem; }
             set
             {
                 _selectedItem = value;
-               // OnPropertyChanged();
+                // OnPropertyChanged();
             }
-        }
+        } 
+        #endregion
 
         #region GridTextBoxDataProperty
         public string GridTextBoxDataProperty
@@ -443,6 +489,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 DecimalButtonCommand = new RelayCommand(DecimalButton);
                 EnterButtonCommand = new RelayCommand(EnterButton);
                 AddNewCustomerCommand = new RelayCommand(ButtonAddNewCustomer);
+                cart = new Cart();
                 //  ButtonAddUserCommand = new RelayCommand(ButtonAddUser);
                 SubTotalText = "0.00";
                 DiscountText = "0.00";
@@ -460,17 +507,76 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             // PosBillGrid = LoadGridData();
         }
         #endregion
+
+        #region ButtonAddNewCustomer
         public void ButtonAddNewCustomer()
         {
             try
             {
+                Customer customerNew = new Customer();
+
+                if (!string.IsNullOrEmpty(CustomeShortNameText))
+                {
+                    customerNew.cust_ref = CustomeShortNameText;
+                }
+                if (!string.IsNullOrEmpty(NewCustomerNameText))
+                {
+                    customerNew.customer_name = NewCustomerNameText;
+                }
+                if (!string.IsNullOrEmpty(AddressText))
+                {
+                    customerNew.address = AddressText;
+                }
+                if (!string.IsNullOrEmpty(PhoneNoText))
+                {
+                    customerNew.phone = PhoneNoText;
+                }
+                if (!string.IsNullOrEmpty(EmailText))
+                {
+                    customerNew.email = EmailText;
+                }
+                if (!string.IsNullOrEmpty(NewCustGstNoText))
+                {
+                    customerNew.customer_GstNo = NewCustGstNoText;
+                }
+                if (!string.IsNullOrEmpty(CustomerCurrencyText))
+                {
+                    customerNew.customer_currency = CustomerCurrencyText;
+                }
+                if (!string.IsNullOrEmpty(SalesPersonText))
+                {
+                    customerNew.Sale_person = SalesPersonText;
+                }
+                if (!string.IsNullOrEmpty(PaymentTermsText))
+                {
+                    customerNew.payment_terms = PaymentTermsText;
+                }
+                if (!string.IsNullOrEmpty(CreditStatusText))
+                {
+                    customerNew.credit_status = CreditStatusText;
+                }
+                if (!string.IsNullOrEmpty(ShippingCompanyText))
+                {
+                    customerNew.Shipping_copmany = ShippingCompanyText;
+                }
+                if (!string.IsNullOrEmpty(SalesAreaText))
+                {
+                    customerNew.Sales_Area = SalesAreaText;
+                }
+                if (!string.IsNullOrEmpty(TaxGroupText))
+                {
+                    customerNew.taxgroup_id = TaxGroupText;
+                }
 
             }
             catch (Exception ex)
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        }
+        } 
+        #endregion
+
+        #region ShowAddUserPopup
         public void ShowAddUserPopup()
         {
             try
@@ -481,14 +587,15 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             {
                 throw new Exception("An Exception Occured", ex);
             }
-        }
+        } 
+        #endregion
 
         #region LoadCustomerNameText
         public void LoadCustomerNameText()
         {
             try
             {
-                Cart cartnew = new Cart();
+               // Cart cartnew = new Cart();
                 if (string.IsNullOrEmpty(AutoCompleteCustomerTextBoxText))
                 {
                     return;
@@ -512,7 +619,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     }
                     CustomerDBManager customerDBManager = new CustomerDBManager();
                     cutomerVm = customerDBManager.CustomerDetailsByDeptNo(m_deptno);
-                    cartnew.custmerCart = cutomerVm;
+                    cart.custmerCart = cutomerVm;
+                    cart.custmerCart.customer_name = CustomerNameText;
                 }
             }
             catch (Exception ex)
@@ -528,7 +636,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             try
             {
                 POSBillDbManager pOSBillDbManager = new POSBillDbManager();
-                Cart cartnew = new Cart();
+              //  Cart cartnew = new Cart();
                 CustomerDBManager customerDBManager = new CustomerDBManager();
                 string strPos = ViewModelBase.userVm.strPos;
                 string strCustomerName = "";
@@ -539,7 +647,10 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     CustomerNameText = strCustomerName;
                     m_deptno = datasetSalesTypeIdDeptMaster.Tables[0].Rows[0]["debtor_no"].ToString();
                     cutomerVm = customerDBManager.CustomerDetailsByDeptNo(m_deptno);
-                    cartnew.custmerCart = cutomerVm;
+                    cart.custmerCart = cutomerVm;
+                    cart.custmerCart.cust_deptNo = m_deptno;
+                    cart.custmerCart.cust_ref = datasetSalesTypeIdDeptMaster.Tables[0].Rows[0]["debtor_ref"].ToString();
+                    cart.custmerCart.customer_name = CustomerNameText;
                 }
             }
             catch (Exception ex)
@@ -566,11 +677,14 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         #region ButtonCard
         public void ButtonCard()
         {
-
             try
             {
-
-
+                InvoiceGenerate invoiceGenerate = new InvoiceGenerate();
+                string strPaymentMethod = "card";
+                // Cart cartNew = new Cart();
+                cart.userCart = userVm;
+                cart.strCartPaymentMethod = strPaymentMethod;
+                invoiceGenerate.GenerateInvoice(cart);
             }
             catch (Exception ex)
             {
@@ -586,23 +700,10 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
             {
                 InvoiceGenerate invoiceGenerate = new InvoiceGenerate();
                 string strPaymentMethod = "Cash";
-                //string[] strItems = new string[5];
-                //string strPayment = "";
-                //int GridRows = Convert.ToInt32(TotalOrderText);
-                //POSBillGrid pOSBillGrid = new POSBillGrid();
-                //PosBillDetails[] items = new PosBillDetails[5];
-                //for (int i = 0; i < GridRows; i++)
-                //{
-                //    items[i] = new PosBillDetails()
-                //    {
-                //        strPosItemName = pOSBillGrid.ItemName,
-                //        strPosQty = pOSBillGrid.Quantity.ToString(),
-                //        strPrice = pOSBillGrid.Price.ToString(),
-                //        strDscount = pOSBillGrid.Discount,
-                //        strTotal = pOSBillGrid.Total.ToString()
-                //    };
-                //}
-                invoiceGenerate.GenerateInvoice(strPaymentMethod);
+                // Cart cartNew = new Cart();
+                cart.userCart = userVm;
+                cart.strCartPaymentMethod = strPaymentMethod;
+                invoiceGenerate.GenerateInvoice(cart);
             }
             catch (Exception ex)
             {
@@ -665,10 +766,10 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                         price = GridData[_rowIndex].Price;
                     }
                     decimal iquantity = GridData[_rowIndex].Quantity;
-                    int iRowTotal = Convert.ToInt16(iquantity * price);
+                    decimal iRowTotal = Convert.ToInt16(iquantity * price);
                     string strDisCount = GridData[_rowIndex].Discount;
                     strDisCount = strDisCount.Replace("%", "");
-                    double dicountValue = Convert.ToDouble(strDisCount);
+                    decimal dicountValue = Convert.ToDecimal(strDisCount);
                     decimal discountedPrice =Convert.ToDecimal(iRowTotal * (1 - dicountValue / 100));
                     int total = Convert.ToInt32(iquantity * discountedPrice);
                     GridData[_rowIndex].Total = total;
@@ -706,31 +807,20 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         } 
         #endregion
 
-        #region loadGridColums
-        //public void loadGridColums()
-        //{
-        //    GridData.Columns.Add("ItemName", typeof(string));
-        //    GridData.Columns.Add("Quantity", typeof(int));
-        //    GridData.Columns.Add("Price", typeof(int));
-        //    GridData.Columns.Add("Discount", typeof(int));
-        //    GridData.Columns.Add("Total", typeof(int));
-        //}
-        #endregion
-
         #region POSBillCalculation
         public void POSBillCalculation(int iqty)
         {
             try
             {
                 POSBillGrid pOSBillGrid = new POSBillGrid();
-                Cart cartnew = new Cart();
+                //Cart cartnew = new Cart();
                 int i = 0;
                 decimal iPrice = GridData[_rowIndex].Price;
-                double strSubTotal = GridData[_rowIndex].Total;
+                decimal strSubTotal = GridData[_rowIndex].Total;
                 decimal iquantity = GridData[_rowIndex].Quantity;
-                int iRowTotal = GridData[_rowIndex].Total;
+                decimal iRowTotal = GridData[_rowIndex].Total;
 
-                double isubtotal = Convert.ToDouble(SubTotalText);
+                decimal isubtotal = Convert.ToDecimal(SubTotalText);
                 isubtotal = isubtotal - iRowTotal;
                 SubTotalText = isubtotal.ToString();
                 if (_currentColum == "ItemName")
@@ -810,7 +900,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     }
                     //   strDisCount = strDisCount.Replace("%", "");
 
-                    double dicountValue = Convert.ToDouble(strDisCount);
+                    decimal dicountValue = Convert.ToDecimal(strDisCount);
                     int total = 0;
                     if (dicountValue != 0)
                     {
@@ -823,12 +913,12 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     }
                     GridData[_rowIndex].Total = total;
                     iRowTotal = GridData[_rowIndex].Total;
-                    double i_subTotal = Convert.ToDouble(m_subTotal);
+                    decimal i_subTotal = Convert.ToDecimal(m_subTotal);
 
                     if (i_subTotal != 0)
                     {
                         iRowTotal = GridData[_rowIndex].Total;
-                        isubtotal = Convert.ToDouble(SubTotalText);
+                        isubtotal = Convert.ToDecimal(SubTotalText);
                         i_subTotal = iRowTotal;
                         strSubTotal = i_subTotal;
                     }
@@ -894,7 +984,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 }
                 else
                 {
-                    isubtotal = Convert.ToDouble(SubTotalText);
+                    isubtotal = Convert.ToDecimal(SubTotalText);
                     if (GridData.Count == 1)
                     {
                         isubtotal = 0;
@@ -902,7 +992,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     strSubTotal = strSubTotal + isubtotal;
                     SubTotalText = strSubTotal.ToString();
                 }
-                cartnew.posBillArray =  LoadToArray();
+                cart.posBillArray =  LoadToArray();
             }
             catch (Exception ex)
             {
@@ -1179,6 +1269,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     int i = 0;
                     POSBillDbManager pOSBillDbManager = new POSBillDbManager();
                     POSBillGrid pOSBillGrid = new POSBillGrid();
+                    string strItemcode = "";
                     string strSelectedData = _selectedSuggestion;
                     string strtext = AutoCompleteTextBoxText;
                     string[] parts = new string[0];
@@ -1201,6 +1292,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                             parts = strSelectedData.Split('-');
                             strItemName = parts[1];
                             iItemcode = parts[0];
+                            strItemcode = iItemcode;
                         }
                     }
                     else
@@ -1208,10 +1300,12 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                         if (strtext != "")
                         {
                             iItemcode = strtext;
+                            strItemcode = iItemcode;
                             DataSet dataSetItemName = pOSBillDbManager.GetItemNameByItemCode(iItemcode);
                             if (dataSetItemName.Tables[0].Rows.Count > 0)
                             {
                                 strItemName = dataSetItemName.Tables[0].Rows[0]["description"].ToString();
+                               
                             }
                             else
                             {
@@ -1271,18 +1365,19 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     iQuantity = Convert.ToDecimal(strQty);
                     dPrice = Convert.ToDecimal(strPrice);
                     m_ActualPrice = dPrice;
+                    pOSBillGrid.Itemcode = strItemcode;
                     pOSBillGrid.ItemName = strItemName;
                     pOSBillGrid.Quantity = iQuantity;
                     pOSBillGrid.Price = dPrice;
                     pOSBillGrid.Discount = strDiscount;
-                    pOSBillGrid.Total = Convert.ToInt32(dPrice);
+                    pOSBillGrid.Total = dPrice;
                     GridData.Add(pOSBillGrid);
                     if (pOSBillGrid.Total != 0)
                     {
-                        int strRowTotalGrid = pOSBillGrid.Total;
+                        decimal strRowTotalGrid = pOSBillGrid.Total;
                         string strSubTotaltxt = SubTotalText;
-                        double iSubTotaltxt = Convert.ToDouble(strSubTotaltxt);
-                        double iSubTotal = strRowTotalGrid + iSubTotaltxt;
+                        decimal iSubTotaltxt = Convert.ToDecimal(strSubTotaltxt);
+                        decimal iSubTotal = strRowTotalGrid + iSubTotaltxt;
                         string strSubTotal = iSubTotal.ToString();
                         SubTotalText = strSubTotal;
                     }
@@ -1300,9 +1395,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     TotalOrderText = rowCount.ToString();
                     int iqty = Convert.ToInt32(iQuantity);
                     POSBillCalculation(iqty);
+                    IsDataLoaded = true;
                     AutoCompleteTextBoxText = "";
                 }
-               
             }
             catch (Exception ex)
             {
@@ -1323,6 +1418,7 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                     PosBillDetails details = new PosBillDetails
                     {
                         strPosItemName = item.ItemName,
+                        strPosItemCode = item.Itemcode,
                         strPosQty = item.Quantity.ToString(),
                         strPrice = item.Price.ToString(),
                         strDscount = item.Discount,
@@ -1647,7 +1743,8 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
                 TotalOrderText = "0.00";
                 DiscountText = "0.00";
                 SubTotalText = "0.00";
-                CustomerNameText = "";
+              //  CustomerNameText = "";
+                IsDataLoaded = false;
             }
             catch (Exception ex)
             {

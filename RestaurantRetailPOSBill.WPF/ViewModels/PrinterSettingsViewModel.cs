@@ -180,9 +180,9 @@ namespace RestaurantRetailPOSBill.WPF.ViewModels
         }
       public void  UpadatePrintersettings()
         {
-            DbManager<PaperSize> dbManagerPapersize = new DbManager<PaperSize>();
-            List<PaperSize> paperSizeList = dbManagerPapersize.GetAll().Result.ToList();
-            PaperSize paperSize = new PaperSize();
+            DbManager<PaperSizeSysPref> dbManagerPapersize = new DbManager<PaperSizeSysPref>();
+            List<PaperSizeSysPref> paperSizeList = dbManagerPapersize.GetAll().Result.ToList();
+            PaperSizeSysPref paperSize = new PaperSizeSysPref();
             paperSize._value = SelectedPaperSize;
             if (paperSizeList.Count > 0)
             {

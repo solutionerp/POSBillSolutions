@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace POSBill.Domain.Models
 {
-    public class PaperSize : DomainObject
+    public class PaperSizeSysPref : DomainObject
     {
-        public PaperSize() 
+        public PaperSizeSysPref() 
         {
             _name = "papersize_settings";
         }
@@ -36,13 +36,13 @@ namespace POSBill.Domain.Models
 
         public override async Task<IEnumerable<T>> ToArray<T>(DataSet dataSet)
         {
-            List<PaperSize> paperSize = new List<PaperSize>();
+            List<PaperSizeSysPref> paperSize = new List<PaperSizeSysPref>();
             if (dataSet.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in dataSet.Tables[0].Rows)
                 {
                     string strPapersizeValue = row["value"].ToString();
-                    PaperSize paperSizes = new PaperSize();
+                    PaperSizeSysPref paperSizes = new PaperSizeSysPref();
                     paperSizes._value = strPapersizeValue;
                     paperSize.Add(paperSizes);
                 }

@@ -7,20 +7,87 @@
              mc:Ignorable="d" 
              xmlns:calculatorNavBar="clr-namespace:RestaurantRetailPOSBill.WPF.Controls.calculatorNavBar"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="ButtonStyleKeypad" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <!--<Setter Property="Background" Value="Orange"/>-->
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect  ShadowDepth="5" Color="Gray" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="80*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"></ColumnDefinition>
-                <ColumnDefinition Width="80*"></ColumnDefinition>
-                <ColumnDefinition Width="10*"></ColumnDefinition>
-             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
-                <calculatorNavBar:CalculatorNavigationBar></calculatorNavBar:CalculatorNavigationBar>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="80*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBox Height="auto" Width="auto"></TextBox>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                    <RowDefinition Height="18*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="1" Command="{Binding Path=NumberButtonCommand}" CommandParameter="1" />
+                <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="2" />
+                <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyleKeypad}" Content="3" Command="{Binding Path=NumberButtonCommand}" CommandParameter="3" />
+                <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource ButtonStyleKeypad}" Content="4" Command="{Binding Path=NumberButtonCommand}" CommandParameter="4" />
+                <Button Content="5" Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="1" Command="{Binding Path=NumberButtonCommand}" CommandParameter="5" />
+                <Button Content="6" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="1" Command="{Binding Path=NumberButtonCommand}" CommandParameter="6" />
+                <Button Content="7" Grid.Column="0" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="7" />
+                <Button Content="8" Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="8" />
+                <Button Content="9" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="2" Command="{Binding Path=NumberButtonCommand}" CommandParameter="9" />
+                <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource ButtonStyleKeypad}" Content="0" Command="{Binding Path=NumberButtonCommand}" CommandParameter="0" />
+                <Button Content="." Grid.Column="1" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="3" Command="{Binding Path=DecimalButtonCommand}" />
+                <Button Content="00" Grid.Column="2" Style="{StaticResource ButtonStyleKeypad}" Grid.Row="3" Command="{Binding Path=DecimalButtonCommand}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Button Style="{StaticResource ButtonStyleKeypad}" Background="Orange" Width="auto" Height="auto" Content="+" FontSize="80">
+
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Style="{StaticResource ButtonStyleKeypad}" Background="Orange" Width="auto" Height="auto" Content="-" FontSize="80"></Button>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button Style="{StaticResource ButtonStyleKeypad}" Background="Orange" Width="auto" Height="auto" Content="/" FontSize="80"></Button>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Button Style="{StaticResource ButtonStyleKeypad}" Background="Orange" Width="auto" Height="auto" Content="*" FontSize="80"></Button>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Button Style="{StaticResource ButtonStyleKeypad}" Background="Orange" Width="auto" Height="auto" Content="=" FontSize="80"></Button>
             </Grid>
         </Grid>
     </Grid>

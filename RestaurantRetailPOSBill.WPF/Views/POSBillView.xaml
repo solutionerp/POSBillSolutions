@@ -9,7 +9,7 @@
              xmlns:controls="clr-namespace:RestaurantRetailPOSBill.WPF.Controls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             d:MinHeight="600" d:MinWidth="800">
+             d:MinHeight="600" d:MinWidth="800" Background="White">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -24,13 +24,35 @@
                     <DropShadowEffect  ShadowDepth="5" Color="Gray" Opacity="0.8"/>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="TextBox" x:Key="TextBoxStyleSearch">
-            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="FontSize" Value="16" />
             <Setter Property="Height" Value="50"/>
             <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Padding" Value="8" />
             <Setter Property="Padding" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="TextBox" x:Key="TextBoxStyle">
             <Setter Property="FontSize" Value="16" />
@@ -48,9 +70,9 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Background" Value="White" />
-            <Setter Property="Padding" Value="10"/>
-            <!--<Setter Property="Height" Value="50"></Setter>-->
+            <Setter Property="Padding" Value="18"/>
             <Setter Property="Focusable" Value="True"></Setter>
+           
         </Style>
         <Style TargetType="TextBlock" x:Key="TextBlockStylesearch">
             <Setter Property="FontSize" Value="18" />
@@ -75,7 +97,6 @@
         <Style x:Key="ButtonStyleKeypad" TargetType="Button">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="16"/>
-            <!--<Setter Property="Background" Value="Orange"/>-->
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="Black"/>
@@ -85,14 +106,17 @@
                     <DropShadowEffect  ShadowDepth="5" Color="Gray" Opacity="0.8"/>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
-    
-    <UserControl.Background>
-        <ImageBrush ImageSource="/Views/Posbgd.jpg"  
-                    Opacity="1"
-            Stretch="UniformToFill"></ImageBrush>
-    </UserControl.Background>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -103,55 +127,28 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"></RowDefinition>
-                <!--<RowDefinition Height="1*"></RowDefinition>-->
                 <RowDefinition Height="40*"></RowDefinition>
                 <RowDefinition Height="50*"></RowDefinition>
             </Grid.RowDefinitions>
              
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <Grid Grid.Column="0">
-                        <TextBox x:Name="AutoCompleteCustomerTextBox"
-         Style="{StaticResource TextBoxStyleSearch}"
-         TextChanged="AutoCompleteCustomerTextBox_TextChanged"
-         Text="{Binding AutoCompleteCustomerTextBoxText, Mode=TwoWay}">
-                            <controls:WatermarkService.Watermark>
-                                <TextBlock Style="{StaticResource TextBlockStylesearch}">Customer</TextBlock>
-                            </controls:WatermarkService.Watermark>
-                        </TextBox>
-                        <Popup x:Name="SuggestionsCustomerPopup" PlacementTarget="{Binding ElementName=AutoCompleteCustomerTextBox}" StaysOpen="False" IsOpen="true" Width="270">
-                            <!--<ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>-->
-                            <ListBox ItemsSource="{Binding FilteredSuggestions}"
-         SelectedItem="{Binding SelectedSuggestion,Mode=TwoWay}">
-                                <b:Interaction.Triggers>
-                                    <b:EventTrigger EventName="SelectionChanged">
-                                        <b:InvokeCommandAction Command="{Binding ListBoxCustomerItemSelectedCommand}" />
-                                    </b:EventTrigger>
-                                </b:Interaction.Triggers>
-                            </ListBox>
-                        </Popup>
-                    </Grid>
-                </StackPanel>
+                   
                     <Grid Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70*"></ColumnDefinition>
-                        <ColumnDefinition Width="40*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
                         <TextBlock Style="{StaticResource TextBlockStyleCustomer}" Text="{Binding CustomerNameText}" Background="White" Foreground="Black"></TextBlock>
+                    
                     </Grid>
-                    <Grid Grid.Column="1">
-                        <Button Style="{StaticResource ButtonStyle}" Content="AddCustomer" Command="{Binding ButtonAddUserCommand}"></Button>
+                    <Grid Grid.Column="2">
+                    <Button Style="{StaticResource ButtonStyle}" Content="AddCustomer" Command="{Binding ButtonAddUserCommand}" Background="{StaticResource BrushPrimary1}" Foreground="White"></Button>
                         <Popup IsOpen="{Binding IsUserRegistrationPopupOpen}" StaysOpen="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="600">
                             <local:AddUserView />
                         </Popup>
                     </Grid>
-                    </Grid>
-            </Grid>
+            </Grid>   
             
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -186,7 +183,6 @@
                     <Grid Grid.Row="5" Background="Black">
                         <TextBlock Margin="10" Style="{StaticResource TextBlockStyle}">Tender</TextBlock>
                     </Grid>
-                    <!--<TextBlock FontSize="30" Background="Black" Height="auto" Width="auto" Text="{Binding ColoredText}" Foreground="Green"></TextBlock>-->
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -198,28 +194,22 @@
                         <RowDefinition Height="17*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Background="Black">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SubTotalText}"></TextBlock>
-                        <!--<TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding SubTotalText, Mode=TwoWay}" IsReadOnly="True"></TextBox>-->
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SubTotalText}" HorizontalAlignment="Right"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="1" Background="Black">
-                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding DeliverChargeText, Mode=TwoWay}"></TextBox>
-                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DeliverChargeText}"></TextBlock>-->
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding DeliverChargeText, Mode=TwoWay}" HorizontalAlignment="Right"></TextBox>
                     </Grid>
                     <Grid Grid.Row="2" Background="Black">
-                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TaxText}"></TextBlock>-->
-                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TaxText, Mode=TwoWay}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TaxText, Mode=TwoWay}" HorizontalAlignment="Right"></TextBox>
                     </Grid>
                     <Grid Grid.Row="3" Background="Black">
-                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding DiscountText, Mode=TwoWay}"></TextBlock>-->
-                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding DiscountText, Mode=TwoWay}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding DiscountText, Mode=TwoWay}" HorizontalAlignment="Right"></TextBox>
                     </Grid>
                     <Grid Grid.Row="4" Background="Black">
-                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TotalOrderText}"></TextBlock>-->
-                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TotalOrderText}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TotalOrderText}" HorizontalAlignment="Right"></TextBox>
                     </Grid>
                     <Grid Grid.Row="5" Background="Black">
-                        <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding TenderText}"></TextBlock>-->
-                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TenderText, Mode=TwoWay}"></TextBox>
+                        <TextBox Style="{StaticResource TextBoxStyle2}" Text="{Binding TenderText, Mode=TwoWay}" HorizontalAlignment="Right"></TextBox>
                     </Grid>
                 </Grid>
             </Grid>
@@ -251,9 +241,9 @@
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="0" Width="auto" Content="Discount" Background="{StaticResource BrushPrimary5}"   Command="{Binding DiscountCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Width="auto" Content="Add Shipping" Background="{StaticResource BrushPrimary5}" Command="{Binding AddShippingCommand}"></Button>
                         <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="2" Width="auto" Content="Add Coupons" Background="{StaticResource BrushPrimary5}" Command="{Binding AddCouponsCommand}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="2" Width="auto" Content="Cash" Background="{StaticResource BrushPrimary1}" Command="{Binding CashButtonCommand}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="1" Width="auto" Foreground="White" Content="Card" Background="{StaticResource BrushPrimary10}" Command="{Binding CardButtonCommand}"></Button>
-                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2" Width="auto" Foreground="White" Content="Pay" Background="{StaticResource BrushPrimary7}" Command="{Binding Paycommand}"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="2" Width="auto" Content="Cash" Background="{StaticResource BrushPrimary1}" Command="{Binding CashButtonCommand}" IsEnabled="{Binding IsDataLoaded}" Foreground="White"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="1" Width="auto"  Content="Card" Background="{StaticResource BrushPrimary10}" Command="{Binding CardButtonCommand}"  IsEnabled="{Binding IsDataLoaded}" Foreground="Black"></Button>
+                        <Button Style="{StaticResource ButtonStyle}" Grid.Row="2" Grid.Column="2" Width="auto" Foreground="White" Content="Pay" Background="{StaticResource BrushPrimary7}" Command="{Binding Paycommand}"  IsEnabled="{Binding IsDataLoaded}"></Button>
                     </Grid>
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -302,14 +292,21 @@
                 <RowDefinition Height="90*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+            
                 <StackPanel>
                     <TextBox x:Name="AutoCompleteTextBox" Style="{StaticResource TextBoxStyleSearch}" TextChanged="AutoCompleteTextBox_TextChanged"  Text="{Binding AutoCompleteTextBoxText, Mode=TwoWay}">
                         <controls:WatermarkService.Watermark>
-                            <TextBlock Style="{StaticResource TextBlockStylesearch}">Type here to search text</TextBlock>
+                            <TextBlock Style="{StaticResource TextBlockStylesearch}">Type here to search Item</TextBlock>
                         </controls:WatermarkService.Watermark>
                     </TextBox>
 
-                    <Popup x:Name="SuggestionsPopup" PlacementTarget="{Binding ElementName=AutoCompleteTextBox}" StaysOpen="False" IsOpen="true" Width="600">
+                    <Popup x:Name="SuggestionsPopup" PlacementTarget="{Binding ElementName=AutoCompleteTextBox}" StaysOpen="False" IsOpen="true" Width="400">
                         <!--<ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>-->
                         <ListBox ItemsSource="{Binding FilteredSuggestions}"
          SelectedItem="{Binding SelectedSuggestion,Mode=TwoWay}">
@@ -321,6 +318,32 @@
                         </ListBox>
                     </Popup>
                 </StackPanel>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <StackPanel>
+                        <Grid Grid.Column="0">
+                            <TextBox x:Name="AutoCompleteCustomerTextBox"
+         Style="{StaticResource TextBoxStyleSearch}"
+         TextChanged="AutoCompleteCustomerTextBox_TextChanged"
+         Text="{Binding AutoCompleteCustomerTextBoxText, Mode=TwoWay}">
+                                <controls:WatermarkService.Watermark>
+                                    <TextBlock Style="{StaticResource TextBlockStylesearch}">Customer</TextBlock>
+                                </controls:WatermarkService.Watermark>
+                            </TextBox>
+                            <Popup x:Name="SuggestionsCustomerPopup" PlacementTarget="{Binding ElementName=AutoCompleteCustomerTextBox}" StaysOpen="False" IsOpen="true" Width="270">
+                                <!--<ListBox ItemsSource="{Binding FilteredSuggestions}" SelectedItem="{Binding SelectedSuggestion, Mode=TwoWay}" PreviewKeyDown="AutoCompleteTextBox_PreviewKeyDown"/>-->
+                                <ListBox ItemsSource="{Binding FilteredSuggestions}"
+         SelectedItem="{Binding SelectedSuggestion,Mode=TwoWay}">
+                                    <b:Interaction.Triggers>
+                                        <b:EventTrigger EventName="SelectionChanged">
+                                            <b:InvokeCommandAction Command="{Binding ListBoxCustomerItemSelectedCommand}" />
+                                        </b:EventTrigger>
+                                    </b:Interaction.Triggers>
+                                </ListBox>
+                            </Popup>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
             </Grid>
             <Grid Grid.Row="1">
                 <DataGrid ItemsSource="{Binding GridData}" AutoGenerateColumns="False" BeginningEdit="DataGrid_BeginningEdit" PreviewKeyDown="POSBillDataGrid_PreviewKeyDown" RowHeight="40">

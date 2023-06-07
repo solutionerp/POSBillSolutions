@@ -12,10 +12,11 @@ namespace POSBill.Domain.Models
     public class POSBillGrid : INotifyPropertyChanged
     {
         private string itemName;
+        private string itemcode;
         private decimal quantity;
         private decimal price;
         private string discount;
-        private int total;
+        private decimal total;
         public string ItemName
         {
             get { return itemName; }
@@ -39,10 +40,16 @@ namespace POSBill.Domain.Models
             get { return discount; }
             set { discount = value; NotifyPropertyChanged(); }
         }
-        public int Total
+        public decimal Total
         {
             get { return total; }
             set { total = value; NotifyPropertyChanged(); }
+        }
+
+        public string Itemcode
+        {
+            get { return itemcode; }
+            set { itemcode = value; NotifyPropertyChanged(); }
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

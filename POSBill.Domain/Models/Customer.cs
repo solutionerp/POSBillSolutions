@@ -10,6 +10,8 @@ namespace POSBill.Domain.Models
     public class Customer : DomainObject
     {
         public string customer_currency { get; set; }
+        public string cust_deptNo { get;set; }
+        public string customer_GstNo { get; set; }
         public string default_discount { get; set; }
         public string customer_name { get; set; }
         public string customer_id { get; set; }
@@ -21,7 +23,10 @@ namespace POSBill.Domain.Models
         public string taxgroup_id { get; set; }
         public string payment_terms { get; set; }
         public string sales_type { get; set; }
-
+        public string credit_status { get; set; }
+        public string Shipping_copmany { get;set; }
+        public string Sales_Area { get; set; }
+        public string Sale_person { get;set; }
         public override string GetInsertQuery()
         {
             throw new NotImplementedException();

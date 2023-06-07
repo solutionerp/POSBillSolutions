@@ -8,8 +8,15 @@ namespace POSBill.Domain.Models
 {
     public class Cart
     {
-        public Customer custmerCart;
-        public User userCart;
+        public Customer custmerCart { get; set; }
+        public User userCart { get; set; }
+         
         public PosBillDetails[] posBillArray;
+        public double AmountTotal { get; set; }
+        public double order { get; set; }
+        public string InvoiceNumber { get; set; }
+        public DateTime strDate { get; set; }
+        public string strCartPaymentMethod { get; set; }
+        
     }
 }
